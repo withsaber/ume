@@ -10,7 +10,7 @@ One look, one feel, everywhere: mail app, calendar app, whatever comes next. Eve
 |---|---|
 | `src/tokens.css` | The token source of truth: primitives, semantic tokens, dark mode, type scale, radii, shadows, motion |
 | `src/ume.css` | All component styles, plain CSS on top of the tokens |
-| `src/components/` | React components: Button, IconButton, Input, Select, Toggle, Tabs, Dialog, Toast, Avatar, Facepile, Chip, Card, Tooltip, Divider, Skeleton, Progress, Typography, UmeProvider |
+| `src/components/` | React components: Avatar, Banner, Button, ButtonGroup, Card, Chip, CircularProgress, Dialog, Divider, Dropdown, Facepile, IconButton, IconText, Input, Progress, Select, Skeleton, Tabs, Toast, Toggle, Tooltip, Typography, UmeProvider |
 | `dist/` | Built ESM + CJS bundles with extracted CSS and TypeScript types (`node build.js`) |
 | `tokens/` | Standalone token files generated from the source: `ume-tokens.json`, `tokens.css`, `tokens.tailwind.js`, `TOKENS.md` |
 
