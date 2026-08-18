@@ -1,0 +1,174 @@
+/* ume tokens: single source of truth.
+   Named for the plum blossom (梅): warm persimmon accent, quiet greys.
+   Every other token file (JSON, Tailwind preset, TOKENS.md) is generated from this file. */
+
+:root,
+[data-ume-theme="light"] {
+  /* Primitives: grey */
+  --ume-white: 255 255 255;
+  --ume-grey-50: 250 250 249;
+  --ume-grey-100: 243 243 242;
+  --ume-grey-200: 229 229 227;
+  --ume-grey-300: 212 212 209;
+  --ume-grey-400: 176 176 172;
+  --ume-grey-500: 142 142 138;
+  --ume-grey-600: 110 110 106;
+  --ume-grey-700: 78 78 75;
+  --ume-grey-800: 46 46 44;
+  --ume-grey-900: 29 29 28;
+  --ume-black: 12 12 12;
+
+  /* Primitives: persimmon (primary accent) */
+  --ume-persimmon-100: 255 237 231;
+  --ume-persimmon-200: 255 218 208;
+  --ume-persimmon-300: 255 198 184;
+  --ume-persimmon-400: 252 148 124;
+  --ume-persimmon-500: 239 96 63;
+  --ume-persimmon-600: 200 68 40;
+  --ume-persimmon-700: 152 45 22;
+  --ume-persimmon-800: 98 20 4;
+
+  /* Primitives: supporting hues */
+  --ume-green-100: 196 255 229;
+  --ume-green-300: 77 231 165;
+  --ume-green-500: 0 160 94;
+  --ume-green-700: 0 92 54;
+  --ume-yellow-100: 255 240 194;
+  --ume-yellow-300: 255 207 66;
+  --ume-yellow-500: 189 141 0;
+  --ume-yellow-700: 108 80 0;
+  --ume-blue-100: 226 244 255;
+  --ume-blue-300: 147 219 255;
+  --ume-blue-500: 42 152 208;
+  --ume-blue-700: 9 90 130;
+  --ume-red-100: 255 233 233;
+  --ume-red-300: 255 196 196;
+  --ume-red-500: 244 84 84;
+  --ume-red-700: 160 14 14;
+  --ume-plum-100: 255 240 247;
+  --ume-plum-300: 255 196 226;
+  --ume-plum-500: 196 90 140;
+  --ume-plum-700: 130 58 94;
+
+  /* Semantic: text */
+  --ume-text-primary: rgb(var(--ume-grey-900));
+  --ume-text-secondary: rgb(var(--ume-grey-600));
+  --ume-text-tertiary: rgb(var(--ume-grey-500));
+  --ume-text-disabled: rgb(var(--ume-grey-400));
+  --ume-text-inverse: rgb(var(--ume-white));
+  --ume-text-link: rgb(var(--ume-persimmon-600));
+  --ume-text-danger: rgb(var(--ume-red-500));
+
+  /* Semantic: surfaces */
+  --ume-bg-canvas: rgb(var(--ume-grey-50));
+  --ume-bg-raised: rgb(var(--ume-white));
+  --ume-bg-sunken: rgb(var(--ume-grey-100));
+  --ume-bg-overlay: rgb(var(--ume-white));
+  --ume-bg-emphasis: rgb(var(--ume-grey-900));
+  --ume-bg-scrim: rgb(var(--ume-white) / 0.72);
+  --ume-bg-hover: rgb(var(--ume-black) / 0.05);
+  --ume-bg-active: rgb(var(--ume-black) / 0.08);
+  --ume-bg-field: rgb(var(--ume-black) / 0.05);
+
+  /* Semantic: borders */
+  --ume-border-strong: rgb(var(--ume-black) / 0.16);
+  --ume-border-default: rgb(var(--ume-black) / 0.10);
+  --ume-border-subtle: rgb(var(--ume-black) / 0.06);
+  --ume-border-focus: rgb(var(--ume-persimmon-500));
+
+  /* Semantic: action */
+  --ume-action-primary-bg: rgb(var(--ume-grey-900));
+  --ume-action-primary-bg-hover: rgb(var(--ume-grey-800));
+  --ume-action-primary-bg-active: rgb(var(--ume-grey-700));
+  --ume-action-primary-text: rgb(var(--ume-white));
+  --ume-action-accent-bg: rgb(var(--ume-persimmon-500));
+  --ume-action-accent-bg-hover: rgb(var(--ume-persimmon-600));
+  --ume-action-accent-bg-active: rgb(var(--ume-persimmon-700));
+  --ume-action-accent-text: rgb(var(--ume-white));
+  --ume-action-danger-bg: rgb(var(--ume-red-500));
+  --ume-action-danger-bg-hover: rgb(var(--ume-red-700));
+
+  /* Semantic: status accents */
+  --ume-accent-success: rgb(var(--ume-green-500));
+  --ume-accent-success-soft: rgb(var(--ume-green-300) / 0.30);
+  --ume-accent-warning: rgb(var(--ume-yellow-500));
+  --ume-accent-warning-soft: rgb(var(--ume-yellow-300) / 0.35);
+  --ume-accent-danger: rgb(var(--ume-red-500));
+  --ume-accent-danger-soft: rgb(var(--ume-red-300) / 0.35);
+  --ume-accent-info: rgb(var(--ume-blue-500));
+  --ume-accent-info-soft: rgb(var(--ume-blue-300) / 0.35);
+  --ume-accent-plum: rgb(var(--ume-plum-500));
+  --ume-accent-plum-soft: rgb(var(--ume-plum-300) / 0.40);
+  --ume-accent-persimmon-soft: rgb(var(--ume-persimmon-300) / 0.40);
+
+  /* Type */
+  --ume-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ume-font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --ume-text-xs: 0.75rem;
+  --ume-text-sm: 0.8125rem;
+  --ume-text-md: 0.875rem;
+  --ume-text-lg: 1rem;
+  --ume-text-xl: 1.25rem;
+  --ume-text-2xl: 1.5rem;
+  --ume-text-3xl: 2rem;
+
+  /* Radius */
+  --ume-radius-sm: 6px;
+  --ume-radius-md: 10px;
+  --ume-radius-lg: 14px;
+  --ume-radius-full: 999px;
+
+  /* Shadows */
+  --ume-shadow-1: 0 1px 2px rgb(var(--ume-black) / 0.06), 0 1px 3px rgb(var(--ume-black) / 0.05);
+  --ume-shadow-2: 0 4px 12px rgb(var(--ume-black) / 0.08), 0 2px 4px rgb(var(--ume-black) / 0.05);
+  --ume-shadow-3: 0 16px 40px rgb(var(--ume-black) / 0.14), 0 4px 10px rgb(var(--ume-black) / 0.06);
+
+  /* Focus ring */
+  --ume-ring: 0 0 0 3px rgb(var(--ume-persimmon-500) / 0.28);
+
+  /* Motion */
+  --ume-ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --ume-duration: 140ms;
+}
+
+[data-ume-theme="dark"] {
+  --ume-text-primary: rgb(var(--ume-grey-100));
+  --ume-text-secondary: rgb(var(--ume-grey-400));
+  --ume-text-tertiary: rgb(var(--ume-grey-500));
+  --ume-text-disabled: rgb(var(--ume-grey-600));
+  --ume-text-inverse: rgb(var(--ume-grey-900));
+  --ume-text-link: rgb(var(--ume-persimmon-400));
+  --ume-text-danger: rgb(var(--ume-red-300));
+
+  --ume-bg-canvas: rgb(var(--ume-black));
+  --ume-bg-raised: rgb(var(--ume-grey-900));
+  --ume-bg-sunken: rgb(var(--ume-grey-800));
+  --ume-bg-overlay: rgb(var(--ume-grey-800));
+  --ume-bg-emphasis: rgb(var(--ume-white));
+  --ume-bg-scrim: rgb(var(--ume-black) / 0.66);
+  --ume-bg-hover: rgb(var(--ume-white) / 0.06);
+  --ume-bg-active: rgb(var(--ume-white) / 0.10);
+  --ume-bg-field: rgb(var(--ume-white) / 0.07);
+
+  --ume-border-strong: rgb(var(--ume-white) / 0.20);
+  --ume-border-default: rgb(var(--ume-white) / 0.12);
+  --ume-border-subtle: rgb(var(--ume-white) / 0.07);
+  --ume-border-focus: rgb(var(--ume-persimmon-400));
+
+  --ume-action-primary-bg: rgb(var(--ume-white));
+  --ume-action-primary-bg-hover: rgb(var(--ume-grey-200));
+  --ume-action-primary-bg-active: rgb(var(--ume-grey-300));
+  --ume-action-primary-text: rgb(var(--ume-grey-900));
+  --ume-action-accent-bg: rgb(var(--ume-persimmon-500));
+  --ume-action-accent-bg-hover: rgb(var(--ume-persimmon-400));
+  --ume-action-accent-bg-active: rgb(var(--ume-persimmon-300));
+  --ume-action-accent-text: rgb(var(--ume-white));
+  --ume-action-danger-bg: rgb(var(--ume-red-500));
+  --ume-action-danger-bg-hover: rgb(var(--ume-red-300));
+
+  --ume-shadow-1: 0 1px 2px rgb(var(--ume-black) / 0.5);
+  --ume-shadow-2: 0 4px 12px rgb(var(--ume-black) / 0.55);
+  --ume-shadow-3: 0 16px 40px rgb(var(--ume-black) / 0.6);
+
+  --ume-ring: 0 0 0 3px rgb(var(--ume-persimmon-400) / 0.35);
+}
