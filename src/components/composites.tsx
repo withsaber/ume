@@ -114,6 +114,162 @@ export function Body({ children }: { children: React.ReactNode }) { return <p cl
 export function Caption({ children }: { children: React.ReactNode }) { return <p className="ume-caption">{children}</p>; }
 export function Mono({ children }: { children: React.ReactNode }) { return <span className="ume-mono">{children}</span>; }
 
+/* ---------- Banner ---------- */
+export type BannerTone = 'neutral' | 'info' | 'success' | 'warning' | 'danger' | 'accent';
+export interface BannerCTA { label: string; onClick?: () => void }
+export interface BannerProps {
+  label: string;
+  tone?: BannerTone;
+  icon?: React.ReactNode;
+  ctas?: BannerCTA[];
+}
+export function Banner({ label, tone = 'neutral', icon, ctas = [] }: BannerProps) {
+  return (
+    <div className={`ume-banner${tone !== 'neutral' ? ` ume-banner--${tone}` : ''}`} role="status">
+      {icon && <span className="ume-banner__icon">{icon}</span>}
+      <span className="ume-banner__label">{label}</span>
+      {ctas.length > 0 && (
+        <span className="ume-banner__ctas">
+          {ctas.map((c, i) => (
+            <button key={i} className="ume-banner__cta" onClick={c.onClick}>{c.label}</button>
+          ))}
+        </span>
+      )}
+    </div>
+  );
+}
+
+/* ---------- ButtonGroup ---------- */
+export interface ButtonGroupProps {
+  children: React.ReactNode;
+  fullWidth?: boolean;
+  stacked?: boolean;
+}
+export function ButtonGroup({ children, fullWidth, stacked }: ButtonGroupProps) {
+  return (
+    <div
+      className={`ume-buttongroup${fullWidth ? ' ume-buttongroup--full' : ''}${stacked ? ' ume-buttongroup--stacked' : ''}`}
+      role="group"
+    >
+      {children}
+    </div>
+  );
+}
+export interface ButtonGroupItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  label: string;
+  destructive?: boolean;
+  icon?: React.ReactNode;
+}
+export function ButtonGroupItem({ label, destructive, icon, ...rest }: ButtonGroupItemProps) {
+  return (
+    <button className={`ume-buttongroup__item${destructive ? ' ume-buttongroup__item--destructive' : ''}`} {...rest}>
+      {icon}
+      {label}
+    </button>
+  );
+}
+
+/* ---------- CircularProgress ---------- */
+export interface CircularProgressProps {
+  progress?: number;
+  spinner?: boolean;
+  size?: number;
+  strokeWidth?: number;
+}
+export function CircularProgress({ progress, spinner, size = 32, strokeWidth = 3 }: CircularProgressProps) {
+  const r = (size - strokeWidth) / 2;
+  const c = 2 * Math.PI * r;
+  const clamped = Math.max(0, Math.min(100, progress ?? 0));
+  const offset = spinner ? c * 0.72 : c * (1 - clamped / 100);
+  return (
+    <span
+      className={`ume-cprogress${spinner ? ' ume-cprogress--spinner' : ''}`}
+      role="progressbar"
+      aria-valuenow={spinner ? undefined : clamped}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      style={{ width: size, height: size }}
+    >
+      <svg width={size} height={size}>
+        <circle className="ume-cprogress__track" cx={size / 2} cy={size / 2} r={r} fill="none" strokeWidth={strokeWidth} />
+        <circle
+          className="ume-cprogress__bar"
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          strokeWidth={strokeWidth}
+          strokeDasharray={c}
+          strokeDashoffset={offset}
+          transform={`rotate(-90 ${size / 2} ${size / 2})`}
+        />
+      </svg>
+    </span>
+  );
+}
+
+/* ---------- Dropdown ---------- */
+export interface DropdownProps {
+  open: boolean;
+  children: React.ReactNode;
+  className?: string;
+}
+export function Dropdown({ open, children, className = '' }: DropdownProps) {
+  if (!open) return null;
+  return (
+    <div className={`ume-dropdown ${className}`.trim()} role="menu">
+      {children}
+    </div>
+  );
+}
+export interface DropdownItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  label?: string;
+  icon?: React.ReactNode;
+  destructive?: boolean;
+  end?: React.ReactNode;
+}
+export function DropdownItem({ label, icon, destructive, end, children, ...rest }: DropdownItemProps) {
+  return (
+    <button
+      className={`ume-dropdown-item${destructive ? ' ume-dropdown-item--danger' : ''}`}
+      role="menuitem"
+      {...rest}
+    >
+      {icon && <span className="ume-dropdown-item__icon">{icon}</span>}
+      {children || label}
+      {end && <span className="ume-dropdown-item__end">{end}</span>}
+    </button>
+  );
+}
+
+/* ---------- IconText ---------- */
+export interface IconTextProps {
+  label: string;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
+  filled?: boolean;
+  disabled?: boolean;
+  onClick?: (e: React.MouseEvent) => void;
+}
+export function IconText({ label, startIcon, endIcon, filled, disabled, onClick }: IconTextProps) {
+  const cls = `ume-icontext${filled ? ' ume-icontext--filled' : ''}`;
+  const inner = (
+    <>
+      {startIcon && <span className="ume-icontext__icon">{startIcon}</span>}
+      {label}
+      {endIcon && <span className="ume-icontext__icon">{endIcon}</span>}
+    </>
+  );
+  if (onClick) {
+    return (
+      <button className={cls} onClick={onClick} disabled={disabled}>
+        {inner}
+      </button>
+    );
+  }
+  return <span className={cls}>{inner}</span>;
+}
+
 /* ---------- ThemeProvider ---------- */
 export type UmeTheme = 'light' | 'dark';
 export function UmeProvider({ theme = 'light', children }: { theme?: UmeTheme; children: React.ReactNode }) {
