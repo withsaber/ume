@@ -1,0 +1,35 @@
+{
+  "name": "ume",
+  "version": "1.0.0",
+  "description": "ume: a standalone design system. Named for the plum blossom, the first flower to bloom in late winter.",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "sideEffects": ["*.css"],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./styles.css": {
+      "import": "./dist/esm/index.css",
+      "require": "./dist/cjs/index.css"
+    },
+    "./tokens.css": "./tokens/tokens.css"
+  },
+  "files": ["dist", "src", "tokens"],
+  "keywords": ["react", "components", "design-system", "ume"],
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "typescript": "^5.0.0"
+  }
+}
