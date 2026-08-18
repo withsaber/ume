@@ -1,0 +1,221 @@
+/* ume components. Requires tokens.css (imported by index). */
+
+.ume-root,
+.ume-root * {
+  box-sizing: border-box;
+}
+
+.ume-root {
+  font-family: var(--ume-font-sans);
+  font-size: var(--ume-text-md);
+  line-height: 1.5;
+  color: var(--ume-text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Button ---------- */
+.ume-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font: inherit;
+  font-weight: 550;
+  border: none;
+  border-radius: var(--ume-radius-md);
+  cursor: pointer;
+  transition: background var(--ume-duration) var(--ume-ease), box-shadow var(--ume-duration) var(--ume-ease), transform 60ms var(--ume-ease);
+  user-select: none;
+  white-space: nowrap;
+}
+.ume-btn:active { transform: translateY(0.5px); }
+.ume-btn:focus-visible { outline: none; box-shadow: var(--ume-ring); }
+.ume-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+.ume-btn--md { height: 36px; padding: 0 16px; font-size: var(--ume-text-md); }
+.ume-btn--sm { height: 28px; padding: 0 12px; font-size: var(--ume-text-sm); border-radius: var(--ume-radius-sm); }
+
+.ume-btn--primary { background: var(--ume-action-primary-bg); color: var(--ume-action-primary-text); }
+.ume-btn--primary:hover:not(:disabled) { background: var(--ume-action-primary-bg-hover); }
+.ume-btn--primary:active:not(:disabled) { background: var(--ume-action-primary-bg-active); }
+
+.ume-btn--accent { background: var(--ume-action-accent-bg); color: var(--ume-action-accent-text); }
+.ume-btn--accent:hover:not(:disabled) { background: var(--ume-action-accent-bg-hover); }
+.ume-btn--accent:active:not(:disabled) { background: var(--ume-action-accent-bg-active); }
+
+.ume-btn--secondary { background: var(--ume-bg-raised); color: var(--ume-text-primary); box-shadow: inset 0 0 0 1px var(--ume-border-default); }
+.ume-btn--secondary:hover:not(:disabled) { background: var(--ume-bg-hover); }
+
+.ume-btn--ghost { background: transparent; color: var(--ume-text-secondary); }
+.ume-btn--ghost:hover:not(:disabled) { background: var(--ume-bg-hover); color: var(--ume-text-primary); }
+
+.ume-btn--danger { background: transparent; color: var(--ume-text-danger); }
+.ume-btn--danger:hover:not(:disabled) { background: var(--ume-accent-danger-soft); }
+.ume-btn--danger-solid { background: var(--ume-action-danger-bg); color: #fff; }
+.ume-btn--danger-solid:hover:not(:disabled) { background: var(--ume-action-danger-bg-hover); }
+
+/* ---------- IconButton ---------- */
+.ume-iconbtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border: none; border-radius: var(--ume-radius-sm);
+  background: transparent; color: var(--ume-text-secondary); cursor: pointer;
+  transition: background var(--ume-duration) var(--ume-ease), color var(--ume-duration) var(--ume-ease);
+}
+.ume-iconbtn:hover { background: var(--ume-bg-hover); color: var(--ume-text-primary); }
+.ume-iconbtn:focus-visible { outline: none; box-shadow: var(--ume-ring); }
+.ume-iconbtn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ---------- Input ---------- */
+.ume-field { display: flex; flex-direction: column; gap: 6px; }
+.ume-field__label { font-size: var(--ume-text-sm); font-weight: 550; color: var(--ume-text-secondary); }
+.ume-input {
+  display: flex; align-items: center; gap: 8px;
+  height: 38px; padding: 0 12px;
+  background: var(--ume-bg-field); border-radius: var(--ume-radius-md);
+  box-shadow: inset 0 0 0 1px transparent;
+  transition: box-shadow var(--ume-duration) var(--ume-ease), background var(--ume-duration) var(--ume-ease);
+}
+.ume-input:hover { background: var(--ume-bg-hover); }
+.ume-input:focus-within { background: var(--ume-bg-raised); box-shadow: inset 0 0 0 1.5px var(--ume-border-focus), var(--ume-ring); }
+.ume-input input {
+  flex: 1; min-width: 0; border: none; outline: none; background: transparent;
+  font: inherit; color: var(--ume-text-primary); height: 100%;
+}
+.ume-input input::placeholder { color: var(--ume-text-tertiary); }
+.ume-input--error { box-shadow: inset 0 0 0 1.5px var(--ume-accent-danger); }
+.ume-field__helper { font-size: var(--ume-text-xs); color: var(--ume-text-tertiary); }
+.ume-field__helper--error { color: var(--ume-text-danger); }
+
+/* ---------- Select (styled native) ---------- */
+.ume-select {
+  appearance: none; font: inherit; height: 38px; padding: 0 36px 0 12px;
+  color: var(--ume-text-primary); background: var(--ume-bg-field);
+  border: none; border-radius: var(--ume-radius-md); cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+}
+.ume-select:focus-visible { outline: none; box-shadow: inset 0 0 0 1.5px var(--ume-border-focus), var(--ume-ring); }
+
+/* ---------- Toggle ---------- */
+.ume-toggle {
+  position: relative; width: 40px; height: 24px; border: none; border-radius: var(--ume-radius-full);
+  background: rgb(var(--ume-grey-400)); cursor: pointer; padding: 0;
+  transition: background var(--ume-duration) var(--ume-ease);
+}
+.ume-toggle::after {
+  content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px;
+  border-radius: 50%; background: #fff; box-shadow: var(--ume-shadow-1);
+  transition: transform var(--ume-duration) var(--ume-ease);
+}
+.ume-toggle[aria-checked="true"] { background: var(--ume-accent-success); }
+.ume-toggle[aria-checked="true"]::after { transform: translateX(16px); }
+.ume-toggle:focus-visible { outline: none; box-shadow: var(--ume-ring); }
+.ume-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ---------- Tabs ---------- */
+.ume-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--ume-border-default); }
+.ume-tab {
+  font: inherit; font-weight: 500; color: var(--ume-text-secondary);
+  background: none; border: none; padding: 8px 14px 10px; cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: color var(--ume-duration) var(--ume-ease);
+}
+.ume-tab:hover { color: var(--ume-text-primary); }
+.ume-tab--active { color: var(--ume-text-primary); font-weight: 600; border-bottom-color: var(--ume-action-accent-bg); }
+
+/* ---------- Dialog ---------- */
+.ume-dialog-scrim {
+  position: fixed; inset: 0; background: rgb(var(--ume-black) / 0.4);
+  display: flex; align-items: center; justify-content: center; z-index: 100;
+  backdrop-filter: blur(2px);
+}
+.ume-dialog {
+  background: var(--ume-bg-overlay); border-radius: var(--ume-radius-lg);
+  box-shadow: var(--ume-shadow-3); padding: 24px; width: min(420px, calc(100vw - 48px));
+  border: 1px solid var(--ume-border-subtle);
+}
+.ume-dialog__title { font-size: var(--ume-text-lg); font-weight: 650; margin: 0 0 6px; }
+.ume-dialog__body { color: var(--ume-text-secondary); font-size: var(--ume-text-md); margin: 0 0 20px; }
+.ume-dialog__actions { display: flex; justify-content: flex-end; gap: 8px; }
+
+/* ---------- Toast ---------- */
+.ume-toast-region { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 200; }
+.ume-toast {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--ume-bg-emphasis); color: var(--ume-text-inverse);
+  border-radius: var(--ume-radius-md); padding: 10px 16px; font-size: var(--ume-text-md);
+  box-shadow: var(--ume-shadow-2);
+  animation: ume-toast-in 180ms var(--ume-ease);
+}
+@keyframes ume-toast-in { from { opacity: 0; transform: translateY(8px); } }
+.ume-toast__action { background: none; border: none; font: inherit; font-weight: 600; color: inherit; cursor: pointer; opacity: 0.85; }
+.ume-toast__action:hover { opacity: 1; }
+
+/* ---------- Avatar / Facepile ---------- */
+.ume-avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--ume-accent-persimmon-soft); color: var(--ume-text-primary);
+  font-weight: 600; overflow: hidden; flex-shrink: 0;
+}
+.ume-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.ume-avatar--sm { width: 28px; height: 28px; font-size: 11px; }
+.ume-avatar--md { width: 36px; height: 36px; font-size: 13px; }
+.ume-avatar--lg { width: 48px; height: 48px; font-size: 16px; }
+.ume-facepile { display: inline-flex; }
+.ume-facepile .ume-avatar { box-shadow: 0 0 0 2px var(--ume-bg-raised); margin-left: -8px; }
+.ume-facepile .ume-avatar:first-child { margin-left: 0; }
+
+/* ---------- Chip ---------- */
+.ume-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 26px; padding: 0 10px; border-radius: var(--ume-radius-full);
+  background: var(--ume-bg-sunken); color: var(--ume-text-secondary);
+  font-size: var(--ume-text-sm); font-weight: 500;
+}
+.ume-chip--success { background: var(--ume-accent-success-soft); color: var(--ume-accent-success); }
+.ume-chip--warning { background: var(--ume-accent-warning-soft); color: var(--ume-accent-warning); }
+.ume-chip--danger { background: var(--ume-accent-danger-soft); color: var(--ume-accent-danger); }
+.ume-chip--info { background: var(--ume-accent-info-soft); color: var(--ume-accent-info); }
+.ume-chip--plum { background: var(--ume-accent-plum-soft); color: var(--ume-accent-plum); }
+
+/* ---------- Card ---------- */
+.ume-card {
+  background: var(--ume-bg-raised); border: 1px solid var(--ume-border-subtle);
+  border-radius: var(--ume-radius-lg); padding: 20px; box-shadow: var(--ume-shadow-1);
+}
+
+/* ---------- Divider ---------- */
+.ume-divider { border: none; height: 1px; background: var(--ume-border-default); margin: 8px 0; }
+
+/* ---------- Skeleton ---------- */
+.ume-skeleton {
+  border-radius: var(--ume-radius-sm);
+  background: linear-gradient(90deg, var(--ume-bg-sunken) 25%, var(--ume-bg-hover) 50%, var(--ume-bg-sunken) 75%);
+  background-size: 200% 100%;
+  animation: ume-shimmer 1.4s linear infinite;
+}
+@keyframes ume-shimmer { to { background-position: -200% 0; } }
+
+/* ---------- Tooltip ---------- */
+.ume-tooltip-wrap { position: relative; display: inline-flex; }
+.ume-tooltip {
+  position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(2px);
+  background: var(--ume-bg-emphasis); color: var(--ume-text-inverse);
+  font-size: var(--ume-text-xs); font-weight: 500; padding: 5px 10px;
+  border-radius: var(--ume-radius-sm); white-space: nowrap;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--ume-duration) var(--ume-ease), transform var(--ume-duration) var(--ume-ease);
+}
+.ume-tooltip-wrap:hover .ume-tooltip { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---------- Progress ---------- */
+.ume-progress { height: 6px; border-radius: var(--ume-radius-full); background: var(--ume-bg-sunken); overflow: hidden; }
+.ume-progress__bar { height: 100%; border-radius: inherit; background: var(--ume-action-accent-bg); transition: width 200ms var(--ume-ease); }
+
+/* ---------- Typography helpers ---------- */
+.ume-h1 { font-size: var(--ume-text-3xl); font-weight: 700; letter-spacing: -0.02em; margin: 0; }
+.ume-h2 { font-size: var(--ume-text-2xl); font-weight: 650; letter-spacing: -0.01em; margin: 0; }
+.ume-h3 { font-size: var(--ume-text-xl); font-weight: 650; margin: 0; }
+.ume-body { font-size: var(--ume-text-md); margin: 0; }
+.ume-caption { font-size: var(--ume-text-xs); color: var(--ume-text-tertiary); margin: 0; }
+.ume-mono { font-family: var(--ume-font-mono); font-size: var(--ume-text-sm); }
