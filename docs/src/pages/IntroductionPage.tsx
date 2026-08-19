@@ -62,6 +62,17 @@ export default function IntroductionPage() {
           </li>
         </ul>
       </section>
+
+      <section className="docs-section">
+        <h2 className="docs-h2">Inspiration</h2>
+        <p className="docs-desc">
+          Ume's documentation structure and state coverage patterns take cues from{' '}
+          <a href="https://skiff.com/ui" target="_blank" rel="noreferrer">
+            skiff.com/ui
+          </a>
+          , the Skiff design system.
+        </p>
+      </section>
     </>
   );
 }

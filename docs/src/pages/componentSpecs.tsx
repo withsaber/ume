@@ -5,9 +5,11 @@ import {
   Button,
   ButtonGroup,
   ButtonGroupItem,
+  Card,
   Chip,
   CircularProgress,
   CodeInput,
+  Dialog,
   Divider,
   Dropdown,
   DropdownItem,
@@ -19,9 +21,15 @@ import {
   Input,
   KeyCodeSequence,
   MonoTag,
+  Progress,
   Select,
+  Skeleton,
+  Tabs,
   TextArea,
+  ToastProvider,
   Toggle,
+  Tooltip,
+  useToast,
 } from '../../../src';
 import { ComponentPageSpec } from './ComponentPage';
 
@@ -57,6 +65,71 @@ function SelectDemo() {
         ]}
       />
     </div>
+  );
+}
+
+function TabsDemo() {
+  const [tab, setTab] = useState('inbox');
+  return (
+    <Tabs
+      tabs={[
+        { id: 'inbox', label: 'Inbox' },
+        { id: 'sent', label: 'Sent' },
+        { id: 'drafts', label: 'Drafts' },
+      ]}
+      active={tab}
+      onChange={setTab}
+    />
+  );
+}
+
+function ToastDemoButton({ action }: { action?: boolean }) {
+  const { push } = useToast();
+  return (
+    <Button
+      variant="secondary"
+      onClick={() =>
+        action ? push('Message deleted.', { actionLabel: 'Undo' }) : push('Draft saved.')
+      }
+    >
+      Show toast
+    </Button>
+  );
+}
+
+function ToastDemo({ action }: { action?: boolean }) {
+  return (
+    <ToastProvider>
+      <ToastDemoButton action={action} />
+    </ToastProvider>
+  );
+}
+
+function DialogDemo({ destructive }: { destructive?: boolean }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button variant="secondary" onClick={() => setOpen(true)}>
+        {destructive ? 'Delete project' : 'Open dialog'}
+      </Button>
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        title={destructive ? 'Delete project?' : 'Discard changes?'}
+        actions={
+          <>
+            <Button variant="secondary" onClick={() => setOpen(false)}>Cancel</Button>
+            <Button variant={destructive ? 'danger-solid' : 'primary'} onClick={() => setOpen(false)}>
+              {destructive ? 'Delete' : 'Save changes'}
+            </Button>
+          </>
+        }
+      >
+        {destructive
+          ? 'This action cannot be undone. The project and all of its data will be permanently removed.'
+          : 'You have unsaved changes. If you leave now, your changes will be lost.'}
+      </Dialog>
+    </>
   );
 }
 
@@ -337,6 +410,61 @@ const [code, setCode] = useState('');
 
 <Divider />`,
       },
+    ],
+  },
+
+  dialog: {
+    title: 'Dialog',
+    lede: 'A modal overlay that focuses the user on a single decision or task. Closes on Escape or when clicking the scrim.',
+    sections: [
+      {
+        id: 'basic',
+        title: 'Basic',
+        description: 'A title and body, with an optional right-aligned actions row.',
+        preview: <DialogDemo />,
+        code: `const [open, setOpen] = useState(false);
+
+<Button variant="secondary" onClick={() => setOpen(true)}>Open dialog</Button>
+<Dialog
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Discard changes?"
+  actions={
+    <>
+      <Button variant="secondary" onClick={() => setOpen(false)}>Cancel</Button>
+      <Button variant="primary" onClick={() => setOpen(false)}>Save changes</Button>
+    </>
+  }
+>
+  You have unsaved changes. If you leave now, your changes will be lost.
+</Dialog>`,
+      },
+      {
+        id: 'destructive',
+        title: 'Destructive',
+        description: 'Use a danger-solid button to confirm irreversible actions.',
+        preview: <DialogDemo destructive />,
+        code: `<Dialog
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Delete project?"
+  actions={
+    <>
+      <Button variant="secondary" onClick={() => setOpen(false)}>Cancel</Button>
+      <Button variant="danger-solid" onClick={deleteProject}>Delete</Button>
+    </>
+  }
+>
+  This action cannot be undone. The project and all of its data will be permanently removed.
+</Dialog>`,
+      },
+    ],
+    props: [
+      { name: 'open', type: 'boolean', description: 'Controls whether the dialog is rendered.', required: true },
+      { name: 'onClose', type: '() => void', description: 'Called on Escape or when the scrim is clicked.', required: true },
+      { name: 'title', type: 'string', description: 'The dialog heading; also used as the accessible label.', required: true },
+      { name: 'children', type: 'ReactNode', description: 'The body content.', required: true },
+      { name: 'actions', type: 'ReactNode', description: 'Buttons rendered in a right-aligned footer row.' },
     ],
   },
 
@@ -745,6 +873,190 @@ const [on, setOn] = useState(true);
       { name: 'helperText', type: 'string', description: 'Helper text rendered below the field.' },
       { name: 'error', type: 'string', description: 'Error message; marks the field invalid.' },
       { name: 'rows', type: 'number', description: 'Visible row count. Defaults to 3.' },
+    ],
+  },
+  toast: {
+    title: 'Toast',
+    lede: 'A transient notification that appears at the edge of the screen and dismisses itself.',
+    sections: [
+      {
+        id: 'basic',
+        title: 'Basic',
+        description: 'Wrap the app in ToastProvider, then call push from useToast to show a toast.',
+        preview: <ToastDemo />,
+        code: `import { Button, ToastProvider, useToast } from 'ume';
+
+function SaveButton() {
+  const { push } = useToast();
+  return <Button onClick={() => push('Draft saved.')}>Save</Button>;
+}
+
+<ToastProvider>
+  <SaveButton />
+</ToastProvider>`,
+      },
+      {
+        id: 'action',
+        title: 'With action',
+        description: 'Pass an actionLabel and onAction to add an inline action, like Undo.',
+        preview: <ToastDemo action />,
+        code: `const { push } = useToast();
+
+push('Message deleted.', {
+  actionLabel: 'Undo',
+  onAction: () => restoreMessage(),
+});`,
+      },
+    ],
+    props: [
+      { name: 'push', type: `(message: string, opts?: { actionLabel?: string; onAction?: () => void }) => void`, description: 'Returned by useToast. Shows a toast that auto-dismisses after 4 seconds.', required: true },
+      { name: 'children', type: 'ReactNode', description: 'On ToastProvider: the subtree that can show toasts.', required: true },
+    ],
+  },
+
+  tabs: {
+    title: 'Tabs',
+    lede: 'A row of tabs for switching between views, with tablist semantics.',
+    sections: [
+      {
+        id: 'basic',
+        title: 'Basic',
+        description: 'Controlled with active and onChange.',
+        preview: <TabsDemo />,
+        code: `import { Tabs } from 'ume';
+
+const [tab, setTab] = useState('inbox');
+
+<Tabs
+  tabs={[
+    { id: 'inbox', label: 'Inbox' },
+    { id: 'sent', label: 'Sent' },
+    { id: 'drafts', label: 'Drafts' },
+  ]}
+  active={tab}
+  onChange={setTab}
+/>`,
+      },
+    ],
+    props: [
+      { name: 'tabs', type: 'TabItem[]', description: 'The tabs to render: { id, label }.', required: true },
+      { name: 'active', type: 'string', description: 'The id of the active tab.', required: true },
+      { name: 'onChange', type: '(id: string) => void', description: 'Called with the id of the clicked tab.', required: true },
+    ],
+  },
+
+  tooltip: {
+    title: 'Tooltip',
+    lede: 'A small label that appears on hover to explain an element.',
+    sections: [
+      {
+        id: 'basic',
+        title: 'Basic',
+        description: 'Wrap the trigger element and pass the tooltip text as content.',
+        preview: (
+          <Tooltip content="Archive this conversation">
+            <Button variant="secondary">Hover me</Button>
+          </Tooltip>
+        ),
+        code: `import { Button, Tooltip } from 'ume';
+
+<Tooltip content="Archive this conversation">
+  <Button variant="secondary">Hover me</Button>
+</Tooltip>`,
+      },
+    ],
+    props: [
+      { name: 'content', type: 'string', description: 'The tooltip text shown on hover.', required: true },
+      { name: 'children', type: 'ReactNode', description: 'The element that triggers the tooltip.', required: true },
+    ],
+  },
+
+  card: {
+    title: 'Card',
+    lede: 'A surfaced container that groups related content and actions.',
+    sections: [
+      {
+        id: 'basic',
+        title: 'Basic',
+        description: 'Cards take arbitrary children and an optional className.',
+        preview: (
+          <div style={{ width: 320 }}>
+            <Card>
+              <strong>Upgrade to Pro</strong>
+              <p style={{ margin: '8px 0 16px' }}>More storage, custom domains, and priority support.</p>
+              <Button variant="primary">Upgrade</Button>
+            </Card>
+          </div>
+        ),
+        code: `import { Button, Card } from 'ume';
+
+<Card>
+  <strong>Upgrade to Pro</strong>
+  <p>More storage, custom domains, and priority support.</p>
+  <Button variant="primary">Upgrade</Button>
+</Card>`,
+      },
+    ],
+    props: [
+      { name: 'children', type: 'ReactNode', description: 'The content of the card.', required: true },
+      { name: 'className', type: 'string', description: 'Extra class names merged onto the card.' },
+    ],
+  },
+
+  skeleton: {
+    title: 'Skeleton',
+    lede: 'A placeholder block that mimics content while it loads.',
+    sections: [
+      {
+        id: 'basic',
+        title: 'Basic',
+        description: 'Compose width and height to approximate the incoming content.',
+        preview: (
+          <div className="docs-stack" style={{ width: 320 }}>
+            <Skeleton height={20} width="60%" />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton width="80%" />
+          </div>
+        ),
+        code: `import { Skeleton } from 'ume';
+
+<Skeleton height={20} width="60%" />
+<Skeleton />
+<Skeleton />
+<Skeleton width="80%" />`,
+      },
+    ],
+    props: [
+      { name: 'width', type: 'number | string', description: 'Width of the block. Defaults to "100%".' },
+      { name: 'height', type: 'number | string', description: 'Height of the block. Defaults to 14.' },
+    ],
+  },
+
+  progress: {
+    title: 'Progress',
+    lede: 'A horizontal bar for determinate progress, with progressbar semantics.',
+    sections: [
+      {
+        id: 'basic',
+        title: 'Basic',
+        description: 'Pass a value between 0 and 100; it is clamped to that range.',
+        preview: (
+          <div className="docs-stack" style={{ width: 320 }}>
+            <Progress value={25} />
+            <Progress value={60} />
+            <Progress value={90} />
+          </div>
+        ),
+        code: `import { Progress } from 'ume';
+
+<Progress value={25} />
+<Progress value={60} />
+<Progress value={90} />`,
+      },
+    ],
+    props: [
+      { name: 'value', type: 'number', description: 'Progress value between 0 and 100.', required: true },
     ],
   },
 };

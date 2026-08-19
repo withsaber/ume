@@ -45,6 +45,7 @@
   --ume-red-300: 255 196 196;
   --ume-red-500: 244 84 84;
   --ume-red-700: 160 14 14;
+  --ume-red-800: 138 12 12;
   --ume-plum-100: 255 240 247;
   --ume-plum-300: 255 196 226;
   --ume-plum-500: 196 90 140;
@@ -52,12 +53,12 @@
 
   /* Semantic: text */
   --ume-text-primary: rgb(var(--ume-grey-900));
-  --ume-text-secondary: rgb(var(--ume-grey-600));
-  --ume-text-tertiary: rgb(var(--ume-grey-500));
+  --ume-text-secondary: rgb(var(--ume-grey-700));
+  --ume-text-tertiary: rgb(var(--ume-grey-600));
   --ume-text-disabled: rgb(var(--ume-grey-400));
   --ume-text-inverse: rgb(var(--ume-white));
   --ume-text-link: rgb(var(--ume-persimmon-600));
-  --ume-text-danger: rgb(var(--ume-red-500));
+  --ume-text-danger: rgb(var(--ume-red-700));
 
   /* Semantic: surfaces */
   --ume-bg-canvas: rgb(var(--ume-grey-50));
@@ -81,12 +82,12 @@
   --ume-action-primary-bg-hover: rgb(var(--ume-grey-800));
   --ume-action-primary-bg-active: rgb(var(--ume-grey-700));
   --ume-action-primary-text: rgb(var(--ume-white));
-  --ume-action-accent-bg: rgb(var(--ume-persimmon-500));
-  --ume-action-accent-bg-hover: rgb(var(--ume-persimmon-600));
-  --ume-action-accent-bg-active: rgb(var(--ume-persimmon-700));
+  --ume-action-accent-bg: rgb(var(--ume-persimmon-600));
+  --ume-action-accent-bg-hover: rgb(var(--ume-persimmon-700));
+  --ume-action-accent-bg-active: rgb(var(--ume-persimmon-800));
   --ume-action-accent-text: rgb(var(--ume-white));
-  --ume-action-danger-bg: rgb(var(--ume-red-500));
-  --ume-action-danger-bg-hover: rgb(var(--ume-red-700));
+  --ume-action-danger-bg: rgb(var(--ume-red-700));
+  --ume-action-danger-bg-hover: rgb(var(--ume-red-800));
 
   /* Semantic: status accents.
      soft = solid pastel surface (readable under any content);
@@ -111,12 +112,12 @@
 
   /* Semantic: solid status fills (banners). Vivid in both themes;
      always paired with white text. */
-  --ume-accent-success-solid: rgb(var(--ume-green-500));
-  --ume-accent-warning-solid: rgb(var(--ume-yellow-500));
-  --ume-accent-danger-solid: rgb(var(--ume-red-500));
-  --ume-accent-info-solid: rgb(var(--ume-blue-500));
-  --ume-accent-plum-solid: rgb(var(--ume-plum-500));
-  --ume-accent-persimmon-solid: rgb(var(--ume-persimmon-500));
+  --ume-accent-success-solid: rgb(var(--ume-green-700));
+  --ume-accent-warning-solid: rgb(var(--ume-yellow-700));
+  --ume-accent-danger-solid: rgb(var(--ume-red-700));
+  --ume-accent-info-solid: rgb(var(--ume-blue-700));
+  --ume-accent-plum-solid: rgb(var(--ume-plum-700));
+  --ume-accent-persimmon-solid: rgb(var(--ume-persimmon-600));
   --ume-accent-solid-text: rgb(var(--ume-white));
 
   /* Type */

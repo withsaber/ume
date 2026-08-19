@@ -32,6 +32,7 @@ export const NAV_PAGES: NavPage[] = [
   { id: 'shortcut-codeblock', label: 'Shortcut & Codeblock', group: 'Foundation' },
   { id: 'banner', label: 'Banner', group: 'Components' },
   { id: 'buttongroup', label: 'ButtonGroup', group: 'Components' },
+  { id: 'card', label: 'Card', group: 'Components' },
   { id: 'circularprogress', label: 'CircularProgress', group: 'Components' },
   { id: 'chip', label: 'Chip', group: 'Components' },
   { id: 'codeinput', label: 'CodeInput', group: 'Components' },
@@ -42,9 +43,14 @@ export const NAV_PAGES: NavPage[] = [
   { id: 'icontext', label: 'IconText', group: 'Components' },
   { id: 'keycodesequence', label: 'KeyCodeSequence', group: 'Components' },
   { id: 'monotag', label: 'MonoTag', group: 'Components' },
+  { id: 'progress', label: 'Progress', group: 'Components' },
   { id: 'select', label: 'Select', group: 'Components' },
+  { id: 'skeleton', label: 'Skeleton', group: 'Components' },
+  { id: 'tabs', label: 'Tabs', group: 'Components' },
   { id: 'textarea', label: 'TextArea', group: 'Components' },
+  { id: 'toast', label: 'Toast', group: 'Components' },
   { id: 'toggle', label: 'Toggle', group: 'Components' },
+  { id: 'tooltip', label: 'Tooltip', group: 'Components' },
 ];
 
 export const NAV_GROUPS: Array<NavPage['group']> = ['Getting started', 'Foundation', 'Components'];

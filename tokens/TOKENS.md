@@ -65,6 +65,7 @@ Single source of truth: `src/tokens.css`. Everything else is generated from it.
 | `--ume-red-300` | `255 196 196` | `(same)` |
 | `--ume-red-500` | `244 84 84` | `(same)` |
 | `--ume-red-700` | `160 14 14` | `(same)` |
+| `--ume-red-800` | `138 12 12` | `(same)` |
 
 ## Plum
 
@@ -80,12 +81,12 @@ Single source of truth: `src/tokens.css`. Everything else is generated from it.
 | Token | Light | Dark |
 |---|---|---|
 | `--ume-text-primary` | `rgb(var(--ume-grey-900))` | `rgb(var(--ume-grey-100))` |
-| `--ume-text-secondary` | `rgb(var(--ume-grey-600))` | `rgb(var(--ume-grey-400))` |
-| `--ume-text-tertiary` | `rgb(var(--ume-grey-500))` | `rgb(var(--ume-grey-500))` |
+| `--ume-text-secondary` | `rgb(var(--ume-grey-700))` | `rgb(var(--ume-grey-400))` |
+| `--ume-text-tertiary` | `rgb(var(--ume-grey-600))` | `rgb(var(--ume-grey-500))` |
 | `--ume-text-disabled` | `rgb(var(--ume-grey-400))` | `rgb(var(--ume-grey-600))` |
 | `--ume-text-inverse` | `rgb(var(--ume-white))` | `rgb(var(--ume-grey-900))` |
 | `--ume-text-link` | `rgb(var(--ume-persimmon-600))` | `rgb(var(--ume-persimmon-400))` |
-| `--ume-text-danger` | `rgb(var(--ume-red-500))` | `rgb(var(--ume-red-300))` |
+| `--ume-text-danger` | `rgb(var(--ume-red-700))` | `rgb(var(--ume-red-300))` |
 | `--ume-text-xs` | `0.75rem` | `(same)` |
 | `--ume-text-sm` | `0.8125rem` | `(same)` |
 | `--ume-text-md` | `0.875rem` | `(same)` |
@@ -125,12 +126,12 @@ Single source of truth: `src/tokens.css`. Everything else is generated from it.
 | `--ume-action-primary-bg-hover` | `rgb(var(--ume-grey-800))` | `rgb(var(--ume-grey-200))` |
 | `--ume-action-primary-bg-active` | `rgb(var(--ume-grey-700))` | `rgb(var(--ume-grey-300))` |
 | `--ume-action-primary-text` | `rgb(var(--ume-white))` | `rgb(var(--ume-grey-900))` |
-| `--ume-action-accent-bg` | `rgb(var(--ume-persimmon-500))` | `rgb(var(--ume-persimmon-500))` |
-| `--ume-action-accent-bg-hover` | `rgb(var(--ume-persimmon-600))` | `rgb(var(--ume-persimmon-400))` |
-| `--ume-action-accent-bg-active` | `rgb(var(--ume-persimmon-700))` | `rgb(var(--ume-persimmon-300))` |
+| `--ume-action-accent-bg` | `rgb(var(--ume-persimmon-600))` | `rgb(var(--ume-persimmon-500))` |
+| `--ume-action-accent-bg-hover` | `rgb(var(--ume-persimmon-700))` | `rgb(var(--ume-persimmon-400))` |
+| `--ume-action-accent-bg-active` | `rgb(var(--ume-persimmon-800))` | `rgb(var(--ume-persimmon-300))` |
 | `--ume-action-accent-text` | `rgb(var(--ume-white))` | `rgb(var(--ume-white))` |
-| `--ume-action-danger-bg` | `rgb(var(--ume-red-500))` | `rgb(var(--ume-red-500))` |
-| `--ume-action-danger-bg-hover` | `rgb(var(--ume-red-700))` | `rgb(var(--ume-red-300))` |
+| `--ume-action-danger-bg` | `rgb(var(--ume-red-700))` | `rgb(var(--ume-red-500))` |
+| `--ume-action-danger-bg-hover` | `rgb(var(--ume-red-800))` | `rgb(var(--ume-red-300))` |
 
 ## Accent
 
@@ -153,12 +154,12 @@ Single source of truth: `src/tokens.css`. Everything else is generated from it.
 | `--ume-accent-plum-fg` | `rgb(var(--ume-plum-700))` | `rgb(var(--ume-plum-300))` |
 | `--ume-accent-persimmon-soft` | `rgb(var(--ume-persimmon-100))` | `rgb(var(--ume-persimmon-300) / 0.18)` |
 | `--ume-accent-persimmon-fg` | `rgb(var(--ume-persimmon-700))` | `rgb(var(--ume-persimmon-300))` |
-| `--ume-accent-success-solid` | `rgb(var(--ume-green-500))` | `(same)` |
-| `--ume-accent-warning-solid` | `rgb(var(--ume-yellow-500))` | `(same)` |
-| `--ume-accent-danger-solid` | `rgb(var(--ume-red-500))` | `(same)` |
-| `--ume-accent-info-solid` | `rgb(var(--ume-blue-500))` | `(same)` |
-| `--ume-accent-plum-solid` | `rgb(var(--ume-plum-500))` | `(same)` |
-| `--ume-accent-persimmon-solid` | `rgb(var(--ume-persimmon-500))` | `(same)` |
+| `--ume-accent-success-solid` | `rgb(var(--ume-green-700))` | `(same)` |
+| `--ume-accent-warning-solid` | `rgb(var(--ume-yellow-700))` | `(same)` |
+| `--ume-accent-danger-solid` | `rgb(var(--ume-red-700))` | `(same)` |
+| `--ume-accent-info-solid` | `rgb(var(--ume-blue-700))` | `(same)` |
+| `--ume-accent-plum-solid` | `rgb(var(--ume-plum-700))` | `(same)` |
+| `--ume-accent-persimmon-solid` | `rgb(var(--ume-persimmon-600))` | `(same)` |
 | `--ume-accent-solid-text` | `rgb(var(--ume-white))` | `(same)` |
 
 ## Font
