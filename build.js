@@ -24,7 +24,7 @@ async function build() {
   fs.mkdirSync('dist/types', { recursive: true });
   execSync(
     'npx tsc --emitDeclarationOnly --declaration --declarationMap false ' +
-    '--outDir dist/types --rootDir src --skipLibCheck ' +
+    '--jsx react-jsx --outDir dist/types --rootDir src --skipLibCheck ' +
     'src/index.ts src/components/*.tsx src/components/ExtInputs.tsx src/icons/icons.ts',
     { stdio: 'inherit' },
   );
