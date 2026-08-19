@@ -1,0 +1,43 @@
+/* ---------- Shadows page (token showcase) ---------- */
+.shadows-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+.shadows-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+  min-height: 120px;
+  padding: 16px;
+  background: var(--ume-bg-raised);
+  border: 1px solid var(--ume-border-subtle);
+  border-radius: var(--ume-radius-lg);
+}
+.shadows-card__name {
+  font-family: var(--ume-font-mono);
+  font-size: var(--ume-text-xs);
+  color: var(--ume-text-primary);
+}
+.shadows-card__note {
+  font-size: var(--ume-text-sm);
+  color: var(--ume-text-tertiary);
+}
+
+/* Focus ring demo: a static sample of the ring on a demo box (not a component
+   class), plus a real Button to tab to. */
+.shadows-ringsample {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 16px;
+  background: var(--ume-bg-raised);
+  border: 1px solid var(--ume-border-subtle);
+  border-radius: var(--ume-radius-md);
+  box-shadow: var(--ume-ring);
+  font-size: var(--ume-text-md);
+  color: var(--ume-text-secondary);
+}

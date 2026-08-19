@@ -88,18 +88,36 @@
   --ume-action-danger-bg: rgb(var(--ume-red-500));
   --ume-action-danger-bg-hover: rgb(var(--ume-red-700));
 
-  /* Semantic: status accents */
+  /* Semantic: status accents.
+     soft = solid pastel surface (readable under any content);
+     fg   = matching deep text color for use on the soft surface. */
   --ume-accent-success: rgb(var(--ume-green-500));
-  --ume-accent-success-soft: rgb(var(--ume-green-300) / 0.30);
+  --ume-accent-success-soft: rgb(var(--ume-green-100));
+  --ume-accent-success-fg: rgb(var(--ume-green-700));
   --ume-accent-warning: rgb(var(--ume-yellow-500));
-  --ume-accent-warning-soft: rgb(var(--ume-yellow-300) / 0.35);
+  --ume-accent-warning-soft: rgb(var(--ume-yellow-100));
+  --ume-accent-warning-fg: rgb(var(--ume-yellow-700));
   --ume-accent-danger: rgb(var(--ume-red-500));
-  --ume-accent-danger-soft: rgb(var(--ume-red-300) / 0.35);
+  --ume-accent-danger-soft: rgb(var(--ume-red-100));
+  --ume-accent-danger-fg: rgb(var(--ume-red-700));
   --ume-accent-info: rgb(var(--ume-blue-500));
-  --ume-accent-info-soft: rgb(var(--ume-blue-300) / 0.35);
+  --ume-accent-info-soft: rgb(var(--ume-blue-100));
+  --ume-accent-info-fg: rgb(var(--ume-blue-700));
   --ume-accent-plum: rgb(var(--ume-plum-500));
-  --ume-accent-plum-soft: rgb(var(--ume-plum-300) / 0.40);
-  --ume-accent-persimmon-soft: rgb(var(--ume-persimmon-300) / 0.40);
+  --ume-accent-plum-soft: rgb(var(--ume-plum-100));
+  --ume-accent-plum-fg: rgb(var(--ume-plum-700));
+  --ume-accent-persimmon-soft: rgb(var(--ume-persimmon-100));
+  --ume-accent-persimmon-fg: rgb(var(--ume-persimmon-700));
+
+  /* Semantic: solid status fills (banners). Vivid in both themes;
+     always paired with white text. */
+  --ume-accent-success-solid: rgb(var(--ume-green-500));
+  --ume-accent-warning-solid: rgb(var(--ume-yellow-500));
+  --ume-accent-danger-solid: rgb(var(--ume-red-500));
+  --ume-accent-info-solid: rgb(var(--ume-blue-500));
+  --ume-accent-plum-solid: rgb(var(--ume-plum-500));
+  --ume-accent-persimmon-solid: rgb(var(--ume-persimmon-500));
+  --ume-accent-solid-text: rgb(var(--ume-white));
 
   /* Type */
   --ume-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -154,6 +172,25 @@
   --ume-border-default: rgb(var(--ume-white) / 0.12);
   --ume-border-subtle: rgb(var(--ume-white) / 0.07);
   --ume-border-focus: rgb(var(--ume-persimmon-400));
+
+  /* Status accents on dark: translucent tint + bright fg */
+  --ume-accent-success: rgb(var(--ume-green-300));
+  --ume-accent-success-soft: rgb(var(--ume-green-300) / 0.16);
+  --ume-accent-success-fg: rgb(var(--ume-green-300));
+  --ume-accent-warning: rgb(var(--ume-yellow-300));
+  --ume-accent-warning-soft: rgb(var(--ume-yellow-300) / 0.16);
+  --ume-accent-warning-fg: rgb(var(--ume-yellow-300));
+  --ume-accent-danger: rgb(var(--ume-red-300));
+  --ume-accent-danger-soft: rgb(var(--ume-red-300) / 0.16);
+  --ume-accent-danger-fg: rgb(var(--ume-red-300));
+  --ume-accent-info: rgb(var(--ume-blue-300));
+  --ume-accent-info-soft: rgb(var(--ume-blue-300) / 0.16);
+  --ume-accent-info-fg: rgb(var(--ume-blue-300));
+  --ume-accent-plum: rgb(var(--ume-plum-300));
+  --ume-accent-plum-soft: rgb(var(--ume-plum-300) / 0.16);
+  --ume-accent-plum-fg: rgb(var(--ume-plum-300));
+  --ume-accent-persimmon-soft: rgb(var(--ume-persimmon-300) / 0.18);
+  --ume-accent-persimmon-fg: rgb(var(--ume-persimmon-300));
 
   --ume-action-primary-bg: rgb(var(--ume-white));
   --ume-action-primary-bg-hover: rgb(var(--ume-grey-200));

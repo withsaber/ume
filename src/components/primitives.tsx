@@ -11,12 +11,21 @@ export function Button({ variant = 'primary', size = 'md', className = '', ...re
 }
 
 /* ---------- IconButton ---------- */
+export type IconButtonVariant = 'primary' | 'accent' | 'secondary' | 'ghost' | 'danger';
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
+  variant?: IconButtonVariant;
+  size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
 }
-export function IconButton({ label, className = '', ...rest }: IconButtonProps) {
-  return <button aria-label={label} className={`ume-iconbtn ${className}`.trim()} {...rest} />;
+export function IconButton({ label, variant = 'secondary', size = 'md', className = '', ...rest }: IconButtonProps) {
+  return (
+    <button
+      aria-label={label}
+      className={`ume-iconbtn ume-iconbtn--${variant} ume-iconbtn--${size} ${className}`.trim()}
+      {...rest}
+    />
+  );
 }
 
 /* ---------- Input ---------- */
@@ -44,12 +53,6 @@ export function Input({ label, helperText, error, startAdornment, id, ...rest }:
       )}
     </div>
   );
-}
-
-/* ---------- Select ---------- */
-export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {}
-export function Select({ className = '', ...rest }: SelectProps) {
-  return <select className={`ume-select ${className}`.trim()} {...rest} />;
 }
 
 /* ---------- Toggle ---------- */

@@ -136,17 +136,30 @@ Single source of truth: `src/tokens.css`. Everything else is generated from it.
 
 | Token | Light | Dark |
 |---|---|---|
-| `--ume-accent-success` | `rgb(var(--ume-green-500))` | `(same)` |
-| `--ume-accent-success-soft` | `rgb(var(--ume-green-300) / 0.30)` | `(same)` |
-| `--ume-accent-warning` | `rgb(var(--ume-yellow-500))` | `(same)` |
-| `--ume-accent-warning-soft` | `rgb(var(--ume-yellow-300) / 0.35)` | `(same)` |
-| `--ume-accent-danger` | `rgb(var(--ume-red-500))` | `(same)` |
-| `--ume-accent-danger-soft` | `rgb(var(--ume-red-300) / 0.35)` | `(same)` |
-| `--ume-accent-info` | `rgb(var(--ume-blue-500))` | `(same)` |
-| `--ume-accent-info-soft` | `rgb(var(--ume-blue-300) / 0.35)` | `(same)` |
-| `--ume-accent-plum` | `rgb(var(--ume-plum-500))` | `(same)` |
-| `--ume-accent-plum-soft` | `rgb(var(--ume-plum-300) / 0.40)` | `(same)` |
-| `--ume-accent-persimmon-soft` | `rgb(var(--ume-persimmon-300) / 0.40)` | `(same)` |
+| `--ume-accent-success` | `rgb(var(--ume-green-500))` | `rgb(var(--ume-green-300))` |
+| `--ume-accent-success-soft` | `rgb(var(--ume-green-100))` | `rgb(var(--ume-green-300) / 0.16)` |
+| `--ume-accent-success-fg` | `rgb(var(--ume-green-700))` | `rgb(var(--ume-green-300))` |
+| `--ume-accent-warning` | `rgb(var(--ume-yellow-500))` | `rgb(var(--ume-yellow-300))` |
+| `--ume-accent-warning-soft` | `rgb(var(--ume-yellow-100))` | `rgb(var(--ume-yellow-300) / 0.16)` |
+| `--ume-accent-warning-fg` | `rgb(var(--ume-yellow-700))` | `rgb(var(--ume-yellow-300))` |
+| `--ume-accent-danger` | `rgb(var(--ume-red-500))` | `rgb(var(--ume-red-300))` |
+| `--ume-accent-danger-soft` | `rgb(var(--ume-red-100))` | `rgb(var(--ume-red-300) / 0.16)` |
+| `--ume-accent-danger-fg` | `rgb(var(--ume-red-700))` | `rgb(var(--ume-red-300))` |
+| `--ume-accent-info` | `rgb(var(--ume-blue-500))` | `rgb(var(--ume-blue-300))` |
+| `--ume-accent-info-soft` | `rgb(var(--ume-blue-100))` | `rgb(var(--ume-blue-300) / 0.16)` |
+| `--ume-accent-info-fg` | `rgb(var(--ume-blue-700))` | `rgb(var(--ume-blue-300))` |
+| `--ume-accent-plum` | `rgb(var(--ume-plum-500))` | `rgb(var(--ume-plum-300))` |
+| `--ume-accent-plum-soft` | `rgb(var(--ume-plum-100))` | `rgb(var(--ume-plum-300) / 0.16)` |
+| `--ume-accent-plum-fg` | `rgb(var(--ume-plum-700))` | `rgb(var(--ume-plum-300))` |
+| `--ume-accent-persimmon-soft` | `rgb(var(--ume-persimmon-100))` | `rgb(var(--ume-persimmon-300) / 0.18)` |
+| `--ume-accent-persimmon-fg` | `rgb(var(--ume-persimmon-700))` | `rgb(var(--ume-persimmon-300))` |
+| `--ume-accent-success-solid` | `rgb(var(--ume-green-500))` | `(same)` |
+| `--ume-accent-warning-solid` | `rgb(var(--ume-yellow-500))` | `(same)` |
+| `--ume-accent-danger-solid` | `rgb(var(--ume-red-500))` | `(same)` |
+| `--ume-accent-info-solid` | `rgb(var(--ume-blue-500))` | `(same)` |
+| `--ume-accent-plum-solid` | `rgb(var(--ume-plum-500))` | `(same)` |
+| `--ume-accent-persimmon-solid` | `rgb(var(--ume-persimmon-500))` | `(same)` |
+| `--ume-accent-solid-text` | `rgb(var(--ume-white))` | `(same)` |
 
 ## Font
 

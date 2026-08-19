@@ -1,0 +1,61 @@
+/* DropdownSubmenu: nested flyout row for Dropdown. Row mirrors .ume-dropdown-item,
+   panel mirrors .ume-dropdown (same tokens, radius, shadow). */
+
+.ume-dropdown-submenu {
+  position: relative;
+}
+
+.ume-dropdown-submenu__trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  background: none;
+  font: inherit;
+  font-weight: 500;
+  font-size: var(--ume-text-md);
+  color: var(--ume-text-primary);
+  border-radius: var(--ume-radius-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--ume-duration) var(--ume-ease);
+}
+.ume-dropdown-submenu__trigger:hover:not(:disabled),
+.ume-dropdown-submenu__trigger[aria-expanded="true"] { background: var(--ume-bg-hover); }
+.ume-dropdown-submenu__trigger:focus-visible { outline: none; box-shadow: var(--ume-ring); }
+.ume-dropdown-submenu__trigger:disabled { opacity: 0.45; cursor: not-allowed; }
+.ume-dropdown-submenu__icon { display: inline-flex; color: var(--ume-text-secondary); flex-shrink: 0; }
+.ume-dropdown-submenu__trigger:disabled .ume-dropdown-submenu__icon { color: var(--ume-text-disabled); }
+.ume-dropdown-submenu__chevron {
+  margin-left: auto;
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--ume-text-tertiary);
+}
+
+.ume-dropdown-submenu__panel {
+  position: absolute;
+  top: -7px; /* parent dropdown padding (6px) + border (1px) so first item aligns with the row */
+  left: 100%;
+  min-width: 180px;
+  background: var(--ume-bg-overlay);
+  border: 1px solid var(--ume-border-subtle);
+  border-radius: var(--ume-radius-md);
+  box-shadow: var(--ume-shadow-2);
+  padding: 6px;
+  z-index: 160;
+  animation: ume-dropdown-submenu-in 140ms var(--ume-ease);
+}
+.ume-dropdown-submenu__panel--left {
+  left: auto;
+  right: 100%;
+  animation-name: ume-dropdown-submenu-in-left;
+}
+@keyframes ume-dropdown-submenu-in {
+  from { opacity: 0; transform: translateX(-4px); }
+}
+@keyframes ume-dropdown-submenu-in-left {
+  from { opacity: 0; transform: translateX(4px); }
+}

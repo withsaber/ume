@@ -1,0 +1,34 @@
+/* ---------- Typography page (token showcase) ---------- */
+.type-row {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  width: 100%;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--ume-border-subtle);
+}
+.type-row:last-child { border-bottom: none; }
+.type-row__meta {
+  flex: none;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.type-row__name {
+  font-family: var(--ume-font-mono);
+  font-size: var(--ume-text-xs);
+  color: var(--ume-text-primary);
+}
+.type-row__size {
+  font-size: var(--ume-text-xs);
+  color: var(--ume-text-tertiary);
+}
+.type-row__specimen {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ume-text-primary);
+}

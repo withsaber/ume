@@ -13,6 +13,29 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* ---------- Scrollbars (opt-in) ----------
+   Thin, rounded, quiet: a low-contrast thumb that darkens on hover.
+   Apply .ume-scrollbar to any scrollable element; .ume-scrollbar--dark on dark surfaces. */
+.ume-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--ume-grey-400) / 0.45) transparent;
+}
+.ume-scrollbar::-webkit-scrollbar { width: 10px; height: 10px; }
+.ume-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.ume-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: var(--ume-radius-full);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  background-color: rgb(var(--ume-grey-400) / 0.45);
+  transition: background-color 200ms var(--ume-ease);
+}
+.ume-scrollbar::-webkit-scrollbar-thumb:hover { background-color: rgb(var(--ume-grey-400) / 0.8); }
+.ume-scrollbar::-webkit-scrollbar-corner { background: transparent; }
+
+.ume-scrollbar--dark { scrollbar-color: rgb(255 255 255 / 0.25) transparent; }
+.ume-scrollbar--dark::-webkit-scrollbar-thumb { background-color: rgb(255 255 255 / 0.22); }
+.ume-scrollbar--dark::-webkit-scrollbar-thumb:hover { background-color: rgb(255 255 255 / 0.42); }
+
 /* ---------- Button ---------- */
 .ume-btn {
   display: inline-flex;
@@ -54,16 +77,36 @@
 .ume-btn--danger-solid { background: var(--ume-action-danger-bg); color: #fff; }
 .ume-btn--danger-solid:hover:not(:disabled) { background: var(--ume-action-danger-bg-hover); }
 
-/* ---------- IconButton ---------- */
+/* ---------- IconButton ----------
+   Square sibling of Button: same variants, sizes, and radii. */
 .ume-iconbtn {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px; border: none; border-radius: var(--ume-radius-sm);
-  background: transparent; color: var(--ume-text-secondary); cursor: pointer;
-  transition: background var(--ume-duration) var(--ume-ease), color var(--ume-duration) var(--ume-ease);
+  border: none; border-radius: var(--ume-radius-md);
+  background: var(--ume-bg-raised); box-shadow: inset 0 0 0 1px var(--ume-border-default), var(--ume-shadow-1);
+  color: var(--ume-text-secondary); cursor: pointer;
+  transition: background var(--ume-duration) var(--ume-ease), box-shadow var(--ume-duration) var(--ume-ease), color var(--ume-duration) var(--ume-ease), transform 60ms var(--ume-ease);
 }
-.ume-iconbtn:hover { background: var(--ume-bg-hover); color: var(--ume-text-primary); }
-.ume-iconbtn:focus-visible { outline: none; box-shadow: var(--ume-ring); }
-.ume-iconbtn:disabled { opacity: 0.45; cursor: not-allowed; }
+.ume-iconbtn:active { transform: translateY(0.5px); }
+.ume-iconbtn:focus-visible { outline: none; box-shadow: inset 0 0 0 1.5px var(--ume-border-focus), var(--ume-ring); }
+.ume-iconbtn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+.ume-iconbtn--lg { width: 44px; height: 44px; }
+.ume-iconbtn--md { width: 36px; height: 36px; }
+.ume-iconbtn--sm { width: 28px; height: 28px; border-radius: var(--ume-radius-sm); }
+
+.ume-iconbtn--primary { background: var(--ume-action-primary-bg); box-shadow: none; color: var(--ume-action-primary-text); }
+.ume-iconbtn--primary:hover:not(:disabled) { background: var(--ume-action-primary-bg-hover); }
+
+.ume-iconbtn--accent { background: var(--ume-action-accent-bg); box-shadow: none; color: var(--ume-action-accent-text); }
+.ume-iconbtn--accent:hover:not(:disabled) { background: var(--ume-action-accent-bg-hover); }
+
+.ume-iconbtn--secondary:hover:not(:disabled) { box-shadow: inset 0 0 0 1px var(--ume-border-strong), var(--ume-shadow-1); color: var(--ume-text-primary); }
+
+.ume-iconbtn--ghost { background: transparent; box-shadow: none; color: var(--ume-text-secondary); }
+.ume-iconbtn--ghost:hover:not(:disabled) { background: var(--ume-bg-hover); color: var(--ume-text-primary); }
+
+.ume-iconbtn--danger { background: transparent; box-shadow: none; color: var(--ume-text-danger); }
+.ume-iconbtn--danger:hover:not(:disabled) { background: var(--ume-accent-danger-soft); }
 
 /* ---------- Input ---------- */
 .ume-field { display: flex; flex-direction: column; gap: 6px; }
@@ -86,16 +129,6 @@
 .ume-field__helper { font-size: var(--ume-text-xs); color: var(--ume-text-tertiary); }
 .ume-field__helper--error { color: var(--ume-text-danger); }
 
-/* ---------- Select (styled native) ---------- */
-.ume-select {
-  appearance: none; font: inherit; height: 38px; padding: 0 36px 0 12px;
-  color: var(--ume-text-primary); background: var(--ume-bg-field);
-  border: none; border-radius: var(--ume-radius-md); cursor: pointer;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 12px center;
-}
-.ume-select:focus-visible { outline: none; box-shadow: inset 0 0 0 1.5px var(--ume-border-focus), var(--ume-ring); }
-
 /* ---------- Toggle ---------- */
 .ume-toggle {
   position: relative; width: 40px; height: 24px; border: none; border-radius: var(--ume-radius-full);
@@ -107,7 +140,7 @@
   border-radius: 50%; background: #fff; box-shadow: var(--ume-shadow-1);
   transition: transform var(--ume-duration) var(--ume-ease);
 }
-.ume-toggle[aria-checked="true"] { background: var(--ume-accent-success); }
+.ume-toggle[aria-checked="true"] { background: var(--ume-action-accent-bg); }
 .ume-toggle[aria-checked="true"]::after { transform: translateX(16px); }
 .ume-toggle:focus-visible { outline: none; box-shadow: var(--ume-ring); }
 .ume-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
@@ -154,7 +187,7 @@
 /* ---------- Avatar / Facepile ---------- */
 .ume-avatar {
   display: inline-flex; align-items: center; justify-content: center;
-  border-radius: 50%; background: var(--ume-accent-persimmon-soft); color: var(--ume-text-primary);
+  border-radius: 50%; background: var(--ume-accent-persimmon-soft); color: var(--ume-accent-persimmon-fg);
   font-weight: 600; overflow: hidden; flex-shrink: 0;
 }
 .ume-avatar img { width: 100%; height: 100%; object-fit: cover; }
@@ -169,14 +202,15 @@
 .ume-chip {
   display: inline-flex; align-items: center; gap: 6px;
   height: 26px; padding: 0 10px; border-radius: var(--ume-radius-full);
-  background: var(--ume-bg-sunken); color: var(--ume-text-secondary);
+  background: var(--ume-bg-raised); box-shadow: inset 0 0 0 1px var(--ume-border-default);
+  color: var(--ume-text-secondary);
   font-size: var(--ume-text-sm); font-weight: 500;
 }
-.ume-chip--success { background: var(--ume-accent-success-soft); color: var(--ume-accent-success); }
-.ume-chip--warning { background: var(--ume-accent-warning-soft); color: var(--ume-accent-warning); }
-.ume-chip--danger { background: var(--ume-accent-danger-soft); color: var(--ume-accent-danger); }
-.ume-chip--info { background: var(--ume-accent-info-soft); color: var(--ume-accent-info); }
-.ume-chip--plum { background: var(--ume-accent-plum-soft); color: var(--ume-accent-plum); }
+.ume-chip--success { background: var(--ume-accent-success-soft); box-shadow: none; color: var(--ume-accent-success-fg); }
+.ume-chip--warning { background: var(--ume-accent-warning-soft); box-shadow: none; color: var(--ume-accent-warning-fg); }
+.ume-chip--danger { background: var(--ume-accent-danger-soft); box-shadow: none; color: var(--ume-accent-danger-fg); }
+.ume-chip--info { background: var(--ume-accent-info-soft); box-shadow: none; color: var(--ume-accent-info-fg); }
+.ume-chip--plum { background: var(--ume-accent-plum-soft); box-shadow: none; color: var(--ume-accent-plum-fg); }
 
 /* ---------- Card ---------- */
 .ume-card {
@@ -224,20 +258,21 @@
 .ume-banner {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  border-radius: var(--ume-radius-md);
+  gap: 10px;
+  min-height: 44px;
+  padding: 6px 12px 6px 14px;
+  border-radius: var(--ume-radius-sm);
   font-size: var(--ume-text-md);
   font-weight: 500;
-  color: var(--ume-text-primary);
-  background: var(--ume-bg-sunken);
+  color: var(--ume-text-inverse);
+  background: var(--ume-bg-emphasis);
 }
-.ume-banner--info { background: var(--ume-accent-info-soft); }
-.ume-banner--success { background: var(--ume-accent-success-soft); }
-.ume-banner--warning { background: var(--ume-accent-warning-soft); }
-.ume-banner--danger { background: var(--ume-accent-danger-soft); }
-.ume-banner--accent { background: var(--ume-accent-persimmon-soft); }
-.ume-banner__icon { display: inline-flex; flex-shrink: 0; color: var(--ume-text-secondary); }
+.ume-banner--info { background: var(--ume-accent-info-solid); color: var(--ume-accent-solid-text); }
+.ume-banner--success { background: var(--ume-accent-success-solid); color: var(--ume-accent-solid-text); }
+.ume-banner--warning { background: var(--ume-accent-warning-solid); color: var(--ume-accent-solid-text); }
+.ume-banner--danger { background: var(--ume-accent-danger-solid); color: var(--ume-accent-solid-text); }
+.ume-banner--accent { background: var(--ume-accent-persimmon-solid); color: var(--ume-accent-solid-text); }
+.ume-banner__icon { display: inline-flex; flex-shrink: 0; color: inherit; }
 .ume-banner__label { flex: 1; min-width: 0; }
 .ume-banner__ctas { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
 .ume-banner__cta {
@@ -246,14 +281,15 @@
   font-size: var(--ume-text-sm);
   border: none;
   background: none;
-  color: var(--ume-text-primary);
+  color: inherit;
   padding: 5px 10px;
   border-radius: var(--ume-radius-sm);
   cursor: pointer;
   transition: background var(--ume-duration) var(--ume-ease);
 }
-.ume-banner__cta:hover { background: rgb(var(--ume-black) / 0.06); }
-[data-ume-theme=dark] .ume-banner__cta:hover { background: rgb(var(--ume-white) / 0.08); }
+.ume-banner__cta:hover { background: rgb(255 255 255 / 0.16); }
+/* neutral banner is white in dark mode: dark hover instead */
+[data-ume-theme=dark] .ume-banner:not([class*="ume-banner--"]) .ume-banner__cta:hover { background: rgb(0 0 0 / 0.08); }
 
 /* ButtonGroup */
 .ume-buttongroup {
@@ -360,9 +396,10 @@ button.ume-icontext { cursor: pointer; }
 button.ume-icontext:hover:not(:disabled) { color: var(--ume-text-primary); }
 button.ume-icontext:disabled { opacity: 0.45; cursor: not-allowed; }
 .ume-icontext--filled {
-  background: var(--ume-bg-sunken);
+  background: var(--ume-bg-raised);
+  box-shadow: inset 0 0 0 1px var(--ume-border-default);
   border-radius: var(--ume-radius-full);
   padding: 4px 12px;
 }
-button.ume-icontext--filled:hover:not(:disabled) { background: var(--ume-bg-hover); }
+button.ume-icontext--filled:hover:not(:disabled) { box-shadow: inset 0 0 0 1px var(--ume-border-strong); }
 .ume-icontext__icon { display: inline-flex; flex-shrink: 0; }

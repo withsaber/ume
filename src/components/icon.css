@@ -1,0 +1,13 @@
+/* ume Icon component. Requires tokens.css (imported by index). */
+
+.ume-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  line-height: 0;
+}
+.ume-icon svg {
+  display: block;
+}

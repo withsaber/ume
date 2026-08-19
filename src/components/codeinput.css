@@ -1,0 +1,35 @@
+/* CodeInput (one-time code / OTP). Uses the same tokens as .ume-input. */
+
+.ume-codeinput { display: inline-flex; flex-direction: column; gap: 6px; }
+.ume-codeinput__cells { display: flex; gap: 8px; }
+
+.ume-codeinput__cell {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  text-align: center;
+  font: inherit;
+  font-size: var(--ume-text-lg);
+  font-weight: 600;
+  color: var(--ume-text-primary);
+  caret-color: var(--ume-action-accent-bg);
+  background: var(--ume-bg-raised);
+  border-radius: var(--ume-radius-md);
+  box-shadow: inset 0 0 0 1px var(--ume-border-default);
+  transition: box-shadow var(--ume-duration) var(--ume-ease), background var(--ume-duration) var(--ume-ease);
+}
+.ume-codeinput__cell:hover:not(:disabled) { box-shadow: inset 0 0 0 1px var(--ume-border-strong); }
+.ume-codeinput__cell:focus {
+  outline: none;
+  background: var(--ume-bg-raised);
+  box-shadow: inset 0 0 0 1.5px var(--ume-border-focus), var(--ume-ring);
+}
+.ume-codeinput__cell--filled { box-shadow: inset 0 0 0 1px var(--ume-border-strong); }
+.ume-codeinput__cell--filled:focus { box-shadow: inset 0 0 0 1.5px var(--ume-border-focus), var(--ume-ring); }
+.ume-codeinput__cell:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.ume-codeinput--error .ume-codeinput__cell { box-shadow: inset 0 0 0 1.5px var(--ume-accent-danger); }
+.ume-codeinput--error .ume-codeinput__cell:focus {
+  box-shadow: inset 0 0 0 1.5px var(--ume-accent-danger), var(--ume-ring);
+}

@@ -1,0 +1,60 @@
+/* ---------- Colors page (token showcase) ---------- */
+.colors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+.colors-swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.colors-swatch__chip {
+  aspect-ratio: 1;
+  border-radius: var(--ume-radius-md);
+  border: 1px solid var(--ume-border-subtle);
+}
+.colors-swatch__name {
+  font-family: var(--ume-font-mono);
+  font-size: var(--ume-text-xs);
+  color: var(--ume-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.colors-grouplabel {
+  font-size: var(--ume-text-sm);
+  font-weight: 600;
+  color: var(--ume-text-secondary);
+  margin: 20px 0 10px;
+}
+.colors-grouplabel:first-child { margin-top: 0; }
+
+/* Semantic tokens: larger cards pairing a swatch strip with the token name. */
+.colors-semgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+.colors-semcard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  background: var(--ume-bg-raised);
+  border: 1px solid var(--ume-border-subtle);
+  border-radius: var(--ume-radius-md);
+}
+.colors-semcard__chip {
+  height: 48px;
+  border-radius: var(--ume-radius-sm);
+  border: 1px solid var(--ume-border-subtle);
+}
+.colors-semcard__name {
+  font-family: var(--ume-font-mono);
+  font-size: var(--ume-text-xs);
+  color: var(--ume-text-secondary);
+}

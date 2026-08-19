@@ -1,0 +1,35 @@
+/* ---------- Menu ----------
+   Embedded menu panel: same look as .ume-dropdown, but static. */
+.ume-menu {
+  width: 100%;
+  min-width: 200px;
+  background: var(--ume-bg-overlay);
+  border: 1px solid var(--ume-border-subtle);
+  border-radius: var(--ume-radius-md);
+  box-shadow: var(--ume-shadow-2);
+  padding: 6px;
+}
+.ume-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  background: none;
+  font: inherit;
+  font-weight: 500;
+  font-size: var(--ume-text-md);
+  color: var(--ume-text-primary);
+  border-radius: var(--ume-radius-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--ume-duration) var(--ume-ease);
+}
+.ume-menu__item:hover:not(:disabled) { background: var(--ume-bg-hover); }
+.ume-menu__item:focus-visible { outline: none; box-shadow: var(--ume-ring); }
+.ume-menu__item:disabled { opacity: 0.45; cursor: not-allowed; }
+.ume-menu__item--danger { color: var(--ume-text-danger); }
+.ume-menu__item-icon { display: inline-flex; color: var(--ume-text-secondary); flex-shrink: 0; }
+.ume-menu__item--danger .ume-menu__item-icon { color: var(--ume-text-danger); }
+.ume-menu__item-end { margin-left: auto; color: var(--ume-text-tertiary); font-size: var(--ume-text-xs); display: inline-flex; align-items: center; }

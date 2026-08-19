@@ -1,0 +1,53 @@
+/* ---------- Markdown ---------- */
+.ume-markdown {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ume-text-primary);
+}
+.ume-markdown > :first-child { margin-top: 0; }
+.ume-markdown > :last-child { margin-bottom: 0; }
+
+.ume-markdown__p { margin: 10px 0; }
+
+.ume-markdown__h1 {
+  font-size: var(--ume-text-2xl);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  margin: 20px 0 8px;
+}
+.ume-markdown__h2 {
+  font-size: var(--ume-text-xl);
+  font-weight: 650;
+  margin: 18px 0 6px;
+}
+.ume-markdown__h3 {
+  font-size: var(--ume-text-lg);
+  font-weight: 600;
+  margin: 16px 0 6px;
+}
+
+.ume-markdown__code {
+  font-family: var(--ume-font-mono);
+  font-size: 0.9em;
+  background: var(--ume-bg-field);
+  border: 1px solid var(--ume-border-subtle);
+  border-radius: var(--ume-radius-sm);
+  padding: 1.5px 6px;
+  color: var(--ume-text-primary);
+}
+
+.ume-markdown__link {
+  color: var(--ume-text-link);
+  text-decoration: none;
+}
+.ume-markdown__link:hover { text-decoration: underline; }
+
+.ume-markdown__list {
+  margin: 10px 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ume-markdown .ume-codeblock { margin: 12px 0; }

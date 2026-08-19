@@ -1,0 +1,21 @@
+/* ---------- MonoTag ---------- */
+.ume-monotag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: var(--ume-radius-sm);
+  background: var(--ume-bg-raised);
+  box-shadow: inset 0 0 0 1px var(--ume-border-default);
+  color: var(--ume-text-secondary);
+  font-family: var(--ume-font-mono);
+  font-size: var(--ume-text-xs);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.ume-monotag--success { background: var(--ume-accent-success-soft); box-shadow: none; color: var(--ume-accent-success-fg); }
+.ume-monotag--warning { background: var(--ume-accent-warning-soft); box-shadow: none; color: var(--ume-accent-warning-fg); }
+.ume-monotag--danger { background: var(--ume-accent-danger-soft); box-shadow: none; color: var(--ume-accent-danger-fg); }
+.ume-monotag--info { background: var(--ume-accent-info-soft); box-shadow: none; color: var(--ume-accent-info-fg); }
+.ume-monotag--plum { background: var(--ume-accent-plum-soft); box-shadow: none; color: var(--ume-accent-plum-fg); }

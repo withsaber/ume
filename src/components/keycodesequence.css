@@ -1,0 +1,33 @@
+/* ---------- KeyCodeSequence ---------- */
+.ume-kbd-sequence {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.ume-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  font-family: var(--ume-font-sans);
+  font-size: var(--ume-text-xs);
+  font-weight: 500;
+  color: var(--ume-text-secondary);
+  background: var(--ume-bg-raised);
+  border: 1px solid var(--ume-border-default);
+  border-radius: var(--ume-radius-sm);
+  box-shadow: 0 1.5px 0 var(--ume-border-default);
+}
+.ume-kbd--sm {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  font-size: 10px;
+  border-radius: 4px;
+}
+.ume-kbd__separator {
+  color: var(--ume-text-tertiary);
+  font-size: var(--ume-text-xs);
+}

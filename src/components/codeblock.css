@@ -1,0 +1,83 @@
+/* ---------- CodeBlock ----------
+   Dark code panel. The surface colors are deliberately fixed (not theme
+   tokens): code reads on a dark terminal-like surface in both themes. */
+.ume-codeblock {
+  --ume-codeblock-bg: #18181b;
+  --ume-codeblock-header-bg: #27272a;
+  --ume-codeblock-header-border: #3f3f46;
+
+  margin: 0;
+  border-radius: 16px;
+  background: var(--ume-codeblock-bg);
+  overflow: hidden;
+  box-shadow:
+    0 2px 4px -2px rgb(0 0 0 / 0.1),
+    0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.ume-codeblock__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 49px;
+  padding: 0 16px;
+  background: var(--ume-codeblock-header-bg);
+  border-bottom: 1px solid var(--ume-codeblock-header-border);
+}
+
+.ume-codeblock__title {
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.ume-codeblock__copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: var(--ume-radius-sm);
+  background: none;
+  color: #a1a1aa;
+  cursor: pointer;
+}
+.ume-codeblock__copy:hover {
+  background: rgb(255 255 255 / 0.08);
+  color: #ffffff;
+}
+
+.ume-codeblock__body {
+  margin: 0;
+  padding: 16px 24px;
+  overflow-x: auto;
+  font-family: var(--ume-font-mono);
+  font-size: 12px;
+  line-height: 24px;
+  color: #ffffff;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.25) transparent;
+}
+.ume-codeblock__body::-webkit-scrollbar { width: 10px; height: 10px; }
+.ume-codeblock__body::-webkit-scrollbar-track { background: transparent; }
+.ume-codeblock__body::-webkit-scrollbar-thumb {
+  border-radius: var(--ume-radius-full);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  background-color: rgb(255 255 255 / 0.22);
+}
+.ume-codeblock__body::-webkit-scrollbar-thumb:hover { background-color: rgb(255 255 255 / 0.42); }
+
+.ume-codeblock__line {
+  white-space: pre;
+  min-height: 24px;
+}
+
+/* Syntax palette */
+.ume-codeblock__tok-keyword { color: #7dd3fc; }
+.ume-codeblock__tok-tag { color: #ffbfbf; }
+.ume-codeblock__tok-string { color: #ffc3b7; }
+.ume-codeblock__tok-attr { color: #c4b5fc; }
+.ume-codeblock__tok-punct { color: #c4b5fc; }
+.ume-codeblock__tok-comment { color: #71717a; }
+.ume-codeblock__tok-plain { color: #ffffff; }

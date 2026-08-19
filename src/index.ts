@@ -3,3 +3,18 @@ import './ume.css';
 
 export * from './components/primitives';
 export * from './components/composites';
+export * from './components/Icon';
+export * from './components/Select';
+export * from './components/CodeInput';
+export * from './components/TextArea';
+export * from './components/DropdownSubmenu';
+export * from './components/Portal';
+export * from './components/KeyCodeSequence';
+export * from './components/MonoTag';
+export * from './components/ChatBubble';
+export * from './components/Popover';
+export * from './components/Menu';
+export * from './components/CodeBlock';
+export * from './components/Markdown';
+export * from './hooks';
+export { umeIcons } from './icons/icons';

@@ -1,0 +1,24 @@
+/* TextArea. Uses the same tokens/values as .ume-input. */
+
+.ume-textarea {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  font: inherit;
+  color: var(--ume-text-primary);
+  background: var(--ume-bg-field);
+  border-radius: var(--ume-radius-md);
+  box-shadow: inset 0 0 0 1px transparent;
+  resize: vertical;
+  transition: box-shadow var(--ume-duration) var(--ume-ease), background var(--ume-duration) var(--ume-ease);
+}
+.ume-textarea:hover { background: var(--ume-bg-hover); }
+.ume-textarea:focus {
+  outline: none;
+  background: var(--ume-bg-raised);
+  box-shadow: inset 0 0 0 1.5px var(--ume-border-focus), var(--ume-ring);
+}
+.ume-textarea::placeholder { color: var(--ume-text-tertiary); }
+.ume-textarea:disabled { opacity: 0.45; cursor: not-allowed; resize: none; }
+.ume-textarea--error { box-shadow: inset 0 0 0 1.5px var(--ume-accent-danger); }

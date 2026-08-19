@@ -1,0 +1,26 @@
+/* ---------- Popover ---------- */
+.ume-popover {
+  position: absolute;
+  z-index: 150;
+  min-width: 200px;
+  padding: 12px;
+  background: var(--ume-bg-overlay);
+  border: 1px solid var(--ume-border-subtle);
+  border-radius: var(--ume-radius-md);
+  box-shadow: var(--ume-shadow-2);
+  animation: ume-popover-in 140ms var(--ume-ease);
+}
+.ume-popover--center { transform: translateX(-50%); }
+.ume-popover--end { transform: translateX(-100%); }
+
+@keyframes ume-popover-in {
+  from { opacity: 0; transform: translateY(-4px); }
+}
+.ume-popover--center { animation-name: ume-popover-in-center; }
+@keyframes ume-popover-in-center {
+  from { opacity: 0; transform: translateX(-50%) translateY(-4px); }
+}
+.ume-popover--end { animation-name: ume-popover-in-end; }
+@keyframes ume-popover-in-end {
+  from { opacity: 0; transform: translateX(-100%) translateY(-4px); }
+}
