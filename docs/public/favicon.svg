@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- PLACEHOLDER: replace with the final ume mark -->
+  <rect width="64" height="64" rx="14" fill="#D24524"/>
+  <g fill="#FFFFFF">
+    <circle cx="32" cy="20" r="6.5"/>
+    <circle cx="43.4" cy="28.2" r="6.5"/>
+    <circle cx="39" cy="41.8" r="6.5"/>
+    <circle cx="25" cy="41.8" r="6.5"/>
+    <circle cx="20.6" cy="28.2" r="6.5"/>
+  </g>
+  <circle cx="32" cy="33" r="5" fill="#FFDAD0"/>
+</svg>

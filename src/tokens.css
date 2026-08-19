@@ -23,7 +23,7 @@
   --ume-persimmon-200: 255 218 208;
   --ume-persimmon-300: 255 198 184;
   --ume-persimmon-400: 252 148 124;
-  --ume-persimmon-500: 239 96 63;
+  --ume-persimmon-500: 210 69 36;
   --ume-persimmon-600: 200 68 40;
   --ume-persimmon-700: 152 45 22;
   --ume-persimmon-800: 98 20 4;
@@ -31,19 +31,19 @@
   /* Primitives: supporting hues */
   --ume-green-100: 196 255 229;
   --ume-green-300: 77 231 165;
-  --ume-green-500: 0 160 94;
+  --ume-green-500: 0 136 79;
   --ume-green-700: 0 92 54;
   --ume-yellow-100: 255 240 194;
-  --ume-yellow-300: 255 207 66;
-  --ume-yellow-500: 189 141 0;
+  --ume-yellow-300: 255 207 65;
+  --ume-yellow-500: 150 111 4;
   --ume-yellow-700: 108 80 0;
   --ume-blue-100: 226 244 255;
   --ume-blue-300: 147 219 255;
-  --ume-blue-500: 42 152 208;
-  --ume-blue-700: 9 90 130;
+  --ume-blue-500: 1 126 178;
+  --ume-blue-700: 10 90 130;
   --ume-red-100: 255 233 233;
   --ume-red-300: 255 196 196;
-  --ume-red-500: 244 84 84;
+  --ume-red-500: 217 57 62;
   --ume-red-700: 160 14 14;
   --ume-plum-100: 255 240 247;
   --ume-plum-300: 255 196 226;
@@ -72,7 +72,7 @@
 
   /* Semantic: borders */
   --ume-border-strong: rgb(var(--ume-black) / 0.16);
-  --ume-border-default: rgb(var(--ume-black) / 0.10);
+  --ume-border-default: rgb(var(--ume-black) / 0.1);
   --ume-border-subtle: rgb(var(--ume-black) / 0.06);
   --ume-border-focus: rgb(var(--ume-persimmon-500));
 
@@ -120,8 +120,8 @@
   --ume-accent-solid-text: rgb(var(--ume-white));
 
   /* Type */
-  --ume-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --ume-font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --ume-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ume-font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   --ume-text-xs: 0.75rem;
   --ume-text-sm: 0.8125rem;
   --ume-text-md: 0.875rem;
@@ -148,6 +148,17 @@
   --ume-ease: cubic-bezier(0.2, 0.6, 0.2, 1);
   --ume-duration: 140ms;
 }
+
+  /* Synced from Paper (new tokens) */
+  --ume-blue-200: 191 231 255;
+  --ume-blue-400: 95 185 232;
+  --ume-blue-600: 10 106 148;
+  --ume-blue-800: 8 63 92;
+  --ume-action-secondary-bg: rgb(var(--ume-blue-500));
+  --ume-action-secondary-bg-hover: rgb(var(--ume-blue-600));
+  --ume-action-secondary-bg-active: rgb(var(--ume-blue-700));
+  --ume-action-secondary-text: rgb(var(--ume-white));
+  --ume-accent-blue-solid: rgb(var(--ume-blue-500));
 
 [data-ume-theme="dark"] {
   --ume-text-primary: rgb(var(--ume-grey-100));

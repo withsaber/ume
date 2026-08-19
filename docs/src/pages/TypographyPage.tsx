@@ -22,17 +22,18 @@ export default function TypographyPage() {
       <header className="docs-pagehead">
         <h1 className="docs-h1">Typography</h1>
         <p className="docs-lede">
-          ume sets type in Inter — a variable font designed for screens — with a seven-step scale
-          and a small set of text components.
+          ume sets type in Plus Jakarta Sans — a variable font with a warm, geometric voice — on a
+          seven-step scale with a small set of text components.
         </p>
       </header>
 
       <DocSection id="typeface" title="Typeface">
         <p className="docs-desc">
-          The sans stack is <code>--ume-font-sans</code>: Inter, falling back to system-ui,
-          -apple-system, Segoe UI, and Roboto. Code and token labels use{' '}
-          <code>--ume-font-mono</code>: ui-monospace, SF Mono, Menlo, Consolas. Load Inter as a
-          variable font and every weight between 100 and 900 is available; ume uses 400–700.
+          The sans stack is <code>--ume-font-sans</code>: Plus Jakarta Sans, falling back to
+          system-ui, -apple-system, Segoe UI, and Roboto. Code and token labels use{' '}
+          <code>--ume-font-mono</code>: Geist Mono, then ui-monospace, SF Mono, Menlo, Consolas.
+          Load both as variable fonts; ume uses 400–700 (500 for mono) and a default −0.01em
+          tracking on UI text.
         </p>
       </DocSection>
 

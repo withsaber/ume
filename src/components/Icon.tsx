@@ -5,8 +5,8 @@ import './icon.css';
 export type { UmeIconName, UmeIconVariant };
 
 /* ---------- Icon ----------
-   Every icon ships in three variants on the same 18px grid:
-   fill (solid), outline (stroke), duotone (solid with a 40% secondary layer). */
+   Every icon ships in two variants on the same 18px grid:
+   fill (solid), outline (1.25px stroke). */
 export interface IconProps {
   name: UmeIconName;
   variant?: UmeIconVariant;

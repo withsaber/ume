@@ -2,13 +2,12 @@
 
 `icons.ts` is a **generated file** — do not edit it by hand. It contains the
 curated ume icon registry: ~150 essential UI icons extracted from the local
-Nucleo UI collection (18px grid), each in **three variants**:
+Nucleo UI collection (18px grid), each in **two variants**:
 
 | Variant | Nucleo klass | Look |
 |---|---|---|
 | `fill` | `glyph` | solid shapes |
-| `outline` | `outline` | 1.5px strokes |
-| `duotone` | `glyph-duo` | solid, secondary layer at 40% opacity |
+| `outline` | `outline` | 1.25px strokes |
 
 All markup is stored as inner SVG strings with every paint (fill and stroke)
 set to `currentColor`, so icons always inherit the surrounding text color.
@@ -30,6 +29,7 @@ depends on the author's local Nucleo install). To regenerate:
    `29, 5, 11, 9, 13, 22, 27, 30`, then any other set in group 1; lowest `id`
    wins. If an icon has no `glyph-duo` drawing, fall back to `glyph` (none
    needed at generation time — all 153 had full duotone coverage).
+   Outline strokes are normalized to `stroke-width="1.25"`.
 3. Extract the contents of `<g class="nc-icon-wrapper">…</g>`, then normalize:
    - elements carrying `data-color="color-2"` → `currentColor` paint +
      `opacity="0.4"` (strip `fill-opacity`/`data-*` bookkeeping)
@@ -40,7 +40,6 @@ depends on the author's local Nucleo install). To regenerate:
    export const umeIcons = {
      fill:    { 'search': '<path …/>', … },
      outline: { 'search': '<path …/>', … },
-     duotone: { 'search': '<path …/>', … },
    } as const;
    export type UmeIconName = keyof typeof umeIcons.fill;
    export type UmeIconVariant = keyof typeof umeIcons;
@@ -63,7 +62,6 @@ import { Icon } from './components/Icon';
 
 <Icon name="search" />                           // fill, decorative, aria-hidden
 <Icon name="search" variant="outline" />
-<Icon name="check-circle" variant="duotone" />
 <Icon name="trash" aria-label="Delete" />        // announced as an image
 <Icon name="chevron-down" size={14} />
 ```

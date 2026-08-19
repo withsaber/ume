@@ -17,13 +17,13 @@ export default function QuickstartPage() {
       </DocSection>
 
       <DocSection
-        title="Add the typeface"
-        description="Ume uses Inter. Add it once per app."
+        title="Add the typefaces"
+        description="Ume uses Plus Jakarta Sans for UI and Geist Mono for code. Add them once per app."
       >
         <CodeBlock
           title="index.html"
           code={`<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&family=Geist+Mono:wght@100..900&display=swap"
   rel="stylesheet"
 />`}
         />

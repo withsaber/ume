@@ -8,7 +8,6 @@ const ICON_NAMES = Object.keys(umeIcons.fill) as UmeIconName[];
 const VARIANTS: Array<{ id: UmeIconVariant; label: string }> = [
   { id: 'fill', label: 'Fill' },
   { id: 'outline', label: 'Outline' },
-  { id: 'duotone', label: 'Duotone' },
 ];
 
 export default function IconsPage() {
@@ -38,8 +37,8 @@ export default function IconsPage() {
         <h1 className="docs-h1">Icons</h1>
         <p className="docs-lede">
           The ume icon set: {ICON_NAMES.length} essential UI icons on an 18px grid, rendered from
-          the Nucleo UI collection. Every icon comes in three variants — fill, outline, and duotone
-          — and inherits the surrounding text color.
+          the Nucleo UI collection. Every icon comes in two variants — fill and outline (1.25px
+          stroke) — and inherits the surrounding text color.
         </p>
       </header>
 
@@ -50,9 +49,8 @@ export default function IconsPage() {
         <Preview>
           <Icon name="search" />
           <Icon name="search" variant="outline" />
-          <Icon name="search" variant="duotone" />
           <Icon name="bell" variant="outline" size={24} />
-          <Icon name="check-circle" variant="duotone" size={32} />
+          <Icon name="check-circle" size={32} />
         </Preview>
         <CodeBlock
           title="Example: Icons"
@@ -60,15 +58,14 @@ export default function IconsPage() {
 
 <Icon name="search" />
 <Icon name="search" variant="outline" />
-<Icon name="search" variant="duotone" />
 <Icon name="bell" variant="outline" size={24} />
-<Icon name="check-circle" variant="duotone" size={32} />`}
+<Icon name="check-circle" size={32} />`}
         />
       </DocSection>
 
       <DocSection
         title="Gallery"
-        description={`All ${ICON_NAMES.length} icons in three variants. Click one to copy its usage.`}
+        description={`All ${ICON_NAMES.length} icons in two variants. Click one to copy its usage.`}
       >
         <div className="docs-iconfilter">
           <Input
@@ -112,7 +109,7 @@ export default function IconsPage() {
             },
             {
               name: 'variant',
-              type: `'fill' | 'outline' | 'duotone'`,
+              type: `'fill' | 'outline'`,
               description: 'The drawing style. Defaults to "fill".',
             },
             {
