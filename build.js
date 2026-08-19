@@ -25,7 +25,8 @@ async function build() {
   execSync(
     'npx tsc --emitDeclarationOnly --declaration --declarationMap false ' +
     '--jsx react-jsx --outDir dist/types --rootDir src --skipLibCheck ' +
-    'src/index.ts src/components/*.tsx src/components/ExtInputs.tsx src/icons/icons.ts',
+    '--target ES2022 --module ESNext --moduleResolution Bundler --lib ES2022,DOM,DOM.Iterable ' +
+    '--noEmit false src/index.ts src/components/*.tsx src/components/ExtInputs.tsx src/icons/icons.ts',
     { stdio: 'inherit' },
   );
   // Rewrite dist/types/index.d.ts to use barrel re-exports (esbuild emits one file per entry).

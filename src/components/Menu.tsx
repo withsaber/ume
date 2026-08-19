@@ -17,11 +17,12 @@ export function Menu({ children, className = '' }: MenuProps) {
   );
 }
 
-export interface MenuItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface MenuItemProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   label?: string;
   icon?: React.ReactNode;
   destructive?: boolean;
   end?: React.ReactNode;
+  children?: React.ReactNode;
 }
 export function MenuItem({ label, icon, destructive, end, children, ...rest }: MenuItemProps) {
   return (

@@ -2,11 +2,13 @@ import React from 'react';
 import './textarea.css';
 
 /* ---------- TextArea ---------- */
-export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextAreaProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'id' | 'className'> {
   label?: string;
   helperText?: string;
   error?: string;
   rows?: number;
+  id?: string;
+  className?: string;
 }
 export function TextArea({ label, helperText, error, id, rows = 3, className = '', ...rest }: TextAreaProps) {
   const textareaId = id || React.useId();

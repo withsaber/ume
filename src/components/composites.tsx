@@ -242,11 +242,12 @@ export function Dropdown({ open, children, className = '' }: DropdownProps) {
     </div>
   );
 }
-export interface DropdownItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface DropdownItemProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   label?: string;
   icon?: React.ReactNode;
   destructive?: boolean;
   end?: React.ReactNode;
+  children?: React.ReactNode;
 }
 export function DropdownItem({ label, icon, destructive, end, children, ...rest }: DropdownItemProps) {
   return (
