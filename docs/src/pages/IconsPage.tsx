@@ -98,34 +98,101 @@ export default function IconsPage() {
 
       <hr className="docs-separator" />
 
-      <DocSection title="Properties" level={3}>
+      <DocSection
+        id="sizes"
+        title="Sizes"
+        description="Default is 18px (the design grid). Use 14 for dense lists, 24-32 for hero illustrations."
+      >
+        <Preview>
+          <Icon name="search" size={12} />
+          <Icon name="search" size={14} />
+          <Icon name="search" size={16} />
+          <Icon name="search" size={18} />
+          <Icon name="search" size={20} />
+          <Icon name="search" size={24} />
+          <Icon name="search" size={32} />
+          <Icon name="search" size={48} />
+        </Preview>
+        <CodeBlock code={`<Icon name="search" size={24} />`} />
+      </DocSection>
+
+      <DocSection
+        id="all-outline"
+        title="Outline grid"
+        description="All 153 icons in outline (1.25px stroke). Same filter and copy behaviour as the main grid."
+      >
+        <OutlineGrid />
+      </DocSection>
+
+      <DocSection
+        title="Properties"
+        level={3}
+      >
         <PropsTable
           rows={[
             {
               name: 'name',
               type: 'UmeIconName',
-              description: 'The icon to render. One of the names in the gallery above.',
+              description: 'One of the 153 names in the gallery below.',
               required: true,
             },
             {
               name: 'variant',
               type: `'fill' | 'outline'`,
-              description: 'The drawing style. Defaults to "fill".',
+              description: 'Drawing style. Defaults to "fill".',
             },
             {
               name: 'size',
               type: 'number',
-              description: 'Width and height in pixels. Defaults to 18.',
+              description: 'Width and height in px. Defaults to 18.',
             },
             {
               name: 'aria-label',
               type: 'string',
-              description:
-                'When provided, the icon is exposed as an image with this label. Decorative (aria-hidden) by default.',
+              description: 'When provided, the icon is exposed as an image with this label. Decorative (aria-hidden) by default.',
             },
           ]}
         />
       </DocSection>
+    </>
+  );
+}
+
+function OutlineGrid() {
+  const names = Object.keys(umeIcons.outline) as UmeIconName[];
+  const [q, setQ] = useState('');
+  const [copied, setCopied] = useState<string | null>(null);
+  const visible = useMemo(() => {
+    const s = q.trim().toLowerCase();
+    return s ? names.filter((n) => n.includes(s)) : names;
+  }, [q]);
+  const copy = (n: string) => {
+    navigator.clipboard?.writeText(`<Icon name="${n}" variant="outline" />`);
+    setCopied(n);
+    setTimeout(() => setCopied(null), 1000);
+  };
+  return (
+    <>
+      <Input
+        placeholder={`Filter ${names.length} outline icons…`}
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+        aria-label="Filter outline icons"
+      />
+      <div className="docs-icon-grid" style={{ marginTop: 16 }}>
+        {visible.map((n) => (
+          <button
+            key={n}
+            className={`docs-icon-cell${copied === n ? ' docs-icon-cell--copied' : ''}`}
+            onClick={() => copy(n)}
+            title={copied === n ? 'Copied!' : `Copy <Icon name="${n}" variant="outline" />`}
+          >
+            <Icon name={n} variant="outline" size={20} />
+            <span className="docs-icon-cell__name">{copied === n ? 'copied' : n}</span>
+          </button>
+        ))}
+        {visible.length === 0 && <p className="docs-desc">No outline icons match "{q}".</p>}
+      </div>
     </>
   );
 }

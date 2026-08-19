@@ -4,12 +4,16 @@ import { DocSection } from '../components/DocSection';
 import { Preview, PropsTable } from '../components/Preview';
 import { CodeBlock } from '../components/CodeBlock';
 
-/* Inline SVG portrait so the docs work offline. */
-const PHOTO =
-  'data:image/svg+xml;utf8,' +
-  encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFB59D"/><stop offset="1" stop-color="#EF603F"/></linearGradient></defs><rect width="80" height="80" fill="url(#g)"/><circle cx="58" cy="18" r="26" fill="#FFFFFF" opacity="0.22"/><circle cx="24" cy="60" r="18" fill="#FFFFFF" opacity="0.16"/></svg>`
-  );
+/* Local Unsplash portraits (cached at build time, no network at runtime). */
+const PHOTO = '/avatars/saber.jpg';
+const PEOPLE = [
+  { name: 'Alex Brand', src: '/avatars/alex.jpg' },
+  { name: 'Emma Mason', src: '/avatars/emma.jpg' },
+  { name: 'Jamie Drake', src: '/avatars/jamie.jpg' },
+  { name: 'Saber Khan', src: '/avatars/saber.jpg' },
+  { name: 'Riley Park', src: '/avatars/riley.jpg' },
+  { name: 'Noor Alam', src: '/avatars/noor.jpg' },
+];
 
 export default function AvatarPage() {
   return (
@@ -53,7 +57,7 @@ export default function AvatarPage() {
           <Avatar name="Away user"     badge="away"   size="lg" />
           <Avatar name="Busy user"     badge="busy"   size="lg" />
           <Avatar name="Offline user"  badge="offline" size="lg" />
-          <Avatar name="Verified user" badge="verified" src={PHOTO} size="lg" />
+          <Avatar name="Verified user" badge="verified" src="/avatars/emma.jpg" size="lg" />
         </Preview>
         <CodeBlock code={`<Avatar name="Online user" badge="online" size="lg" />
 <Avatar name="Away user"   badge="away"   size="lg" />
@@ -77,7 +81,7 @@ export default function AvatarPage() {
           <Facepile>
             <Avatar name="Alex Brand" badge="online" />
             <Avatar name="Emma Mason" badge="busy" />
-            <Avatar name="Jamie Drake" badge="verified" src={PHOTO} />
+            <Avatar name="Jamie Drake" badge="verified" src="/avatars/jamie.jpg" />
             <Avatar name="Riley Park" />
           </Facepile>
         </Preview>

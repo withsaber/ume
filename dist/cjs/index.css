@@ -577,11 +577,17 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: var(--ume-accent-blue-soft);
-  color: var(--ume-accent-blue-fg);
+  background:
+    linear-gradient(
+      135deg,
+      #C4DAFC 0%,
+      #65A0FD 50%,
+      #2147DD 100%);
+  color: #FFFFFF;
   font-weight: 600;
   overflow: hidden;
   flex-shrink: 0;
+  position: relative;
 }
 .ume-avatar img {
   width: 100%;
