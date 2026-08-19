@@ -69,4 +69,3 @@ module.exports = { presets: [require('ume/tokens/tokens.tailwind.js')] };
 ## Licence
 
 MIT. Entirely original work; no third-party attribution required.
-<!-- Deployed automatically via GitHub Actions -->
