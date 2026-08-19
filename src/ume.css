@@ -272,7 +272,6 @@
 .ume-banner--success { background: var(--ume-accent-success-solid); color: var(--ume-accent-solid-text); }
 .ume-banner--warning { background: var(--ume-accent-warning-solid); color: var(--ume-accent-solid-text); }
 .ume-banner--danger { background: var(--ume-accent-danger-solid); color: var(--ume-accent-solid-text); }
-.ume-banner--accent { background: var(--ume-accent-blue-solid); color: var(--ume-accent-solid-text); }
 .ume-banner__icon { display: inline-flex; flex-shrink: 0; color: inherit; }
 .ume-banner__label { flex: 1; min-width: 0; }
 .ume-banner__ctas { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }

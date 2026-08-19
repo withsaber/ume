@@ -32,6 +32,47 @@
 }
 .colors-grouplabel:first-child { margin-top: 0; }
 
+/* Semantic roles: token name + light/dark chips per row. */
+.colors-rolegroup { width: 100%; max-width: 560px; }
+.colors-role,
+.colors-rolehead {
+  display: grid;
+  grid-template-columns: 1fr 72px 72px;
+  align-items: center;
+  gap: 12px;
+}
+.colors-rolehead {
+  font-family: var(--ume-font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ume-text-tertiary);
+  margin-bottom: 4px;
+}
+.colors-role { padding: 4px 0; border-bottom: 1px solid var(--ume-border-subtle); }
+.colors-role:last-child { border-bottom: none; }
+.colors-role__name {
+  font-family: var(--ume-font-mono);
+  font-size: var(--ume-text-xs);
+  font-weight: 500;
+  color: var(--ume-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.colors-role__chip {
+  height: 28px;
+  border-radius: var(--ume-radius-sm);
+  border: 1px solid var(--ume-border-subtle);
+}
+.colors-role__darkscope {
+  background: #0c0c0c;
+  border-radius: var(--ume-radius-sm);
+  padding: 3px;
+}
+.colors-role__darkscope .colors-role__chip { border-color: rgb(255 255 255 / 0.08); }
+
 /* Semantic tokens: larger cards pairing a swatch strip with the token name. */
 .colors-semgrid {
   display: grid;

@@ -85,7 +85,6 @@
   --ume-accent-danger-solid: rgb(var(--ume-red-500));
   --ume-accent-info-solid: rgb(var(--ume-blue-500));
   --ume-accent-plum-solid: rgb(var(--ume-plum-500));
-  --ume-accent-blue-solid: rgb(var(--ume-blue-500));
   --ume-accent-solid-text: rgb(var(--ume-white));
   --ume-font-sans:
     "Plus Jakarta Sans",
@@ -119,7 +118,7 @@
   --ume-ease: cubic-bezier(0.2, 0.6, 0.2, 1);
   --ume-duration: 140ms;
 }
---ume-blue-200: 154 196 254; --ume-blue-400: 67 125 252; --ume-blue-600: 33 71 221; --ume-blue-800: 34 56 137; --ume-action-secondary-bg: rgb(var(--ume-blue-500)); --ume-action-secondary-bg-hover: rgb(var(--ume-blue-600)); --ume-action-secondary-bg-active: rgb(var(--ume-blue-700)); --ume-action-secondary-text: rgb(var(--ume-white)); --ume-accent-blue-solid: rgb(var(--ume-blue-500)); [data-ume-theme="dark"] {
+--ume-blue-200: 154 196 254; --ume-blue-400: 67 125 252; --ume-blue-600: 33 71 221; --ume-blue-800: 34 56 137; [data-ume-theme="dark"] {
   --ume-text-primary: rgb(var(--ume-grey-100));
   --ume-text-secondary: rgb(var(--ume-grey-400));
   --ume-text-tertiary: rgb(var(--ume-grey-500));
@@ -773,10 +772,6 @@
 }
 .ume-banner--danger {
   background: var(--ume-accent-danger-solid);
-  color: var(--ume-accent-solid-text);
-}
-.ume-banner--accent {
-  background: var(--ume-accent-blue-solid);
   color: var(--ume-accent-solid-text);
 }
 .ume-banner__icon {
