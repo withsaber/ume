@@ -13,14 +13,6 @@
   --ume-grey-800: 46 46 44;
   --ume-grey-900: 29 29 28;
   --ume-black: 12 12 12;
-  --ume-persimmon-100: 255 237 231;
-  --ume-persimmon-200: 255 218 208;
-  --ume-persimmon-300: 255 198 184;
-  --ume-persimmon-400: 252 148 124;
-  --ume-persimmon-500: 210 69 36;
-  --ume-persimmon-600: 200 68 40;
-  --ume-persimmon-700: 152 45 22;
-  --ume-persimmon-800: 98 20 4;
   --ume-green-100: 196 255 229;
   --ume-green-300: 77 231 165;
   --ume-green-500: 0 136 79;
@@ -29,10 +21,10 @@
   --ume-yellow-300: 255 207 65;
   --ume-yellow-500: 150 111 4;
   --ume-yellow-700: 108 80 0;
-  --ume-blue-100: 226 244 255;
-  --ume-blue-300: 147 219 255;
-  --ume-blue-500: 1 126 178;
-  --ume-blue-700: 10 90 130;
+  --ume-blue-100: 196 218 252;
+  --ume-blue-300: 101 160 253;
+  --ume-blue-500: 43 93 243;
+  --ume-blue-700: 33 59 178;
   --ume-red-100: 255 233 233;
   --ume-red-300: 255 196 196;
   --ume-red-500: 217 57 62;
@@ -46,7 +38,7 @@
   --ume-text-tertiary: rgb(var(--ume-grey-500));
   --ume-text-disabled: rgb(var(--ume-grey-400));
   --ume-text-inverse: rgb(var(--ume-white));
-  --ume-text-link: rgb(var(--ume-persimmon-600));
+  --ume-text-link: rgb(var(--ume-blue-600));
   --ume-text-danger: rgb(var(--ume-red-500));
   --ume-bg-canvas: rgb(var(--ume-grey-50));
   --ume-bg-raised: rgb(var(--ume-white));
@@ -60,14 +52,14 @@
   --ume-border-strong: rgb(var(--ume-black) / 0.16);
   --ume-border-default: rgb(var(--ume-black) / 0.1);
   --ume-border-subtle: rgb(var(--ume-black) / 0.06);
-  --ume-border-focus: rgb(var(--ume-persimmon-500));
+  --ume-border-focus: rgb(var(--ume-blue-500));
   --ume-action-primary-bg: rgb(var(--ume-grey-900));
   --ume-action-primary-bg-hover: rgb(var(--ume-grey-800));
   --ume-action-primary-bg-active: rgb(var(--ume-grey-700));
   --ume-action-primary-text: rgb(var(--ume-white));
-  --ume-action-accent-bg: rgb(var(--ume-persimmon-500));
-  --ume-action-accent-bg-hover: rgb(var(--ume-persimmon-600));
-  --ume-action-accent-bg-active: rgb(var(--ume-persimmon-700));
+  --ume-action-accent-bg: rgb(var(--ume-blue-500));
+  --ume-action-accent-bg-hover: rgb(var(--ume-blue-600));
+  --ume-action-accent-bg-active: rgb(var(--ume-blue-700));
   --ume-action-accent-text: rgb(var(--ume-white));
   --ume-action-danger-bg: rgb(var(--ume-red-500));
   --ume-action-danger-bg-hover: rgb(var(--ume-red-700));
@@ -86,14 +78,14 @@
   --ume-accent-plum: rgb(var(--ume-plum-500));
   --ume-accent-plum-soft: rgb(var(--ume-plum-100));
   --ume-accent-plum-fg: rgb(var(--ume-plum-700));
-  --ume-accent-persimmon-soft: rgb(var(--ume-persimmon-100));
-  --ume-accent-persimmon-fg: rgb(var(--ume-persimmon-700));
+  --ume-accent-blue-soft: rgb(var(--ume-blue-100));
+  --ume-accent-blue-fg: rgb(var(--ume-blue-700));
   --ume-accent-success-solid: rgb(var(--ume-green-500));
   --ume-accent-warning-solid: rgb(var(--ume-yellow-500));
   --ume-accent-danger-solid: rgb(var(--ume-red-500));
   --ume-accent-info-solid: rgb(var(--ume-blue-500));
   --ume-accent-plum-solid: rgb(var(--ume-plum-500));
-  --ume-accent-persimmon-solid: rgb(var(--ume-persimmon-500));
+  --ume-accent-blue-solid: rgb(var(--ume-blue-500));
   --ume-accent-solid-text: rgb(var(--ume-white));
   --ume-font-sans:
     "Plus Jakarta Sans",
@@ -123,17 +115,17 @@
   --ume-shadow-1: 0 1px 2px rgb(var(--ume-black) / 0.06), 0 1px 3px rgb(var(--ume-black) / 0.05);
   --ume-shadow-2: 0 4px 12px rgb(var(--ume-black) / 0.08), 0 2px 4px rgb(var(--ume-black) / 0.05);
   --ume-shadow-3: 0 16px 40px rgb(var(--ume-black) / 0.14), 0 4px 10px rgb(var(--ume-black) / 0.06);
-  --ume-ring: 0 0 0 3px rgb(var(--ume-persimmon-500) / 0.28);
+  --ume-ring: 0 0 0 3px rgb(var(--ume-blue-500) / 0.28);
   --ume-ease: cubic-bezier(0.2, 0.6, 0.2, 1);
   --ume-duration: 140ms;
 }
---ume-blue-200: 191 231 255; --ume-blue-400: 95 185 232; --ume-blue-600: 10 106 148; --ume-blue-800: 8 63 92; --ume-action-secondary-bg: rgb(var(--ume-blue-500)); --ume-action-secondary-bg-hover: rgb(var(--ume-blue-600)); --ume-action-secondary-bg-active: rgb(var(--ume-blue-700)); --ume-action-secondary-text: rgb(var(--ume-white)); --ume-accent-blue-solid: rgb(var(--ume-blue-500)); [data-ume-theme="dark"] {
+--ume-blue-200: 154 196 254; --ume-blue-400: 67 125 252; --ume-blue-600: 33 71 221; --ume-blue-800: 34 56 137; --ume-action-secondary-bg: rgb(var(--ume-blue-500)); --ume-action-secondary-bg-hover: rgb(var(--ume-blue-600)); --ume-action-secondary-bg-active: rgb(var(--ume-blue-700)); --ume-action-secondary-text: rgb(var(--ume-white)); --ume-accent-blue-solid: rgb(var(--ume-blue-500)); [data-ume-theme="dark"] {
   --ume-text-primary: rgb(var(--ume-grey-100));
   --ume-text-secondary: rgb(var(--ume-grey-400));
   --ume-text-tertiary: rgb(var(--ume-grey-500));
   --ume-text-disabled: rgb(var(--ume-grey-600));
   --ume-text-inverse: rgb(var(--ume-grey-900));
-  --ume-text-link: rgb(var(--ume-persimmon-400));
+  --ume-text-link: rgb(var(--ume-blue-400));
   --ume-text-danger: rgb(var(--ume-red-300));
   --ume-bg-canvas: rgb(var(--ume-black));
   --ume-bg-raised: rgb(var(--ume-grey-900));
@@ -147,7 +139,7 @@
   --ume-border-strong: rgb(var(--ume-white) / 0.20);
   --ume-border-default: rgb(var(--ume-white) / 0.12);
   --ume-border-subtle: rgb(var(--ume-white) / 0.07);
-  --ume-border-focus: rgb(var(--ume-persimmon-400));
+  --ume-border-focus: rgb(var(--ume-blue-400));
   --ume-accent-success: rgb(var(--ume-green-300));
   --ume-accent-success-soft: rgb(var(--ume-green-300) / 0.16);
   --ume-accent-success-fg: rgb(var(--ume-green-300));
@@ -163,22 +155,22 @@
   --ume-accent-plum: rgb(var(--ume-plum-300));
   --ume-accent-plum-soft: rgb(var(--ume-plum-300) / 0.16);
   --ume-accent-plum-fg: rgb(var(--ume-plum-300));
-  --ume-accent-persimmon-soft: rgb(var(--ume-persimmon-300) / 0.18);
-  --ume-accent-persimmon-fg: rgb(var(--ume-persimmon-300));
+  --ume-accent-blue-soft: rgb(var(--ume-blue-300) / 0.18);
+  --ume-accent-blue-fg: rgb(var(--ume-blue-300));
   --ume-action-primary-bg: rgb(var(--ume-white));
   --ume-action-primary-bg-hover: rgb(var(--ume-grey-200));
   --ume-action-primary-bg-active: rgb(var(--ume-grey-300));
   --ume-action-primary-text: rgb(var(--ume-grey-900));
-  --ume-action-accent-bg: rgb(var(--ume-persimmon-500));
-  --ume-action-accent-bg-hover: rgb(var(--ume-persimmon-400));
-  --ume-action-accent-bg-active: rgb(var(--ume-persimmon-300));
+  --ume-action-accent-bg: rgb(var(--ume-blue-500));
+  --ume-action-accent-bg-hover: rgb(var(--ume-blue-400));
+  --ume-action-accent-bg-active: rgb(var(--ume-blue-300));
   --ume-action-accent-text: rgb(var(--ume-white));
   --ume-action-danger-bg: rgb(var(--ume-red-500));
   --ume-action-danger-bg-hover: rgb(var(--ume-red-300));
   --ume-shadow-1: 0 1px 2px rgb(var(--ume-black) / 0.5);
   --ume-shadow-2: 0 4px 12px rgb(var(--ume-black) / 0.55);
   --ume-shadow-3: 0 16px 40px rgb(var(--ume-black) / 0.6);
-  --ume-ring: 0 0 0 3px rgb(var(--ume-persimmon-400) / 0.35);
+  --ume-ring: 0 0 0 3px rgb(var(--ume-blue-400) / 0.35);
 }
 
 /* src/ume.css */
@@ -586,8 +578,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: var(--ume-accent-persimmon-soft);
-  color: var(--ume-accent-persimmon-fg);
+  background: var(--ume-accent-blue-soft);
+  color: var(--ume-accent-blue-fg);
   font-weight: 600;
   overflow: hidden;
   flex-shrink: 0;
@@ -784,7 +776,7 @@
   color: var(--ume-accent-solid-text);
 }
 .ume-banner--accent {
-  background: var(--ume-accent-persimmon-solid);
+  background: var(--ume-accent-blue-solid);
   color: var(--ume-accent-solid-text);
 }
 .ume-banner__icon {

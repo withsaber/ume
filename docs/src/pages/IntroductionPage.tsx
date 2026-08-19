@@ -46,7 +46,7 @@ export default function IntroductionPage() {
         <h2 className="docs-h2">Design principles</h2>
         <ul className="docs-list">
           <li>
-            <strong>Quiet by default.</strong> Warm greys, one persimmon accent, no decoration for
+            <strong>Quiet by default.</strong> Warm greys, one royal blue accent, no decoration for
             decoration's sake.
           </li>
           <li>
