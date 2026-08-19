@@ -18,9 +18,6 @@ export * from './components/CodeBlock';
 export * from './components/Markdown';
 export * from './hooks';
 export { umeIcons } from './icons/icons';
-export { Badge, Breadcrumb, Filter, Checklist } from './components/primitives';
-
-export type { BadgeTone, BadgeVariant, BadgeProps, Crumb, FilterOption, FilterProps, ChecklistItem } from './components/primitives';
 
 export { Password, PhoneInput, CardNumber, ExpiryCVC } from './components/ExtInputs';
 export type { PasswordProps, PhoneInputProps, CardNumberProps, CardBrand, ExpiryCVCProps } from './components/ExtInputs';

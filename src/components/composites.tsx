@@ -110,8 +110,8 @@ export function Chip({ label, tone = 'neutral' }: ChipProps) {
 }
 
 /* ---------- Card ---------- */
-export function Card({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <div className={`ume-card ${className}`.trim()}>{children}</div>;
+export function Card({ children, className = '', style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
+  return <div className={`ume-card ${className}`.trim()} style={style}>{children}</div>;
 }
 
 /* ---------- Tooltip ---------- */
@@ -137,10 +137,11 @@ export function Mono({ children }: { children: React.ReactNode }) { return <span
 export type BannerTone = 'neutral' | 'info' | 'success' | 'warning' | 'danger' | 'accent';
 export interface BannerCTA { label: string; onClick?: () => void }
 export interface BannerProps {
-  label: string;
+  label?: string;
   tone?: BannerTone;
   icon?: React.ReactNode;
   ctas?: BannerCTA[];
+  children?: React.ReactNode;
 }
 export function Banner({ label, tone = 'neutral', icon, ctas = [] }: BannerProps) {
   return (

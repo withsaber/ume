@@ -620,8 +620,8 @@ function Facepile({ children }) {
 function Chip({ label, tone = "neutral" }) {
   return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: `ume-chip${tone !== "neutral" ? ` ume-chip--${tone}` : ""}`, children: label });
 }
-function Card({ children, className = "" }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: `ume-card ${className}`.trim(), children });
+function Card({ children, className = "", style }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: `ume-card ${className}`.trim(), style, children });
 }
 function Tooltip({ content, children }) {
   return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: "ume-tooltip-wrap", children: [

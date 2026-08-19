@@ -4,8 +4,9 @@ import './codeinput.css';
 /* ---------- CodeInput (one-time code / OTP) ---------- */
 export interface CodeInputProps {
   length?: number;
-  value: string;
-  onChange: (value: string) => void;
+  value?: string;
+  defaultValue?: string;
+  onChange?: (value: string) => void;
   onComplete?: (value: string) => void;
   disabled?: boolean;
   error?: boolean | string;

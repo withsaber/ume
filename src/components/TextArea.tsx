@@ -6,6 +6,7 @@ export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextArea
   label?: string;
   helperText?: string;
   error?: string;
+  rows?: number;
 }
 export function TextArea({ label, helperText, error, id, rows = 3, className = '', ...rest }: TextAreaProps) {
   const textareaId = id || React.useId();

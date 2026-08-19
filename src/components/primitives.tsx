@@ -3,9 +3,10 @@ import { Icon, UmeIconName } from './Icon';
 
 /* ---------- Button ---------- */
 export type ButtonVariant = 'primary' | 'accent' | 'secondary' | 'ghost' | 'danger' | 'danger-solid';
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   variant?: ButtonVariant;
   size?: 'sm' | 'md';
+  children?: React.ReactNode;
 }
 export function Button({ variant = 'primary', size = 'md', className = '', ...rest }: ButtonProps) {
   return <button className={`ume-btn ume-btn--${variant} ume-btn--${size} ${className}`.trim()} {...rest} />;
@@ -13,11 +14,11 @@ export function Button({ variant = 'primary', size = 'md', className = '', ...re
 
 /* ---------- IconButton ---------- */
 export type IconButtonVariant = 'primary' | 'accent' | 'secondary' | 'ghost' | 'danger';
-export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IconButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   label: string;
   variant?: IconButtonVariant;
   size?: 'sm' | 'md' | 'lg';
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 export function IconButton({ label, variant = 'secondary', size = 'md', className = '', ...rest }: IconButtonProps) {
   return (
@@ -58,8 +59,9 @@ export function Input({ label, helperText, error, startAdornment, id, ...rest }:
 
 /* ---------- Toggle ---------- */
 export interface ToggleProps {
-  checked: boolean;
-  onChange: (checked: boolean) => void;
+  checked?: boolean;
+  defaultChecked?: boolean;
+  onChange?: (checked: boolean) => void;
   disabled?: boolean;
   label?: string;
 }
