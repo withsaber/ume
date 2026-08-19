@@ -18,3 +18,6 @@ export * from './components/CodeBlock';
 export * from './components/Markdown';
 export * from './hooks';
 export { umeIcons } from './icons/icons';
+export { Badge, Breadcrumb, Filter, Checklist } from './components/primitives';
+
+export type { BadgeTone, BadgeVariant, BadgeProps, Crumb, FilterOption, FilterProps, ChecklistItem } from './components/primitives';

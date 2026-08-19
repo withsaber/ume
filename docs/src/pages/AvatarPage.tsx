@@ -18,7 +18,7 @@ export default function AvatarPage() {
         <h1 className="docs-h1">Avatar</h1>
         <p className="docs-lede">
           A graphical representation of a user or entity, often an image or initials displayed in a
-          circular container.
+          circular container. Supports presence dots, verified checks, and notification counts.
         </p>
       </header>
 
@@ -38,93 +38,67 @@ export default function AvatarPage() {
         />
       </DocSection>
 
-      <DocSection
-        id="initial-avatar"
-        title="Initial Avatar"
-        description="Avatars display up to two initials derived from the name prop."
-      >
+      <DocSection id="image" title="Image" description="When src is provided, the image fills the circle. Falls back to initials if it fails to load.">
         <Preview>
-          <Avatar name="Alice" size="lg" />
-          <Avatar name="Alice Ng" size="md" />
-          <Avatar name="Bobby Tables" size="sm" />
+          <Avatar name="Saber Khan" src={PHOTO} size="lg" />
+          <Avatar name="Saber Khan" src={PHOTO} size="md" />
+          <Avatar name="Saber Khan" src={PHOTO} size="sm" />
         </Preview>
-        <CodeBlock
-          title="Example: Initial avatar"
-          code={`import { Avatar } from 'ume';
-
-<Avatar name="Alice" size="lg" />
-<Avatar name="Alice Ng" size="md" />
-<Avatar name="Bobby Tables" size="sm" />`}
-        />
+        <CodeBlock code={`<Avatar name="Saber Khan" src="/photos/saber.jpg" size="lg" />`} />
       </DocSection>
 
-      <DocSection
-        id="photo-avatar"
-        title="Photo Avatar"
-        description="Images can be passed into the Avatar component with the src prop."
-      >
+      <DocSection id="presence" title="Presence" description="Anchor a colored dot to the bottom-right. Five states: online, away, busy, offline, verified.">
         <Preview>
-          <Avatar name="Alice" src={PHOTO} size="lg" />
-          <Avatar name="Alice" src={PHOTO} size="md" />
-          <Avatar name="Alice" src={PHOTO} size="sm" />
+          <Avatar name="Online user"   badge="online" size="lg" />
+          <Avatar name="Away user"     badge="away"   size="lg" />
+          <Avatar name="Busy user"     badge="busy"   size="lg" />
+          <Avatar name="Offline user"  badge="offline" size="lg" />
+          <Avatar name="Verified user" badge="verified" src={PHOTO} size="lg" />
         </Preview>
-        <CodeBlock
-          title="Example: Photo avatar"
-          code={`import { Avatar } from 'ume';
-
-<Avatar name="Alice" src={ProfilePic} size="lg" />
-<Avatar name="Alice" src={ProfilePic} size="md" />
-<Avatar name="Alice" src={ProfilePic} size="sm" />`}
-        />
+        <CodeBlock code={`<Avatar name="Online user" badge="online" size="lg" />
+<Avatar name="Away user"   badge="away"   size="lg" />
+<Avatar name="Busy user"   badge="busy"   size="lg" />
+<Avatar name="Offline user" badge="offline" size="lg" />
+<Avatar name="Verified user" badge="verified" src={PHOTO} size="lg" />`} />
       </DocSection>
 
-      <DocSection
-        id="facepile"
-        title="Facepile"
-        description="Stack overlapping avatars with the Facepile component."
-      >
+      <DocSection id="count" title="Notification count" description="Renders a count badge at the top-right. Shows 99+ above 99. Wins over badge.">
+        <Preview>
+          <Avatar name="Three new"  count={3}   size="lg" />
+          <Avatar name="Twelve"     count={12}  size="lg" />
+          <Avatar name="Lots more"  count={150} size="lg" />
+        </Preview>
+        <CodeBlock code={`<Avatar name="Three" count={3} size="lg" />
+<Avatar name="Lots"  count={150} size="lg" />  // renders "99+"`} />
+      </DocSection>
+
+      <DocSection id="facepile" title="Facepile" description="Stack avatars with -8px overlap. Useful for 'and 5 others' affordances.">
         <Preview>
           <Facepile>
-            <Avatar name="Alice Ng" />
-            <Avatar name="Bobby Tables" />
-            <Avatar name="Carol Danvers" />
-            <Avatar name="David Kim" />
+            <Avatar name="Alex Brand" badge="online" />
+            <Avatar name="Emma Mason" badge="busy" />
+            <Avatar name="Jamie Drake" badge="verified" src={PHOTO} />
+            <Avatar name="Riley Park" />
           </Facepile>
         </Preview>
         <CodeBlock
-          title="Example: Facepile"
-          code={`import { Avatar, Facepile } from 'ume';
-
-<Facepile>
-  <Avatar name="Alice Ng" />
-  <Avatar name="Bobby Tables" />
-  <Avatar name="Carol Danvers" />
-  <Avatar name="David Kim" />
+          code={`<Facepile>
+  <Avatar name="Alex Brand" badge="online" />
+  <Avatar name="Emma Mason" badge="busy" />
+  <Avatar name="Jamie Drake" badge="verified" src={PHOTO} />
+  <Avatar name="Riley Park" />
 </Facepile>`}
         />
       </DocSection>
 
-      <hr className="docs-separator" />
-
       <DocSection title="Properties" level={3}>
         <PropsTable
           rows={[
-            {
-              name: 'name',
-              type: 'string',
-              description:
-                'Full name of the user. Up to two initials are derived from it when no image is given.',
-            },
-            {
-              name: 'src',
-              type: 'string',
-              description: 'Image URL for a photo avatar. Falls back to initials when omitted.',
-            },
-            {
-              name: 'size',
-              type: `'sm' | 'md' | 'lg'`,
-              description: 'The size of the avatar. Defaults to "md".',
-            },
+            { name: 'name', type: 'string', description: 'Used for initials and aria-label.' },
+            { name: 'src', type: 'string', description: 'Image URL. Falls back to initials on load failure.' },
+            { name: 'size', type: `'sm' | 'md' | 'lg'`, description: '28 / 36 / 48 px.' },
+            { name: 'badge', type: `'online' | 'away' | 'busy' | 'offline' | 'verified'`, description: 'Bottom-right badge. Hidden when `count` is set.' },
+            { name: 'count', type: 'number', description: 'Top-right count badge. Shows 99+ above 99.' },
           ]}
         />
       </DocSection>

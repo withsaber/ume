@@ -1,245 +1,5 @@
 // src/components/primitives.tsx
 import React from "react";
-import { jsx, jsxs } from "react/jsx-runtime";
-function Button({ variant = "primary", size = "md", className = "", ...rest }) {
-  return /* @__PURE__ */ jsx("button", { className: `ume-btn ume-btn--${variant} ume-btn--${size} ${className}`.trim(), ...rest });
-}
-function IconButton({ label, variant = "secondary", size = "md", className = "", ...rest }) {
-  return /* @__PURE__ */ jsx(
-    "button",
-    {
-      "aria-label": label,
-      className: `ume-iconbtn ume-iconbtn--${variant} ume-iconbtn--${size} ${className}`.trim(),
-      ...rest
-    }
-  );
-}
-function Input({ label, helperText, error, startAdornment, id, ...rest }) {
-  const inputId = id || React.useId();
-  const field = /* @__PURE__ */ jsxs("div", { className: `ume-input${error ? " ume-input--error" : ""}`, children: [
-    startAdornment,
-    /* @__PURE__ */ jsx("input", { id: inputId, "aria-invalid": !!error, ...rest })
-  ] });
-  if (!label && !helperText && !error) return field;
-  return /* @__PURE__ */ jsxs("div", { className: "ume-field", children: [
-    label && /* @__PURE__ */ jsx("label", { className: "ume-field__label", htmlFor: inputId, children: label }),
-    field,
-    (error || helperText) && /* @__PURE__ */ jsx("span", { className: `ume-field__helper${error ? " ume-field__helper--error" : ""}`, children: error || helperText })
-  ] });
-}
-function Toggle({ checked, onChange, disabled, label }) {
-  return /* @__PURE__ */ jsx(
-    "button",
-    {
-      type: "button",
-      role: "switch",
-      "aria-checked": checked,
-      "aria-label": label,
-      disabled,
-      className: "ume-toggle",
-      onClick: () => onChange(!checked)
-    }
-  );
-}
-function Tabs({ tabs, active, onChange }) {
-  return /* @__PURE__ */ jsx("div", { className: "ume-tabs", role: "tablist", children: tabs.map((t) => /* @__PURE__ */ jsx(
-    "button",
-    {
-      role: "tab",
-      "aria-selected": t.id === active,
-      className: `ume-tab${t.id === active ? " ume-tab--active" : ""}`,
-      onClick: () => onChange(t.id),
-      children: t.label
-    },
-    t.id
-  )) });
-}
-function Divider() {
-  return /* @__PURE__ */ jsx("hr", { className: "ume-divider" });
-}
-function Skeleton({ width = "100%", height = 14 }) {
-  return /* @__PURE__ */ jsx("div", { className: "ume-skeleton", style: { width, height }, "aria-hidden": "true" });
-}
-function Progress({ value }) {
-  const clamped = Math.max(0, Math.min(100, value));
-  return /* @__PURE__ */ jsx("div", { className: "ume-progress", role: "progressbar", "aria-valuenow": clamped, "aria-valuemin": 0, "aria-valuemax": 100, children: /* @__PURE__ */ jsx("div", { className: "ume-progress__bar", style: { width: `${clamped}%` } }) });
-}
-
-// src/components/composites.tsx
-import React2, { useCallback, useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { Fragment, jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
-function Dialog({ open, onClose, title, children, actions }) {
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e) => e.key === "Escape" && onClose();
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
-  if (!open) return null;
-  return createPortal(
-    /* @__PURE__ */ jsx2("div", { className: "ume-dialog-scrim", onMouseDown: (e) => e.target === e.currentTarget && onClose(), children: /* @__PURE__ */ jsxs2("div", { className: "ume-dialog", role: "dialog", "aria-modal": "true", "aria-label": title, children: [
-      /* @__PURE__ */ jsx2("h2", { className: "ume-dialog__title", children: title }),
-      /* @__PURE__ */ jsx2("p", { className: "ume-dialog__body", children }),
-      actions && /* @__PURE__ */ jsx2("div", { className: "ume-dialog__actions", children: actions })
-    ] }) }),
-    document.body
-  );
-}
-var ToastContext = React2.createContext({ push: () => {
-} });
-var useToast = () => React2.useContext(ToastContext);
-function ToastProvider({ children }) {
-  const [toasts, setToasts] = useState([]);
-  const nextId = useRef(1);
-  const push = useCallback((message, opts) => {
-    const id = nextId.current++;
-    setToasts((t) => [...t, { id, message, actionLabel: opts == null ? void 0 : opts.actionLabel, onAction: opts == null ? void 0 : opts.onAction }]);
-    setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), 4e3);
-  }, []);
-  return /* @__PURE__ */ jsxs2(ToastContext.Provider, { value: { push }, children: [
-    children,
-    createPortal(
-      /* @__PURE__ */ jsx2("div", { className: "ume-toast-region", children: toasts.map((t) => /* @__PURE__ */ jsxs2("div", { className: "ume-toast", role: "status", children: [
-        /* @__PURE__ */ jsx2("span", { children: t.message }),
-        t.actionLabel && /* @__PURE__ */ jsx2("button", { className: "ume-toast__action", onClick: () => {
-          var _a;
-          (_a = t.onAction) == null ? void 0 : _a.call(t);
-          setToasts((x) => x.filter((y) => y.id !== t.id));
-        }, children: t.actionLabel })
-      ] }, t.id)) }),
-      document.body
-    )
-  ] });
-}
-function Avatar({ name = "", src, size = "md" }) {
-  const initials = name.split(/\s+/).map((w) => w[0]).filter(Boolean).slice(0, 2).join("").toUpperCase();
-  return /* @__PURE__ */ jsx2("span", { className: `ume-avatar ume-avatar--${size}`, "aria-label": name, children: src ? /* @__PURE__ */ jsx2("img", { src, alt: name }) : initials });
-}
-function Facepile({ children }) {
-  return /* @__PURE__ */ jsx2("span", { className: "ume-facepile", children });
-}
-function Chip({ label, tone = "neutral" }) {
-  return /* @__PURE__ */ jsx2("span", { className: `ume-chip${tone !== "neutral" ? ` ume-chip--${tone}` : ""}`, children: label });
-}
-function Card({ children, className = "" }) {
-  return /* @__PURE__ */ jsx2("div", { className: `ume-card ${className}`.trim(), children });
-}
-function Tooltip({ content, children }) {
-  return /* @__PURE__ */ jsxs2("span", { className: "ume-tooltip-wrap", children: [
-    children,
-    /* @__PURE__ */ jsx2("span", { className: "ume-tooltip", role: "tooltip", children: content })
-  ] });
-}
-function H1({ children }) {
-  return /* @__PURE__ */ jsx2("h1", { className: "ume-h1", children });
-}
-function H2({ children }) {
-  return /* @__PURE__ */ jsx2("h2", { className: "ume-h2", children });
-}
-function H3({ children }) {
-  return /* @__PURE__ */ jsx2("h3", { className: "ume-h3", children });
-}
-function Body({ children }) {
-  return /* @__PURE__ */ jsx2("p", { className: "ume-body", children });
-}
-function Caption({ children }) {
-  return /* @__PURE__ */ jsx2("p", { className: "ume-caption", children });
-}
-function Mono({ children }) {
-  return /* @__PURE__ */ jsx2("span", { className: "ume-mono", children });
-}
-function Banner({ label, tone = "neutral", icon, ctas = [] }) {
-  return /* @__PURE__ */ jsxs2("div", { className: `ume-banner${tone !== "neutral" ? ` ume-banner--${tone}` : ""}`, role: "status", children: [
-    icon && /* @__PURE__ */ jsx2("span", { className: "ume-banner__icon", children: icon }),
-    /* @__PURE__ */ jsx2("span", { className: "ume-banner__label", children: label }),
-    ctas.length > 0 && /* @__PURE__ */ jsx2("span", { className: "ume-banner__ctas", children: ctas.map((c, i) => /* @__PURE__ */ jsx2("button", { className: "ume-banner__cta", onClick: c.onClick, children: c.label }, i)) })
-  ] });
-}
-function ButtonGroup({ children, fullWidth, stacked }) {
-  return /* @__PURE__ */ jsx2(
-    "div",
-    {
-      className: `ume-buttongroup${fullWidth ? " ume-buttongroup--full" : ""}${stacked ? " ume-buttongroup--stacked" : ""}`,
-      role: "group",
-      children
-    }
-  );
-}
-function ButtonGroupItem({ label, destructive, icon, ...rest }) {
-  return /* @__PURE__ */ jsxs2("button", { className: `ume-buttongroup__item${destructive ? " ume-buttongroup__item--destructive" : ""}`, ...rest, children: [
-    icon,
-    label
-  ] });
-}
-function CircularProgress({ progress, spinner, size = 32, strokeWidth = 3 }) {
-  const r = (size - strokeWidth) / 2;
-  const c = 2 * Math.PI * r;
-  const clamped = Math.max(0, Math.min(100, progress != null ? progress : 0));
-  const offset = spinner ? c * 0.72 : c * (1 - clamped / 100);
-  return /* @__PURE__ */ jsx2(
-    "span",
-    {
-      className: `ume-cprogress${spinner ? " ume-cprogress--spinner" : ""}`,
-      role: "progressbar",
-      "aria-valuenow": spinner ? void 0 : clamped,
-      "aria-valuemin": 0,
-      "aria-valuemax": 100,
-      style: { width: size, height: size },
-      children: /* @__PURE__ */ jsxs2("svg", { width: size, height: size, children: [
-        /* @__PURE__ */ jsx2("circle", { className: "ume-cprogress__track", cx: size / 2, cy: size / 2, r, fill: "none", strokeWidth }),
-        /* @__PURE__ */ jsx2(
-          "circle",
-          {
-            className: "ume-cprogress__bar",
-            cx: size / 2,
-            cy: size / 2,
-            r,
-            fill: "none",
-            strokeWidth,
-            strokeDasharray: c,
-            strokeDashoffset: offset,
-            transform: `rotate(-90 ${size / 2} ${size / 2})`
-          }
-        )
-      ] })
-    }
-  );
-}
-function Dropdown({ open, children, className = "" }) {
-  if (!open) return null;
-  return /* @__PURE__ */ jsx2("div", { className: `ume-dropdown ${className}`.trim(), role: "menu", children });
-}
-function DropdownItem({ label, icon, destructive, end, children, ...rest }) {
-  return /* @__PURE__ */ jsxs2(
-    "button",
-    {
-      className: `ume-dropdown-item${destructive ? " ume-dropdown-item--danger" : ""}`,
-      role: "menuitem",
-      ...rest,
-      children: [
-        icon && /* @__PURE__ */ jsx2("span", { className: "ume-dropdown-item__icon", children: icon }),
-        children || label,
-        end && /* @__PURE__ */ jsx2("span", { className: "ume-dropdown-item__end", children: end })
-      ]
-    }
-  );
-}
-function IconText({ label, startIcon, endIcon, filled, disabled, onClick }) {
-  const cls = `ume-icontext${filled ? " ume-icontext--filled" : ""}`;
-  const inner = /* @__PURE__ */ jsxs2(Fragment, { children: [
-    startIcon && /* @__PURE__ */ jsx2("span", { className: "ume-icontext__icon", children: startIcon }),
-    label,
-    endIcon && /* @__PURE__ */ jsx2("span", { className: "ume-icontext__icon", children: endIcon })
-  ] });
-  if (onClick) {
-    return /* @__PURE__ */ jsx2("button", { className: cls, onClick, disabled, children: inner });
-  }
-  return /* @__PURE__ */ jsx2("span", { className: cls, children: inner });
-}
-function UmeProvider({ theme = "light", children }) {
-  return /* @__PURE__ */ jsx2("div", { className: "ume-root", "data-ume-theme": theme, children });
-}
 
 // src/icons/icons.ts
 var umeIcons = {
@@ -556,7 +316,7 @@ var umeIcons = {
 };
 
 // src/components/Icon.tsx
-import { jsx as jsx3 } from "react/jsx-runtime";
+import { jsx } from "react/jsx-runtime";
 function Icon({
   name,
   variant = "fill",
@@ -566,7 +326,7 @@ function Icon({
   "aria-hidden": ariaHidden
 }) {
   const hidden = ariaHidden != null ? ariaHidden : !ariaLabel;
-  return /* @__PURE__ */ jsx3(
+  return /* @__PURE__ */ jsx(
     "span",
     {
       className: `ume-icon ${className}`.trim(),
@@ -574,7 +334,7 @@ function Icon({
       "aria-label": hidden ? void 0 : ariaLabel,
       "aria-hidden": hidden || void 0,
       style: { width: size, height: size },
-      children: /* @__PURE__ */ jsx3(
+      children: /* @__PURE__ */ jsx(
         "svg",
         {
           viewBox: "0 0 18 18",
@@ -589,6 +349,305 @@ function Icon({
       )
     }
   );
+}
+
+// src/components/primitives.tsx
+import { Fragment, jsx as jsx2, jsxs } from "react/jsx-runtime";
+function Button({ variant = "primary", size = "md", className = "", ...rest }) {
+  return /* @__PURE__ */ jsx2("button", { className: `ume-btn ume-btn--${variant} ume-btn--${size} ${className}`.trim(), ...rest });
+}
+function IconButton({ label, variant = "secondary", size = "md", className = "", ...rest }) {
+  return /* @__PURE__ */ jsx2(
+    "button",
+    {
+      "aria-label": label,
+      className: `ume-iconbtn ume-iconbtn--${variant} ume-iconbtn--${size} ${className}`.trim(),
+      ...rest
+    }
+  );
+}
+function Input({ label, helperText, error, startAdornment, id, ...rest }) {
+  const inputId = id || React.useId();
+  const field = /* @__PURE__ */ jsxs("div", { className: `ume-input${error ? " ume-input--error" : ""}`, children: [
+    startAdornment,
+    /* @__PURE__ */ jsx2("input", { id: inputId, "aria-invalid": !!error, ...rest })
+  ] });
+  if (!label && !helperText && !error) return field;
+  return /* @__PURE__ */ jsxs("div", { className: "ume-field", children: [
+    label && /* @__PURE__ */ jsx2("label", { className: "ume-field__label", htmlFor: inputId, children: label }),
+    field,
+    (error || helperText) && /* @__PURE__ */ jsx2("span", { className: `ume-field__helper${error ? " ume-field__helper--error" : ""}`, children: error || helperText })
+  ] });
+}
+function Toggle({ checked, onChange, disabled, label }) {
+  return /* @__PURE__ */ jsx2(
+    "button",
+    {
+      type: "button",
+      role: "switch",
+      "aria-checked": checked,
+      "aria-label": label,
+      disabled,
+      className: "ume-toggle",
+      onClick: () => onChange(!checked)
+    }
+  );
+}
+function Tabs({ tabs, active, onChange }) {
+  return /* @__PURE__ */ jsx2("div", { className: "ume-tabs", role: "tablist", children: tabs.map((t) => /* @__PURE__ */ jsx2(
+    "button",
+    {
+      role: "tab",
+      "aria-selected": t.id === active,
+      className: `ume-tab${t.id === active ? " ume-tab--active" : ""}`,
+      onClick: () => onChange(t.id),
+      children: t.label
+    },
+    t.id
+  )) });
+}
+function Divider() {
+  return /* @__PURE__ */ jsx2("hr", { className: "ume-divider" });
+}
+function Skeleton({ width = "100%", height = 14 }) {
+  return /* @__PURE__ */ jsx2("div", { className: "ume-skeleton", style: { width, height }, "aria-hidden": "true" });
+}
+function Progress({ value }) {
+  const clamped = Math.max(0, Math.min(100, value));
+  return /* @__PURE__ */ jsx2("div", { className: "ume-progress", role: "progressbar", "aria-valuenow": clamped, "aria-valuemin": 0, "aria-valuemax": 100, children: /* @__PURE__ */ jsx2("div", { className: "ume-progress__bar", style: { width: `${clamped}%` } }) });
+}
+function Badge({ label, tone = "neutral", variant = "soft", size = "md", icon, anchor }) {
+  const inner = icon ? /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx2(Icon, { name: icon, size: 12 }),
+    label
+  ] }) : label;
+  return /* @__PURE__ */ jsx2("span", { className: `ume-badge ume-badge--${tone} ume-badge--${variant} ume-badge--${size}${anchor ? " ume-badge--anchor" : ""}`, children: inner });
+}
+function Breadcrumb({ items, separator = "/" }) {
+  return /* @__PURE__ */ jsx2("nav", { className: "ume-breadcrumb", "aria-label": "Breadcrumb", children: items.map((c, i) => {
+    const isLast = i === items.length - 1;
+    const cls = `ume-breadcrumb__item${isLast ? " ume-breadcrumb__item--current" : ""}`;
+    return /* @__PURE__ */ jsxs("span", { className: "ume-breadcrumb__crumb", children: [
+      c.href && !isLast ? /* @__PURE__ */ jsx2("a", { className: cls, href: c.href, children: c.label }) : /* @__PURE__ */ jsx2("span", { className: cls, children: c.label }),
+      !isLast && /* @__PURE__ */ jsx2("span", { className: "ume-breadcrumb__sep", "aria-hidden": "true", children: separator })
+    ] }, i);
+  }) });
+}
+function Filter({ label, options, value, onChange }) {
+  var _a, _b, _c;
+  return /* @__PURE__ */ jsxs("div", { className: "ume-filter", children: [
+    /* @__PURE__ */ jsx2("span", { className: "ume-filter__label", children: label }),
+    /* @__PURE__ */ jsxs("button", { className: "ume-filter__trigger", "aria-haspopup": "listbox", children: [
+      /* @__PURE__ */ jsx2("span", { children: (_c = (_a = options.find((o) => o.value === value)) == null ? void 0 : _a.label) != null ? _c : (_b = options[0]) == null ? void 0 : _b.label }),
+      /* @__PURE__ */ jsx2("svg", { width: "12", height: "12", viewBox: "0 0 16 16", fill: "none", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": "true", children: /* @__PURE__ */ jsx2("path", { d: "m4 6 4 4 4-4" }) })
+    ] })
+  ] });
+}
+function Checklist({ items, onToggle }) {
+  return /* @__PURE__ */ jsx2("ul", { className: "ume-checklist", children: items.map((it) => /* @__PURE__ */ jsx2("li", { className: `ume-checklist__item${it.checked ? " ume-checklist__item--checked" : ""}${it.disabled ? " ume-checklist__item--disabled" : ""}`, children: /* @__PURE__ */ jsxs("label", { className: "ume-checklist__row", children: [
+    /* @__PURE__ */ jsx2(
+      "input",
+      {
+        type: "checkbox",
+        className: "ume-checklist__cb",
+        defaultChecked: it.checked,
+        disabled: it.disabled,
+        onChange: () => onToggle == null ? void 0 : onToggle(it.id)
+      }
+    ),
+    /* @__PURE__ */ jsx2("span", { className: "ume-checklist__cb-box", "aria-hidden": "true", children: /* @__PURE__ */ jsx2("svg", { viewBox: "0 0 16 16", width: "11", height: "11", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", children: /* @__PURE__ */ jsx2("path", { d: "m3 8 3.5 3.5L13 5" }) }) }),
+    /* @__PURE__ */ jsxs("span", { className: "ume-checklist__body", children: [
+      /* @__PURE__ */ jsx2("span", { className: "ume-checklist__label", children: it.label }),
+      it.helper && /* @__PURE__ */ jsx2("span", { className: "ume-checklist__helper", children: it.helper })
+    ] })
+  ] }) }, it.id)) });
+}
+
+// src/components/composites.tsx
+import React2, { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { Fragment as Fragment2, jsx as jsx3, jsxs as jsxs2 } from "react/jsx-runtime";
+function Dialog({ open, onClose, title, children, actions }) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && onClose();
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+  if (!open) return null;
+  return createPortal(
+    /* @__PURE__ */ jsx3("div", { className: "ume-dialog-scrim", onMouseDown: (e) => e.target === e.currentTarget && onClose(), children: /* @__PURE__ */ jsxs2("div", { className: "ume-dialog", role: "dialog", "aria-modal": "true", "aria-label": title, children: [
+      /* @__PURE__ */ jsx3("h2", { className: "ume-dialog__title", children: title }),
+      /* @__PURE__ */ jsx3("p", { className: "ume-dialog__body", children }),
+      actions && /* @__PURE__ */ jsx3("div", { className: "ume-dialog__actions", children: actions })
+    ] }) }),
+    document.body
+  );
+}
+var ToastContext = React2.createContext({ push: () => {
+} });
+var useToast = () => React2.useContext(ToastContext);
+function ToastProvider({ children }) {
+  const [toasts, setToasts] = useState([]);
+  const nextId = useRef(1);
+  const push = useCallback((message, opts) => {
+    const id = nextId.current++;
+    setToasts((t) => [...t, { id, message, actionLabel: opts == null ? void 0 : opts.actionLabel, onAction: opts == null ? void 0 : opts.onAction }]);
+    setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), 4e3);
+  }, []);
+  return /* @__PURE__ */ jsxs2(ToastContext.Provider, { value: { push }, children: [
+    children,
+    createPortal(
+      /* @__PURE__ */ jsx3("div", { className: "ume-toast-region", children: toasts.map((t) => /* @__PURE__ */ jsxs2("div", { className: "ume-toast", role: "status", children: [
+        /* @__PURE__ */ jsx3("span", { children: t.message }),
+        t.actionLabel && /* @__PURE__ */ jsx3("button", { className: "ume-toast__action", onClick: () => {
+          var _a;
+          (_a = t.onAction) == null ? void 0 : _a.call(t);
+          setToasts((x) => x.filter((y) => y.id !== t.id));
+        }, children: t.actionLabel })
+      ] }, t.id)) }),
+      document.body
+    )
+  ] });
+}
+var VERIFIED_CHECK = '<svg viewBox="0 0 18 18" width="100%" height="100%"><path d="M6.75,15h-.002c-.227,0-.442-.104-.583-.281L2.165,9.719c-.259-.324-.207-.795.117-1.054.325-.259.796-.206,1.054.117l3.418,4.272L14.667,3.278c.261-.322.732-.373,1.055-.111.322.261.372.733.111.055L7.333,14.722c-.143.176-.357.278-.583.278Z" fill="#fff" transform="scale(0.62) translate(5.2,4.6)"/></svg>';
+function Avatar({ name = "", src, size = "md", badge, count }) {
+  const initials = name.split(/\s+/).map((w) => w[0]).filter(Boolean).slice(0, 2).join("").toUpperCase();
+  const badgeNode = count != null ? /* @__PURE__ */ jsx3("span", { className: "ume-avatar__badge ume-avatar__badge--count", children: count > 99 ? "99+" : count }) : badge === "verified" ? /* @__PURE__ */ jsx3(
+    "span",
+    {
+      className: "ume-avatar__badge ume-avatar__badge--verified",
+      dangerouslySetInnerHTML: { __html: VERIFIED_CHECK }
+    }
+  ) : badge ? /* @__PURE__ */ jsx3("span", { className: `ume-avatar__badge ume-avatar__badge--${badge}` }) : null;
+  return /* @__PURE__ */ jsxs2("span", { className: `ume-avatar ume-avatar--${size}`, "aria-label": name, children: [
+    src ? /* @__PURE__ */ jsx3("img", { src, alt: name }) : initials,
+    badgeNode
+  ] });
+}
+function Facepile({ children }) {
+  return /* @__PURE__ */ jsx3("span", { className: "ume-facepile", children });
+}
+function Chip({ label, tone = "neutral" }) {
+  return /* @__PURE__ */ jsx3("span", { className: `ume-chip${tone !== "neutral" ? ` ume-chip--${tone}` : ""}`, children: label });
+}
+function Card({ children, className = "" }) {
+  return /* @__PURE__ */ jsx3("div", { className: `ume-card ${className}`.trim(), children });
+}
+function Tooltip({ content, children }) {
+  return /* @__PURE__ */ jsxs2("span", { className: "ume-tooltip-wrap", children: [
+    children,
+    /* @__PURE__ */ jsx3("span", { className: "ume-tooltip", role: "tooltip", children: content })
+  ] });
+}
+function H1({ children }) {
+  return /* @__PURE__ */ jsx3("h1", { className: "ume-h1", children });
+}
+function H2({ children }) {
+  return /* @__PURE__ */ jsx3("h2", { className: "ume-h2", children });
+}
+function H3({ children }) {
+  return /* @__PURE__ */ jsx3("h3", { className: "ume-h3", children });
+}
+function Body({ children }) {
+  return /* @__PURE__ */ jsx3("p", { className: "ume-body", children });
+}
+function Caption({ children }) {
+  return /* @__PURE__ */ jsx3("p", { className: "ume-caption", children });
+}
+function Mono({ children }) {
+  return /* @__PURE__ */ jsx3("span", { className: "ume-mono", children });
+}
+function Banner({ label, tone = "neutral", icon, ctas = [] }) {
+  return /* @__PURE__ */ jsxs2("div", { className: `ume-banner${tone !== "neutral" ? ` ume-banner--${tone}` : ""}`, role: "status", children: [
+    icon && /* @__PURE__ */ jsx3("span", { className: "ume-banner__icon", children: icon }),
+    /* @__PURE__ */ jsx3("span", { className: "ume-banner__label", children: label }),
+    ctas.length > 0 && /* @__PURE__ */ jsx3("span", { className: "ume-banner__ctas", children: ctas.map((c, i) => /* @__PURE__ */ jsx3("button", { className: "ume-banner__cta", onClick: c.onClick, children: c.label }, i)) })
+  ] });
+}
+function ButtonGroup({ children, fullWidth, stacked }) {
+  return /* @__PURE__ */ jsx3(
+    "div",
+    {
+      className: `ume-buttongroup${fullWidth ? " ume-buttongroup--full" : ""}${stacked ? " ume-buttongroup--stacked" : ""}`,
+      role: "group",
+      children
+    }
+  );
+}
+function ButtonGroupItem({ label, destructive, icon, ...rest }) {
+  return /* @__PURE__ */ jsxs2("button", { className: `ume-buttongroup__item${destructive ? " ume-buttongroup__item--destructive" : ""}`, ...rest, children: [
+    icon,
+    label
+  ] });
+}
+function CircularProgress({ progress, spinner, size = 32, strokeWidth = 3 }) {
+  const r = (size - strokeWidth) / 2;
+  const c = 2 * Math.PI * r;
+  const clamped = Math.max(0, Math.min(100, progress != null ? progress : 0));
+  const offset = spinner ? c * 0.72 : c * (1 - clamped / 100);
+  return /* @__PURE__ */ jsx3(
+    "span",
+    {
+      className: `ume-cprogress${spinner ? " ume-cprogress--spinner" : ""}`,
+      role: "progressbar",
+      "aria-valuenow": spinner ? void 0 : clamped,
+      "aria-valuemin": 0,
+      "aria-valuemax": 100,
+      style: { width: size, height: size },
+      children: /* @__PURE__ */ jsxs2("svg", { width: size, height: size, children: [
+        /* @__PURE__ */ jsx3("circle", { className: "ume-cprogress__track", cx: size / 2, cy: size / 2, r, fill: "none", strokeWidth }),
+        /* @__PURE__ */ jsx3(
+          "circle",
+          {
+            className: "ume-cprogress__bar",
+            cx: size / 2,
+            cy: size / 2,
+            r,
+            fill: "none",
+            strokeWidth,
+            strokeDasharray: c,
+            strokeDashoffset: offset,
+            transform: `rotate(-90 ${size / 2} ${size / 2})`
+          }
+        )
+      ] })
+    }
+  );
+}
+function Dropdown({ open, children, className = "" }) {
+  if (!open) return null;
+  return /* @__PURE__ */ jsx3("div", { className: `ume-dropdown ${className}`.trim(), role: "menu", children });
+}
+function DropdownItem({ label, icon, destructive, end, children, ...rest }) {
+  return /* @__PURE__ */ jsxs2(
+    "button",
+    {
+      className: `ume-dropdown-item${destructive ? " ume-dropdown-item--danger" : ""}`,
+      role: "menuitem",
+      ...rest,
+      children: [
+        icon && /* @__PURE__ */ jsx3("span", { className: "ume-dropdown-item__icon", children: icon }),
+        children || label,
+        end && /* @__PURE__ */ jsx3("span", { className: "ume-dropdown-item__end", children: end })
+      ]
+    }
+  );
+}
+function IconText({ label, startIcon, endIcon, filled, disabled, onClick }) {
+  const cls = `ume-icontext${filled ? " ume-icontext--filled" : ""}`;
+  const inner = /* @__PURE__ */ jsxs2(Fragment2, { children: [
+    startIcon && /* @__PURE__ */ jsx3("span", { className: "ume-icontext__icon", children: startIcon }),
+    label,
+    endIcon && /* @__PURE__ */ jsx3("span", { className: "ume-icontext__icon", children: endIcon })
+  ] });
+  if (onClick) {
+    return /* @__PURE__ */ jsx3("button", { className: cls, onClick, disabled, children: inner });
+  }
+  return /* @__PURE__ */ jsx3("span", { className: cls, children: inner });
+}
+function UmeProvider({ theme = "light", children }) {
+  return /* @__PURE__ */ jsx3("div", { className: "ume-root", "data-ume-theme": theme, children });
 }
 
 // src/components/Select.tsx
@@ -1104,7 +1163,7 @@ function MenuItem({ label, icon, destructive, end, children, ...rest }) {
 
 // src/components/CodeBlock.tsx
 import { useState as useState5 } from "react";
-import { Fragment as Fragment2, jsx as jsx13, jsxs as jsxs9 } from "react/jsx-runtime";
+import { Fragment as Fragment3, jsx as jsx13, jsxs as jsxs9 } from "react/jsx-runtime";
 var KEYWORDS = /* @__PURE__ */ new Set(["import", "from", "export", "const", "let", "return", "function", "default"]);
 function tokenizeLine(line) {
   const tokens = [];
@@ -1132,7 +1191,7 @@ function tokenizeLine(line) {
   return tokens;
 }
 function HighlightedCode({ code }) {
-  return /* @__PURE__ */ jsx13(Fragment2, { children: code.split("\n").map((line, i) => /* @__PURE__ */ jsxs9("div", { className: "ume-codeblock__line", children: [
+  return /* @__PURE__ */ jsx13(Fragment3, { children: code.split("\n").map((line, i) => /* @__PURE__ */ jsxs9("div", { className: "ume-codeblock__line", children: [
     tokenizeLine(line).map((t, j) => /* @__PURE__ */ jsx13("span", { className: `ume-codeblock__tok-${t.type}`, children: t.text }, j)),
     line === "" && " "
   ] }, i)) });
@@ -1267,14 +1326,17 @@ function Markdown({ content, className = "" }) {
 }
 export {
   Avatar,
+  Badge,
   Banner,
   Body,
+  Breadcrumb,
   Button,
   ButtonGroup,
   ButtonGroupItem,
   Caption,
   Card,
   ChatBubble,
+  Checklist,
   Chip,
   CircularProgress,
   CodeBlock,
@@ -1285,6 +1347,7 @@ export {
   DropdownItem,
   DropdownSubmenu,
   Facepile,
+  Filter,
   H1,
   H2,
   H3,

@@ -51,6 +51,10 @@ export const NAV_PAGES: NavPage[] = [
   { id: 'toast', label: 'Toast', group: 'Components' },
   { id: 'toggle', label: 'Toggle', group: 'Components' },
   { id: 'tooltip', label: 'Tooltip', group: 'Components' },
+  { id: 'badge', label: 'Badge', group: 'Components' },
+  { id: 'breadcrumb', label: 'Breadcrumb', group: 'Components' },
+  { id: 'filter', label: 'Filter', group: 'Components' },
+  { id: 'checklist', label: 'Checklist', group: 'Components' },
 ];
 
 export const NAV_GROUPS: Array<NavPage['group']> = ['Getting started', 'Foundation', 'Components'];

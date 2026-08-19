@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon, UmeIconName } from './Icon';
 
 /* ---------- Button ---------- */
 export type ButtonVariant = 'primary' | 'accent' | 'secondary' | 'ghost' | 'danger' | 'danger-solid';
@@ -120,5 +121,101 @@ export function Progress({ value }: ProgressProps) {
     <div className="ume-progress" role="progressbar" aria-valuenow={clamped} aria-valuemin={0} aria-valuemax={100}>
       <div className="ume-progress__bar" style={{ width: `${clamped}%` }} />
     </div>
+  );
+}
+
+/* ---------- Badge ---------- */
+export type BadgeTone = 'neutral'|'success'|'warning'|'danger'|'info'|'plum'|'blue';
+export type BadgeVariant = 'solid'|'soft'|'outline'|'dot';
+export interface BadgeProps {
+  label: string;
+  tone?: BadgeTone;
+  variant?: BadgeVariant;
+  size?: 'sm' | 'md';
+  icon?: UmeIconName;
+  anchor?: boolean;
+}
+export function Badge({ label, tone = 'neutral', variant = 'soft', size = 'md', icon, anchor }: BadgeProps) {
+  const inner = icon ? <><Icon name={icon} size={12} />{label}</> : label;
+  return (
+    <span className={`ume-badge ume-badge--${tone} ume-badge--${variant} ume-badge--${size}${anchor ? ' ume-badge--anchor' : ''}`}>
+      {inner}
+    </span>
+  );
+}
+
+/* ---------- Breadcrumb ---------- */
+export interface Crumb { label: string; href?: string }
+export function Breadcrumb({ items, separator = '/' }: { items: Crumb[]; separator?: string }) {
+  return (
+    <nav className="ume-breadcrumb" aria-label="Breadcrumb">
+      {items.map((c, i) => {
+        const isLast = i === items.length - 1;
+        const cls = `ume-breadcrumb__item${isLast ? ' ume-breadcrumb__item--current' : ''}`;
+        return (
+          <span key={i} className="ume-breadcrumb__crumb">
+            {c.href && !isLast ? (
+              <a className={cls} href={c.href}>{c.label}</a>
+            ) : (
+              <span className={cls}>{c.label}</span>
+            )}
+            {!isLast && <span className="ume-breadcrumb__sep" aria-hidden="true">{separator}</span>}
+          </span>
+        );
+      })}
+    </nav>
+  );
+}
+
+/* ---------- Filter ---------- */
+export interface FilterOption { value: string; label: string }
+export interface FilterProps {
+  label: string;
+  options: FilterOption[];
+  value?: string;
+  onChange?: (value: string) => void;
+}
+export function Filter({ label, options, value, onChange }: FilterProps) {
+  return (
+    <div className="ume-filter">
+      <span className="ume-filter__label">{label}</span>
+      <button className="ume-filter__trigger" aria-haspopup="listbox">
+        <span>{options.find((o) => o.value === value)?.label ?? options[0]?.label}</span>
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="m4 6 4 4 4-4" />
+        </svg>
+      </button>
+    </div>
+  );
+}
+
+/* ---------- Checklist ---------- */
+export interface ChecklistItem { id: string; label: string; checked?: boolean; helper?: string; disabled?: boolean }
+export function Checklist({ items, onToggle }: { items: ChecklistItem[]; onToggle?: (id: string) => void }) {
+  return (
+    <ul className="ume-checklist">
+      {items.map((it) => (
+        <li key={it.id} className={`ume-checklist__item${it.checked ? ' ume-checklist__item--checked' : ''}${it.disabled ? ' ume-checklist__item--disabled' : ''}`}>
+          <label className="ume-checklist__row">
+            <input
+              type="checkbox"
+              className="ume-checklist__cb"
+              defaultChecked={it.checked}
+              disabled={it.disabled}
+              onChange={() => onToggle?.(it.id)}
+            />
+            <span className="ume-checklist__cb-box" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m3 8 3.5 3.5L13 5" />
+              </svg>
+            </span>
+            <span className="ume-checklist__body">
+              <span className="ume-checklist__label">{it.label}</span>
+              {it.helper && <span className="ume-checklist__helper">{it.helper}</span>}
+            </span>
+          </label>
+        </li>
+      ))}
+    </ul>
   );
 }

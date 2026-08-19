@@ -66,16 +66,35 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 }
 
 /* ---------- Avatar / Facepile ---------- */
+export type AvatarBadge = 'online' | 'away' | 'busy' | 'offline' | 'verified';
 export interface AvatarProps {
   name?: string;
   src?: string;
   size?: 'sm' | 'md' | 'lg';
+  /** Presence dot or verified badge, anchored bottom-right. */
+  badge?: AvatarBadge;
+  /** Notification count badge (shows "99+" above 99). Wins over `badge`. */
+  count?: number;
 }
-export function Avatar({ name = '', src, size = 'md' }: AvatarProps) {
+const VERIFIED_CHECK =
+  '<svg viewBox="0 0 18 18" width="100%" height="100%"><path d="M6.75,15h-.002c-.227,0-.442-.104-.583-.281L2.165,9.719c-.259-.324-.207-.795.117-1.054.325-.259.796-.206,1.054.117l3.418,4.272L14.667,3.278c.261-.322.732-.373,1.055-.111.322.261.372.733.111.055L7.333,14.722c-.143.176-.357.278-.583.278Z" fill="#fff" transform="scale(0.62) translate(5.2,4.6)"/></svg>';
+export function Avatar({ name = '', src, size = 'md', badge, count }: AvatarProps) {
   const initials = name.split(/\s+/).map((w) => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase();
+  const badgeNode =
+    count != null ? (
+      <span className="ume-avatar__badge ume-avatar__badge--count">{count > 99 ? '99+' : count}</span>
+    ) : badge === 'verified' ? (
+      <span
+        className="ume-avatar__badge ume-avatar__badge--verified"
+        dangerouslySetInnerHTML={{ __html: VERIFIED_CHECK }}
+      />
+    ) : badge ? (
+      <span className={`ume-avatar__badge ume-avatar__badge--${badge}`} />
+    ) : null;
   return (
     <span className={`ume-avatar ume-avatar--${size}`} aria-label={name}>
       {src ? <img src={src} alt={name} /> : initials}
+      {badgeNode}
     </span>
   );
 }
