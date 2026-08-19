@@ -8,7 +8,6 @@
   --docs-code-bg: #18181b;
   --docs-code-header-bg: #27272a;
   --docs-code-header-border: #3f3f46;
-  --docs-logo-red: #f45454;
 }
 
 * {
@@ -56,7 +55,7 @@ body {
 
 body {
   font-family: var(--ume-font-sans);
-  background: var(--ume-bg-canvas);
+  background: var(--ume-bg-raised);
   color: var(--ume-text-primary);
   -webkit-font-smoothing: antialiased;
 }
@@ -126,9 +125,9 @@ body {
 
 .docs-logo__word {
   font-size: 22.4px;
-  font-weight: 600;
-  letter-spacing: -0.448px;
-  line-height: 32px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-tighter);
+  line-height: var(--leading-3xl);
   color: var(--ume-text-primary);
 }
 
@@ -143,9 +142,9 @@ body {
 }
 
 .docs-nav-group__label {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 19px;
+  font-size: var(--ume-text-md);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-sm);
   color: var(--ume-text-primary);
   padding: 2px 0 3px;
 }
@@ -201,10 +200,10 @@ body {
 
 .docs-nav-item--active {
   color: var(--ume-text-primary);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
 
-/* Red active bar sits on the guide line */
+/* Active bar sits on the guide line — tracks the system accent. */
 .docs-nav-item--active::before {
   content: '';
   position: absolute;
@@ -213,7 +212,7 @@ body {
   bottom: 6px;
   width: 2px;
   border-radius: 2px;
-  background: var(--docs-logo-red);
+  background: var(--ume-action-accent-bg);
 }
 
 .docs-nav-item--sub {
@@ -340,63 +339,73 @@ body {
 /* ---------- Typography ---------- */
 
 .docs-pagehead {
-  margin-bottom: 64px;
+  margin-bottom: var(--space-16);
 }
 
 .docs-h1 {
-  margin: 0 0 12px;
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 32px;
-  letter-spacing: -0.24px;
+  margin: 0 0 var(--space-3);
+  font-size: var(--ume-text-2xl);
+  font-weight: var(--font-weight-heading);
+  line-height: var(--leading-2xl);
+  letter-spacing: var(--tracking-tighter);
   color: var(--ume-text-primary);
 }
 
 .docs-lede {
   margin: 0;
-  font-size: 14px;
-  line-height: 1.35;
-  letter-spacing: -0.14px;
+  font-size: var(--ume-text-md);
+  line-height: var(--leading-md);
+  letter-spacing: var(--tracking-body);
   color: var(--ume-text-secondary);
   max-width: 640px;
 }
 
 .docs-section {
-  margin-bottom: 64px;
+  margin-bottom: var(--space-16);
 }
 
 .docs-h2 {
   position: relative;
-  margin: 0 0 8px;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 28px;
-  letter-spacing: -0.18px;
+  margin: 0 0 var(--space-2);
+  font-size: var(--ume-text-xl);
+  font-weight: var(--font-weight-heading);
+  line-height: var(--leading-xl);
+  letter-spacing: var(--tracking-tight);
   color: var(--ume-text-primary);
 }
 
 .docs-h3 {
-  margin: 0 0 16px;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 28px;
+  margin: 0 0 var(--space-4);
+  font-size: var(--ume-text-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--leading-lg);
+  letter-spacing: var(--tracking-body);
   color: var(--ume-text-primary);
 }
 
 .docs-desc {
-  margin: 0 0 24px;
-  font-size: 14px;
-  line-height: 1.5;
-  letter-spacing: -0.14px;
+  margin: 0 0 var(--space-6);
+  font-size: var(--ume-text-md);
+  line-height: var(--leading-md);
+  letter-spacing: var(--tracking-body);
   color: var(--ume-text-secondary);
 }
 
 .docs-list {
   margin: 0;
-  padding-left: 20px;
-  font-size: 14px;
-  line-height: 1.7;
+  padding-left: var(--space-5);
+  font-size: var(--ume-text-md);
+  line-height: var(--leading-lg);
+  letter-spacing: var(--tracking-body);
   color: var(--ume-text-secondary);
+}
+
+/* Lead words inside a principles list read weak at body weight — lift them
+   to label-weight (550) so the bullet lands with presence. The trailing
+   text stays at body colour so the contrast carries the eye. */
+.docs-list strong {
+  font-weight: var(--font-weight-label);
+  color: var(--ume-text-primary);
 }
 
 .docs-anchor {
@@ -710,11 +719,14 @@ body {
 .docs-pager__pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   padding: 6px 12px;
   border-radius: var(--ume-radius-sm);
   background: var(--ume-bg-field);
-  font-size: 14px;
+  font-family: var(--ume-font-sans);
+  font-size: var(--ume-text-md);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-md);
   color: var(--ume-text-primary);
   transition:
     background var(--ume-duration) var(--ume-ease),
@@ -729,7 +741,10 @@ body {
 }
 
 .docs-pager__label {
-  font-size: 16px;
+  font-size: var(--ume-text-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-lg);
+  letter-spacing: var(--tracking-body);
   color: var(--ume-text-primary);
 }
 
@@ -747,6 +762,45 @@ body {
 
 .docs-footer__copy {
   font-size: 14px;
+  color: var(--ume-text-secondary);
+}
+
+/* ---------- Introduction highlights ---------- */
+
+.docs-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+.docs-intro-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--ume-bg-field);
+  border: 1px solid var(--ume-border-subtle);
+  border-radius: var(--ume-radius-md);
+}
+.docs-intro-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--ume-radius-sm);
+  background: var(--ume-bg-raised);
+  border: 1px solid var(--ume-border-default);
+  color: var(--ume-text-primary);
+}
+.docs-intro-card__title {
+  font-size: var(--ume-text-md);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-md);
+  color: var(--ume-text-primary);
+}
+.docs-intro-card__body {
+  font-size: var(--ume-text-sm);
+  line-height: var(--leading-sm);
   color: var(--ume-text-secondary);
 }
 

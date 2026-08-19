@@ -1,67 +1,47 @@
 # ume icons
 
 `icons.ts` is a **generated file** — do not edit it by hand. It contains the
-curated ume icon registry: ~150 essential UI icons extracted from the local
-Nucleo UI collection (18px grid), each in **two variants**:
+curated ume icon registry: 206 UI icons extracted from the SVG collection in
+this directory.
 
-| Variant | Nucleo klass | Look |
-|---|---|---|
-| `fill` | `glyph` | solid shapes |
-| `outline` | `outline` | 1.25px strokes |
+## Source layout
 
-All markup is stored as inner SVG strings with every paint (fill and stroke)
-set to `currentColor`, so icons always inherit the surrounding text color.
-Nucleo's secondary two-tone elements (`data-color="color-2"`) are normalized
-to `opacity="0.4"` in every variant.
+Flat SVG files at the top of this directory, named by grid size + canonical
+name with comma-separated aliases:
 
-## Regenerating
+```
+24-magnifying-glass,-search.svg
+24-bars-three,-menu,-list,-hamburger.svg
+24-chevron-bottom.svg
+```
 
-The registry is produced by a one-shot Node script (kept out of the repo; it
-depends on the author's local Nucleo install). To regenerate:
+The first segment after the grid prefix is the canonical name; each
+comma-separated suffix is an alias (the registry resolves either).
 
-1. Source data (read-only):
-   - DB: `~/Library/Application Support/Nucleo/icons/data.sqlite3`
-     (tables `icons(id, name, set_id, klass, width, ...)`, `sets(id, title, group_id)`;
-     the "Nucleo UI" group is `group_id=1`).
-   - SVGs: `~/Library/Application Support/Nucleo/icons/sets/<set_id>/<icon_id>.svg`.
-2. For each canonical registry name × variant, resolve the Nucleo icon with
-   `klass` per the table above, `width=18`, preferring sets
-   `29, 5, 11, 9, 13, 22, 27, 30`, then any other set in group 1; lowest `id`
-   wins. If an icon has no `glyph-duo` drawing, fall back to `glyph` (none
-   needed at generation time — all 153 had full duotone coverage).
-   Outline strokes are normalized to `stroke-width="1.25"`.
-3. Extract the contents of `<g class="nc-icon-wrapper">…</g>`, then normalize:
-   - elements carrying `data-color="color-2"` → `currentColor` paint +
-     `opacity="0.4"` (strip `fill-opacity`/`data-*` bookkeeping)
-   - every other `fill`/`stroke` (except `none`) → `currentColor`
-4. Emit `src/icons/icons.ts`:
+## Registry format
 
-   ```ts
-   export const umeIcons = {
-     fill:    { 'search': '<path …/>', … },
-     outline: { 'search': '<path …/>', … },
-   } as const;
-   export type UmeIconName = keyof typeof umeIcons.fill;
-   export type UmeIconVariant = keyof typeof umeIcons;
-   ```
+Each entry is self-contained inner-SVG markup with every paint normalised to
+`fill="none" stroke="currentColor"`, so icons always inherit the surrounding
+text colour:
 
-## Naming
-
-Registry names are canonical kebab-case and may differ from Nucleo's:
-`magnifier` → `search`, `xmark` → `x`, `envelope` → `mail`, `house` → `home`,
-`floppy-disk` → `save`, `export` → `share`, `lock-open` → `unlock`,
-`bell-slash` → `bell-off`, `eye-slash` → `eye-off`, `print` → `printer`,
-`file-content` → `file-text`, `bullet-list` → `list`, `chevron-expand-y` →
-`chevrons-up-down`, `power-off` → `power`, `arrow-door-in/out` → `login`/`logout`,
-etc. When adding icons, prefer the generic product name over the source name.
+```ts
+export const umeIcons: Record<string, string> = {
+  'search': '<path fill="none" stroke="currentColor" d="..." .../>',
+  ...
+};
+export type UmeIconName = keyof typeof umeIcons;
+```
 
 ## Usage
 
 ```tsx
 import { Icon } from './components/Icon';
 
-<Icon name="search" />                           // fill, decorative, aria-hidden
-<Icon name="search" variant="outline" />
-<Icon name="trash" aria-label="Delete" />        // announced as an image
+<Icon name="search" />                      // default: glyph 18px, wrapper 22px
+<Icon name="menu" />                        // hamburger (bars-three)
+<Icon name="trash" aria-label="Delete" />   // announced as an image
 <Icon name="chevron-down" size={14} />
 ```
+
+To add an icon: drop the SVG in this directory, then add the name → alias
+mapping to the curation step and regenerate `icons.ts`.

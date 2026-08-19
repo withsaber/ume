@@ -2,7 +2,7 @@
 .ume-chatbubble {
   display: flex;
   align-items: flex-end;
-  gap: 8px;
+  gap: var(--space-2);
 }
 .ume-chatbubble--user { justify-content: flex-end; }
 .ume-chatbubble--assistant { justify-content: flex-start; }
@@ -50,7 +50,7 @@
 }
 
 .ume-chatbubble__time {
-  margin-top: 4px;
+  margin-top: var(--space-1);
   font-size: var(--ume-text-xs);
   color: var(--ume-text-tertiary);
 }

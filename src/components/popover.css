@@ -3,7 +3,7 @@
   position: absolute;
   z-index: 150;
   min-width: 200px;
-  padding: 12px;
+  padding: var(--space-3);
   background: var(--ume-bg-overlay);
   border: 1px solid var(--ume-border-subtle);
   border-radius: var(--ume-radius-md);

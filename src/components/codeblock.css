@@ -7,7 +7,7 @@
   --ume-codeblock-header-border: #3f3f46;
 
   margin: 0;
-  border-radius: 16px;
+  border-radius: var(--ume-radius-xl);
   background: var(--ume-codeblock-bg);
   overflow: hidden;
   box-shadow:
@@ -49,12 +49,17 @@
 
 .ume-codeblock__body {
   margin: 0;
-  padding: 16px 24px;
+  padding: var(--space-4) var(--space-6);
   overflow-x: auto;
   font-family: var(--ume-font-mono);
   font-size: 12px;
   line-height: 24px;
   color: #ffffff;
+  /* Render tabs at 2 columns so indented code (Markdown, JSON, JSX) reads
+     correctly. Without this, browsers default to 8 columns and code looks
+     unnaturally wide. */
+  tab-size: 2;
+  -moz-tab-size: 2;
   scrollbar-width: thin;
   scrollbar-color: rgb(255 255 255 / 0.25) transparent;
 }

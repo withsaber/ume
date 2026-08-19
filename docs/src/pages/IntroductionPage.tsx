@@ -1,4 +1,28 @@
 import React from 'react';
+import { Icon } from '../../../src';
+
+const HIGHLIGHTS = [
+  {
+    icon: 'sparkle',
+    title: 'Tokens first',
+    body: 'Every color, radius, and shadow comes from a token. Nothing hardcoded.',
+  },
+  {
+    icon: 'moon',
+    title: 'Dark mode built in',
+    body: 'One attribute switch, every component follows.',
+  },
+  {
+    icon: 'shield',
+    title: 'Accessible always',
+    body: 'Real focus rings, ARIA roles, and keyboard support in every component.',
+  },
+  {
+    icon: 'grid',
+    title: 'One face, everywhere',
+    body: 'Mail app, calendar app, whatever comes next — same look, same feel.',
+  },
+];
 
 export default function IntroductionPage() {
   return (
@@ -12,10 +36,17 @@ export default function IntroductionPage() {
       </header>
 
       <section className="docs-section">
-        <p className="docs-desc">
-          One look, one feel, everywhere: mail app, calendar app, whatever comes next. Every product
-          built on ume shares the same face. Every line of code is original and MIT licensed.
-        </p>
+        <div className="docs-intro-grid">
+          {HIGHLIGHTS.map((h) => (
+            <div key={h.title} className="docs-intro-card">
+              <span className="docs-intro-card__icon">
+                <Icon name={h.icon as never} size={18} />
+              </span>
+              <span className="docs-intro-card__title">{h.title}</span>
+              <span className="docs-intro-card__body">{h.body}</span>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="docs-section">
@@ -40,27 +71,6 @@ export default function IntroductionPage() {
           Tokens are also published standalone as JSON, a Tailwind preset, and plain CSS, so any web
           project can use the ume look without React.
         </p>
-      </section>
-
-      <section className="docs-section">
-        <h2 className="docs-h2">Design principles</h2>
-        <ul className="docs-list">
-          <li>
-            <strong>Quiet by default.</strong> Warm greys, one royal blue accent, no decoration for
-            decoration's sake.
-          </li>
-          <li>
-            <strong>Tokens first.</strong> Every color, radius, and shadow comes from a token.
-            Nothing hardcoded.
-          </li>
-          <li>
-            <strong>Accessible always.</strong> Real focus rings, ARIA roles, and keyboard support
-            in every component.
-          </li>
-          <li>
-            <strong>Dark mode built in.</strong> One attribute switch, every component follows.
-          </li>
-        </ul>
       </section>
 
       <section className="docs-section">

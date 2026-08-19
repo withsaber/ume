@@ -1,31 +1,75 @@
-/* ---------- Markdown ---------- */
+/* ---------- Markdown ----------
+   Styles mirror docs.css so rendered prose (chat messages, release notes,
+   any Markdown consumer) reads with the same face as the docs site.
+   All sizes / weights / leading / tracking come from ume tokens, which
+   mirror the Paper design source-of-truth. */
+
 .ume-markdown {
-  font-size: 14px;
-  line-height: 1.6;
+  font-family: var(--ume-font-sans);
+  font-size: var(--ume-text-md);
+  line-height: var(--leading-md);
+  letter-spacing: var(--tracking-body);
+  color: var(--ume-text-secondary);
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+.ume-markdown > :first-child { margin-top: 0; }
+.ume-markdown > :last-child  { margin-bottom: 0; }
+
+/* Headings: heading-weight (650) and tighter tracking, mirroring docs-h1/h2/h3. */
+.ume-markdown__h1 {
+  margin: var(--space-6) 0 var(--space-3);
+  font-size: var(--ume-text-2xl);
+  font-weight: var(--font-weight-heading);
+  line-height: var(--leading-2xl);
+  letter-spacing: var(--tracking-tighter);
   color: var(--ume-text-primary);
 }
-.ume-markdown > :first-child { margin-top: 0; }
-.ume-markdown > :last-child { margin-bottom: 0; }
-
-.ume-markdown__p { margin: 10px 0; }
-
-.ume-markdown__h1 {
-  font-size: var(--ume-text-2xl);
-  font-weight: 650;
-  letter-spacing: -0.01em;
-  margin: 20px 0 8px;
-}
 .ume-markdown__h2 {
+  margin: var(--space-5) 0 var(--space-2);
   font-size: var(--ume-text-xl);
-  font-weight: 650;
-  margin: 18px 0 6px;
+  font-weight: var(--font-weight-heading);
+  line-height: var(--leading-xl);
+  letter-spacing: var(--tracking-tight);
+  color: var(--ume-text-primary);
 }
 .ume-markdown__h3 {
+  margin: var(--space-4) 0 var(--space-2);
   font-size: var(--ume-text-lg);
-  font-weight: 600;
-  margin: 16px 0 6px;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--leading-lg);
+  letter-spacing: var(--tracking-body);
+  color: var(--ume-text-primary);
 }
 
+/* Paragraph: same body size + leading as the docs prose. */
+.ume-markdown__p {
+  margin: var(--space-3) 0;
+  line-height: var(--leading-md);
+}
+
+/* Lists: same as docs-list — primary markers, secondary text, loose leading. */
+.ume-markdown__list {
+  margin: var(--space-3) 0;
+  padding-left: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  line-height: var(--leading-lg);
+}
+.ume-markdown__list li::marker {
+  color: var(--ume-text-tertiary);
+}
+.ume-markdown__list li > p { margin: 0; }
+
+/* Inline emphasis: label-weight in primary colour so bold reads with presence. */
+.ume-markdown strong {
+  font-weight: var(--font-weight-label);
+  color: var(--ume-text-primary);
+}
+.ume-markdown em { font-style: italic; }
+
+/* Inline code: same chip as .docs-chip — Geist Mono, field background, subtle border. */
 .ume-markdown__code {
   font-family: var(--ume-font-mono);
   font-size: 0.9em;
@@ -36,18 +80,16 @@
   color: var(--ume-text-primary);
 }
 
+/* Links: token colour, semibold so they don't disappear inside body text. */
 .ume-markdown__link {
   color: var(--ume-text-link);
   text-decoration: none;
+  font-weight: var(--font-weight-medium);
 }
-.ume-markdown__link:hover { text-decoration: underline; }
-
-.ume-markdown__list {
-  margin: 10px 0;
-  padding-left: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.ume-markdown__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
-.ume-markdown .ume-codeblock { margin: 12px 0; }
+/* Fenced code block delegates to CodeBlock — give it breathing room. */
+.ume-markdown .ume-codeblock { margin: var(--space-3) 0; }

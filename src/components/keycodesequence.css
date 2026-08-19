@@ -2,7 +2,7 @@
 .ume-kbd-sequence {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-1);
 }
 .ume-kbd {
   display: inline-flex;
@@ -25,7 +25,7 @@
   height: 18px;
   padding: 0 4px;
   font-size: 10px;
-  border-radius: 4px;
+  border-radius: var(--ume-radius-sm);
 }
 .ume-kbd__separator {
   color: var(--ume-text-tertiary);
