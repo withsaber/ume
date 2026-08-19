@@ -233,7 +233,7 @@
   justify-content: center;
   gap: 8px;
   font: inherit;
-  font-weight: 550;
+  font-weight: 600;
   border: none;
   border-radius: var(--ume-radius-md);
   cursor: pointer;
@@ -402,7 +402,7 @@
 }
 .ume-field__label {
   font-size: var(--ume-text-sm);
-  font-weight: 550;
+  font-weight: 500;
   color: var(--ume-text-secondary);
 }
 .ume-input {
@@ -829,7 +829,7 @@
 }
 .ume-buttongroup__item {
   font: inherit;
-  font-weight: 550;
+  font-weight: 600;
   font-size: var(--ume-text-md);
   border: none;
   background: transparent;
