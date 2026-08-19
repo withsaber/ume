@@ -55,6 +55,12 @@ export const NAV_PAGES: NavPage[] = [
   { id: 'breadcrumb', label: 'Breadcrumb', group: 'Components' },
   { id: 'filter', label: 'Filter', group: 'Components' },
   { id: 'checklist', label: 'Checklist', group: 'Components' },
+  { id: 'password', label: 'Password', group: 'Components' },
+  { id: 'phone', label: 'PhoneInput', group: 'Components' },
+  { id: 'card', label: 'CardNumber', group: 'Components' },
+  { id: 'expiry', label: 'ExpiryCVC', group: 'Components' },
+  { id: 'labels', label: 'Labels & captions', group: 'Foundation' },
+  { id: 'form-patterns', label: 'Form patterns', group: 'Foundation' },
 ];
 
 export const NAV_GROUPS: Array<NavPage['group']> = ['Getting started', 'Foundation', 'Components'];

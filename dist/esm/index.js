@@ -1324,6 +1324,170 @@ function Markdown({ content, className = "" }) {
     }
   }) });
 }
+
+// src/components/ExtInputs.tsx
+import React9, { useState as useState6, forwardRef } from "react";
+import { jsx as jsx15, jsxs as jsxs10 } from "react/jsx-runtime";
+function passwordStrength(pw) {
+  let score = 0;
+  if (pw.length >= 8) score++;
+  if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) score++;
+  if (/\d/.test(pw) || /[^A-Za-z0-9]/.test(pw)) score++;
+  return Math.min(3, score);
+}
+var Password = forwardRef(function Password2({ label, helper, error, showStrength, id, className = "", ...rest }, ref) {
+  var _a, _b;
+  const [shown, setShown] = useState6(false);
+  const iid = id != null ? id : `pw-${React9.useId()}`;
+  const pw = (_b = (_a = rest.value) != null ? _a : rest.defaultValue) != null ? _b : "";
+  const score = showStrength ? passwordStrength(String(pw)) : null;
+  const labelEl = label ? /* @__PURE__ */ jsx15("label", { htmlFor: iid, className: "ume-extfield__label", children: label }) : null;
+  return /* @__PURE__ */ jsxs10("div", { className: `ume-extfield ${error ? "ume-extfield--error" : ""} ${className}`.trim(), children: [
+    labelEl,
+    /* @__PURE__ */ jsxs10("div", { className: "ume-extfield__shell", children: [
+      /* @__PURE__ */ jsx15("span", { className: "ume-extfield__lead", children: /* @__PURE__ */ jsx15(Icon, { name: "lock", size: 16 }) }),
+      /* @__PURE__ */ jsx15(
+        "input",
+        {
+          ref,
+          id: iid,
+          type: shown ? "text" : "password",
+          className: "ume-extfield__input",
+          ...rest
+        }
+      ),
+      /* @__PURE__ */ jsx15(
+        "button",
+        {
+          type: "button",
+          className: "ume-extfield__trail",
+          "aria-label": shown ? "Hide password" : "Show password",
+          onClick: () => setShown((s) => !s),
+          children: /* @__PURE__ */ jsx15(Icon, { name: shown ? "eye-off" : "eye", size: 16 })
+        }
+      )
+    ] }),
+    showStrength && score != null && /* @__PURE__ */ jsxs10("div", { className: "ume-extfield__strength", "aria-label": `Password strength: ${score} of 3`, children: [
+      /* @__PURE__ */ jsx15("span", { className: `ume-extfield__bar ${score >= 1 ? "is-on" : ""}` }),
+      /* @__PURE__ */ jsx15("span", { className: `ume-extfield__bar ${score >= 2 ? "is-on" : ""}` }),
+      /* @__PURE__ */ jsx15("span", { className: `ume-extfield__bar ${score >= 3 ? "is-on" : ""}` }),
+      /* @__PURE__ */ jsx15("span", { className: "ume-extfield__strengthlabel", children: score === 0 ? "Too weak" : score === 1 ? "Weak" : score === 2 ? "Good" : "Strong" })
+    ] }),
+    (error || helper) && /* @__PURE__ */ jsx15("div", { className: `ume-extfield__help ${error ? "ume-extfield__help--error" : ""}`, children: error || helper })
+  ] });
+});
+var PhoneInput = forwardRef(function PhoneInput2({ label, helper, error, prefix = "+880", id, className = "", ...rest }, ref) {
+  const iid = id != null ? id : `ph-${React9.useId()}`;
+  return /* @__PURE__ */ jsxs10("div", { className: `ume-extfield ${error ? "ume-extfield--error" : ""} ${className}`.trim(), children: [
+    label && /* @__PURE__ */ jsx15("label", { htmlFor: iid, className: "ume-extfield__label", children: label }),
+    /* @__PURE__ */ jsxs10("div", { className: "ume-extfield__shell", children: [
+      /* @__PURE__ */ jsx15("span", { className: "ume-extfield__prefix", children: prefix }),
+      /* @__PURE__ */ jsx15(
+        "input",
+        {
+          ref,
+          id: iid,
+          type: "tel",
+          inputMode: "tel",
+          placeholder: "1700 000 000",
+          className: "ume-extfield__input ume-extfield__input--mono",
+          ...rest
+        }
+      )
+    ] }),
+    (error || helper) && /* @__PURE__ */ jsx15("div", { className: `ume-extfield__help ${error ? "ume-extfield__help--error" : ""}`, children: error || helper })
+  ] });
+});
+function detectBrand(digits) {
+  if (/^4/.test(digits)) return "visa";
+  if (/^(5[1-5]|2[2-7])/.test(digits)) return "mastercard";
+  if (/^3[47]/.test(digits)) return "amex";
+  if (/^6(011|5)/.test(digits)) return "discover";
+  return "generic";
+}
+function formatCard(digits) {
+  const d = digits.replace(/\D/g, "").slice(0, 19);
+  const groups = d.match(/.{1,4}/g) || [];
+  return groups.join(" ");
+}
+var BRAND_COLORS = {
+  visa: "#1A1F71",
+  mastercard: "#EB001B",
+  amex: "#2E77BB",
+  discover: "#FF6000",
+  generic: "#6E6E6A"
+};
+var CardNumber = forwardRef(function CardNumber2({ label, helper, error, id, className = "", value, defaultValue, onChange, ...rest }, ref) {
+  const iid = id != null ? id : `cn-${React9.useId()}`;
+  const [internal, setInternal] = useState6(defaultValue != null ? defaultValue : "");
+  const isControlled = value !== void 0;
+  const raw = isControlled ? String(value != null ? value : "") : internal;
+  const brand = detectBrand(raw.replace(/\D/g, ""));
+  const formatted = formatCard(raw);
+  return /* @__PURE__ */ jsxs10("div", { className: `ume-extfield ${error ? "ume-extfield--error" : ""} ${className}`.trim(), children: [
+    label && /* @__PURE__ */ jsx15("label", { htmlFor: iid, className: "ume-extfield__label", children: label }),
+    /* @__PURE__ */ jsxs10("div", { className: "ume-extfield__shell", children: [
+      /* @__PURE__ */ jsx15(
+        "input",
+        {
+          ref,
+          id: iid,
+          type: "text",
+          inputMode: "numeric",
+          autoComplete: "cc-number",
+          className: "ume-extfield__input ume-extfield__input--mono",
+          value: formatted,
+          onChange: (e) => {
+            const v = e.target.value;
+            if (!isControlled) setInternal(v);
+            onChange == null ? void 0 : onChange(e);
+          },
+          ...rest
+        }
+      ),
+      /* @__PURE__ */ jsx15("span", { className: "ume-extfield__brand", style: { background: BRAND_COLORS[brand] }, children: brand === "generic" ? "\u2022\u2022\u2022\u2022" : brand.toUpperCase() })
+    ] }),
+    (error || helper) && /* @__PURE__ */ jsx15("div", { className: `ume-extfield__help ${error ? "ume-extfield__help--error" : ""}`, children: error || helper })
+  ] });
+});
+function formatExpiry(v) {
+  const d = v.replace(/\D/g, "").slice(0, 4);
+  if (d.length < 3) return d;
+  return `${d.slice(0, 2)}/${d.slice(2)}`;
+}
+function ExpiryCVC({ label, helper, error, expiry = "", cvc = "", onExpiryChange, onCvcChange }) {
+  return /* @__PURE__ */ jsxs10("div", { className: `ume-extsplit ${error ? "ume-extfield--error" : ""}`, children: [
+    label && /* @__PURE__ */ jsx15("div", { className: "ume-extfield__label", children: label }),
+    /* @__PURE__ */ jsxs10("div", { className: "ume-extsplit__row", children: [
+      /* @__PURE__ */ jsx15("div", { className: "ume-extfield__shell ume-extsplit__cell", children: /* @__PURE__ */ jsx15(
+        "input",
+        {
+          type: "text",
+          inputMode: "numeric",
+          autoComplete: "cc-exp",
+          placeholder: "MM/YY",
+          className: "ume-extfield__input ume-extfield__input--mono",
+          value: expiry,
+          onChange: (e) => onExpiryChange == null ? void 0 : onExpiryChange(formatExpiry(e.target.value))
+        }
+      ) }),
+      /* @__PURE__ */ jsx15("div", { className: "ume-extfield__shell ume-extsplit__cell", children: /* @__PURE__ */ jsx15(
+        "input",
+        {
+          type: "text",
+          inputMode: "numeric",
+          autoComplete: "cc-csc",
+          placeholder: "CVC",
+          maxLength: 4,
+          className: "ume-extfield__input ume-extfield__input--mono",
+          value: cvc,
+          onChange: (e) => onCvcChange == null ? void 0 : onCvcChange(e.target.value.replace(/\D/g, ""))
+        }
+      ) })
+    ] }),
+    (error || helper) && /* @__PURE__ */ jsx15("div", { className: `ume-extfield__help ${error ? "ume-extfield__help--error" : ""}`, children: error || helper })
+  ] });
+}
 export {
   Avatar,
   Badge,
@@ -1335,6 +1499,7 @@ export {
   ButtonGroupItem,
   Caption,
   Card,
+  CardNumber,
   ChatBubble,
   Checklist,
   Chip,
@@ -1346,6 +1511,7 @@ export {
   Dropdown,
   DropdownItem,
   DropdownSubmenu,
+  ExpiryCVC,
   Facepile,
   Filter,
   H1,
@@ -1361,6 +1527,8 @@ export {
   MenuItem,
   Mono,
   MonoTag,
+  Password,
+  PhoneInput,
   Popover,
   Portal,
   Progress,

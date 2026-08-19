@@ -3,6 +3,12 @@ import IntroductionPage from './IntroductionPage';
 import QuickstartPage from './QuickstartPage';
 import AvatarPage from './AvatarPage';
 import IconsPage from './IconsPage';
+import PasswordPage from './PasswordPage';
+import PhoneInputPage from './PhoneInputPage';
+import CardNumberPage from './CardNumberPage';
+import ExpiryCVCPage from './ExpiryCVCPage';
+import LabelsPage from './LabelsPage';
+import FormPatternsPage from './FormPatternsPage';
 import ColorsPage from './ColorsPage';
 import ShadowsPage from './ShadowsPage';
 import TypographyPage from './TypographyPage';
@@ -16,6 +22,13 @@ import { ComponentPage } from './ComponentPage';
 import { COMPONENT_SPECS } from './componentSpecs';
 
 export const PAGE_REGISTRY: Record<string, React.ComponentType> = {
+  password: PasswordPage,
+  phone: PhoneInputPage,
+  card: CardNumberPage,
+  expiry: ExpiryCVCPage,
+  labels: LabelsPage,
+  'form-patterns': FormPatternsPage,
+
   introduction: IntroductionPage,
   quickstart: QuickstartPage,
   colors: ColorsPage,
