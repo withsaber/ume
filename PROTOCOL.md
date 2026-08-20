@@ -58,6 +58,22 @@ Sessions die (limits, connection, whatever). Recovery:
    - What we were about to do next
 3. **STATUS.md is updated whenever work state changes** — it's the shared memory across sessions and across AIs.
 
+### 4a. Session close ritual
+When the owner says "close" / "approve and close":
+1. Send a compact summary: what's approved on Paper vs what's pending (artifact state, not work log).
+2. Owner approves (or says "needs changes" → stop and list them).
+3. Ask each sub-step separately:
+   - **Apply to docs?** — approved → mirror Paper → docs page → `npm run build` (both root and `docs/`) → record.
+   - **Commit + push?** — approved → `git add -A -- . ':!.hermes'`, build, commit, push. Report commit hash.
+   - Anything deferred → mark in `STATUS.md` "awaiting next session".
+4. Update `STATUS.md` final section: what landed, what's approved + synced, what's next (numbered, top-priority first).
+5. Confirm commit + push hashes to owner.
+
+**Drift to watch for:**
+- Owner says "apply to docs" → agent writes to `src/*` without confirmation → ask-before-sync gate broken. Stop and re-ask.
+- Agent commits without re-running `npm run build` (both library AND `docs/`) → CI may catch stale dist. Build first.
+- Agent forgets `finish_working_on_nodes({})` for any artboard it touched → Paper renders stale. Call before close.
+
 ## 5. Sync commands (only after approval)
 
 ```bash
