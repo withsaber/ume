@@ -22,7 +22,7 @@
  *   so the Icon component can render it on any viewBox.
  *
  * Naming: Flaticon's Uni Icons names are canonical kebab-case; we keep
- * them as-is. If you have an alias map from a previous Nucleo registry,
+ * them as-is. If you have an alias map from a previous UMEI registry,
  * import it explicitly via --aliases <file.json>.
  *
  * Output: src/icons/icons.ts in the format consumed by src/components/Icon.tsx.
@@ -105,11 +105,11 @@ function kebab(s) {
 
 /* ---------- SVG normalisation ---------- */
 function normaliseSvg(svg) {
-  // Extract the wrapper contents (Nucleo ships icons inside <g class="nc-icon-wrapper">).
+  // Extract the wrapper contents (UMEI ships icons inside <g class="nc-icon-wrapper">).
   // After extraction we normalise: stroke -> currentColor, fill -> none (line variant),
   // and remove any bookkeeping that doesn't help at runtime.
-  const m = svg.match(/<g\s+class=["']nc-icon-wrapper["'][^>]*>([\s\S]*?)<\/g>(?:\s*<\/g>)*\s*<\/svg>/);
-  if (!m) die('Could not locate nc-icon-wrapper in SVG.');
+  const m = svg.match(/<g[^>]*class=["']nc-icon-wrapper["'][^>]*>([\s\S]*?)<\/g>(?:\s*<\/g>)*\s*<\/svg>/);
+  if (!m) throw new Error('no nc-icon-wrapper');
   let inner = m[1];
 
   // Drop the <title> noise; the registry key carries the name.
@@ -124,7 +124,7 @@ function normaliseSvg(svg) {
         .replace(/\sfill="[^"]*"/g, '')
         .replace(/\sstroke="[^"]*"/g, '')
         .replace(/\sclass="[^"]*"/g, '');
-      return `<g${cleaned} fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">`;
+      return `<g${cleaned} fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">`;
     },
   );
 
@@ -139,10 +139,63 @@ function normaliseSvg(svg) {
     return `<path${cleaned}>`;
   });
 
+  // Same normalisation for every other shape element (circle, rect, line,
+  // polyline, polygon, ellipse) — stroke -> currentColor, fill -> none,
+  // and force stroke-width 1.25 when a stroke is present.
+  inner = inner.replace(
+    /<(circle|rect|line|polyline|polygon|ellipse)\b([^>]*)>/g,
+    (whole, tag, attrs) => {
+      let cleaned = attrs
+        .replace(/\sfill="(?!none")[^"]*"/g, ' fill="none"')
+        .replace(/\sstroke="(?!currentColor")[^"]*"/g, ' stroke="currentColor"')
+        .replace(/\sstroke-width="[^"]*"/g, '');
+      if (/\sstroke=/.test(cleaned)) cleaned += ' stroke-width="1.25"';
+      if (!/\sfill=/.test(cleaned)) cleaned += ' fill="none"';
+      return `<${tag}${cleaned}>`;
+    },
+  );
+
+  // Force every path stroke-width to 1.25 (the library rule).
+  inner = inner.replace(/\sstroke-width="[^"]*"/g, ' stroke-width="1.25"');
+
   return inner.trim();
 }
 
 /* ---------- Build registry ---------- */
+/* Friendly aliases → canonical filenames. Components reference these stable
+   names; the underlying file may change without breaking the API. */
+const ALIASES = {
+  'check': 'checkmark-1-medium',
+  'copy': 'square-behind-square-2',
+  'chevron-down': 'chevron-bottom',
+  'chevron-up': 'chevron-top',
+  'chevron-left': 'chevron-left',
+  'chevron-right': 'chevron-right',
+  'eye': 'eye-open',
+  'eye-off': 'eye-slash',
+  'close': 'x',
+  'search': 'search-intelligence',
+  'menu': 'bars-three',
+  'warning-circle': 'warning-sign',
+  'download': 'cloud-download',
+  'upload': 'cloud-upload',
+  'refresh': 'arrows-repeat',
+  'sync': 'cloud-sync',
+  'copy-clipboard': 'clipboard',
+  'save': 'floppy-disk-1',
+  'edit': 'edit-big',
+  'trash': 'trash-can',
+  'link': 'chain-link-1',
+  'unlink': 'broken-chain-link-1',
+  'grid': 'apps',
+  'list': 'list-bullets',
+  'terminal': 'code',
+  'wand': 'magic-wand',
+  'users': 'people',
+  'login': 'enter',
+  'logout': 'arrow-out-of-box',
+};
+
 function build(inputs) {
   const seen = new Set();
   const out = {};
@@ -151,11 +204,15 @@ function build(inputs) {
     seen.add(name);
     const svg = readFileSync(path, 'utf8');
     try {
-      const { inner } = extractInner(svg);
+      const inner = normaliseSvg(svg);
       out[name] = inner;
     } catch (e) {
       console.error(`skip ${name}: ${e.message}`);
     }
+  }
+  // Apply aliases (canonical file content under a friendly name).
+  for (const [alias, target] of Object.entries(ALIASES)) {
+    if (out[target] && !out[alias]) out[alias] = out[target];
   }
   return out;
 }
@@ -173,16 +230,14 @@ function emit(registry) {
   lines.push('   `node tools/icons/import-uni.mjs <folder-or-zip>`');
   lines.push('*/');
   lines.push('');
-  lines.push('export const umeIcons = {');
-  lines.push('  line: {');
+  lines.push('export const umeIcons: Record<string, string> = {');
   for (const name of names) {
     const inner = registry[name];
-    lines.push(`    '${name.replace(/'/g, "\\'")}': "${inner.replace(/"/g, '\\"')}",`);
+    lines.push(`  '${name.replace(/'/g, "\\'")}': "${inner.replace(/"/g, '\\"')}",`);
   }
-  lines.push('  },');
-  lines.push('} as const;');
-  lines.push("export type UmeIconName = keyof typeof umeIcons['line'];");
-  lines.push("export type UmeIconVariant = keyof typeof umeIcons;");
+  lines.push('};');
+  lines.push("export type UmeIconName = string;");
+  lines.push("export type UmeIconVariant = 'line';");
   return lines.join('\n') + '\n';
 }
 

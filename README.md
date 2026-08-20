@@ -11,7 +11,7 @@ One look, one feel, everywhere: mail app, calendar app, whatever comes next. Eve
 | `src/tokens.css` | The token source of truth: primitives, semantic tokens, dark mode, type scale, radii, shadows, motion |
 | `src/ume.css` | All component styles, plain CSS on top of the tokens |
 | `src/components/` | React components: Avatar, Banner, Button, ButtonGroup, Card, ChatBubble, Chip, CircularProgress, CodeBlock, CodeInput, Dialog, Divider, Dropdown (+ Submenu), Facepile, Icon, IconButton, IconText, Input, KeyCodeSequence, Markdown, Menu, MonoTag, Popover, Progress, Select, Skeleton, Tabs, TextArea, Toast, Toggle, Tooltip, Typography, UmeProvider |
-| `src/icons/` | The ume icon set: ~150 essential UI icons (18px grid, from Nucleo UI) in three variants — fill, outline, duotone — consumed via the `Icon` component |
+| `src/icons/` | The ume icon set: ~150 essential UI icons (18px grid, from UMEI) in three variants — fill, outline, duotone — consumed via the `Icon` component |
 | `src/hooks.ts` | Shared interaction hooks: `useOnClickOutside`, `useOnEscapePress` |
 | `dist/` | Built ESM + CJS bundles with extracted CSS and TypeScript types (`node build.js`) |
 | `docs/` | The documentation website (Vite + React). `cd docs && npm install && npm run dev` |

@@ -13,6 +13,9 @@ import FormPreviewsPage from './FormPreviewsPage';
 import ColorsPage from './ColorsPage';
 import ShadowsPage from './ShadowsPage';
 import TypographyPage from './TypographyPage';
+import SpacingPage from './SpacingPage';
+import SyntaxPage from './SyntaxPage';
+import FocusPage from './FocusPage';
 import ChatBubblePage from './ChatBubblePage';
 import MenuPage from './MenuPage';
 import DialogPage from './DialogPage';
@@ -36,6 +39,9 @@ export const PAGE_REGISTRY: Record<string, React.ComponentType> = {
   colors: ColorsPage,
   shadows: ShadowsPage,
   typography: TypographyPage,
+  spacing: SpacingPage,
+  syntax: SyntaxPage,
+  focus: FocusPage,
   avatar: AvatarPage,
   icons: IconsPage,
   chatbubble: ChatBubblePage,

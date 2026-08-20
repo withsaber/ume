@@ -2,12 +2,13 @@
 
 > This file is the contract. **Read this first, every session, before doing any work.**
 > Pair with `STATUS.md` for current state.
+> Pair with `paper_mcp.md` for Paper mechanics (connecting, calling, gotchas) — if Paper isn't behaving, that's where to look.
 
 ## 0. What this is
 
 Ume (梅) is our internal design system for our own applications.
 **Paper is the source of truth. The repo is the build artifact. The docs site is a mirror.**
-Paper file: `01M0DP6PXQ0Q5Z4WHCJKDX0B4V` — driven ONLY via the MCP (`tools/paper/paper_mcp.py`), never via browser automation.
+Paper file: `01M0DP6PXQ0Q5Z4WHCJKDX0B4V` — driven ONLY via the MCP (`tools/paper/paper_mcp.py`), never via browser automation. **Paper connection / tool quirks / debugging → `paper_mcp.md`.**
 
 ## 1. The golden rule
 
@@ -81,3 +82,40 @@ python3 tools/paper/sync.py --check   # preview Paper → repo token diff
 python3 tools/paper/sync.py           # apply to src/tokens.css
 npm run build                         # regenerate tokens/ + dist
 ```
+
+## 6. Component preservation rule (HARD, added Aug 2026)
+
+> **Never alter components the owner provides verbatim.** When the owner shares a mockup (e.g. on the Usage page), build the design system AROUND it — define tokens, focus rings, themes, audit coverage — but do NOT change the component's visual or functional structure. Spacing values, font weights, dimensions, variants, internal layout are all intentional. "Inconsistencies" between components are by design; flag as observations, never normalize.
+
+What this means in practice:
+- If a component uses 4px gap and another uses 12px, both are correct.
+- If a component uses font-weight 500 and another uses 600, both are correct.
+- If a button has no focus ring, leave it without a focus ring until the owner adds one.
+- If a tab is differentiated by background shift (not underline), keep it that way.
+- **You may ADD** new components or variants that the owner hasn't built yet (focus rings, error states, dark variants of system tokens). You may NOT modify what the owner has built.
+
+When in doubt: **preserve the source, document the pattern, propose the change separately.**
+
+## 7. Icon stroke width (HARD rule, added Aug 2026)
+
+> **All icons must use `stroke-width: 1.25`.** No matter what size, color, or context.
+
+This applies to:
+- All UMEI icons in `src/icons/` (24-* files)
+- All Paper icons rendered in any board (light + dark, all sizes)
+- All icons used in component previews, mockups, usage screens
+- All future icons added to the library
+
+Why: 1.5 reads too heavy at small sizes (10-12px). 1.0 reads too thin. 1.25 is the sweet spot across the scale.
+
+When creating or modifying icons:
+- Default `stroke-width="1.25"` in the SVG markup
+- Use `currentColor` for fill/stroke so the icon picks up parent text color
+- viewBox is `0 0 24 24` for the 24px grid
+- All paths use `stroke-linecap="round"` and `stroke-linejoin="round"`
+
+## 8. Token hygiene
+
+- All Paper nodes reference existing tokens (`var(--color-…)`, `var(--text-…)` etc.) so a token edit propagates everywhere.
+- **Exception:** boards that have to render correctly under both themes (Usage page, dark variant boards, Components preview) use **literal hex** for theme-specific colors because Paper has no dark theme token block. The literal hex is the dark-theme value; the light-theme equivalent is the token ref.
+- This is documented in the SPEC strip of each such board.

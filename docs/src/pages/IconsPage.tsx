@@ -30,8 +30,8 @@ export default function IconsPage() {
       <header className="docs-pagehead">
         <h1 className="docs-h1">Icons</h1>
         <p className="docs-lede">
-          The ume icon set: {ICON_NAMES.length} line-variant icons on a 24px grid. Every icon
-          inherits the surrounding text colour via <code>currentColor</code>.
+          The UMEI icon set: {ICON_NAMES.length} line icons on a 24px grid, stroke-width 1.25.
+          Every icon inherits the surrounding text colour via <code>currentColor</code>.
         </p>
       </header>
 
