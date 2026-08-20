@@ -18,7 +18,7 @@ export const NAV_PAGES: NavPage[] = [
   { id: 'introduction', label: 'Introduction', group: 'Getting started' },
   { id: 'quickstart', label: 'Quickstart', group: 'Getting started' },
   { id: 'colors', label: 'Colors', group: 'Foundation' },
-  { id: 'shadows', label: 'Shadows', group: 'Foundation' },
+  { id: 'shadows', label: 'Radius & Shadows', group: 'Foundation' },
   { id: 'typography', label: 'Typography', group: 'Foundation' },
   { id: 'button', label: 'Button', group: 'Foundation' },
   { id: 'input', label: 'Input', group: 'Foundation' },
@@ -61,6 +61,7 @@ export const NAV_PAGES: NavPage[] = [
   { id: 'expiry', label: 'ExpiryCVC', group: 'Components' },
   { id: 'labels', label: 'Labels & captions', group: 'Foundation' },
   { id: 'form-patterns', label: 'Form patterns', group: 'Foundation' },
+  { id: 'form-previews', label: 'Form previews', group: 'Foundation' },
 ];
 
 export const NAV_GROUPS: Array<NavPage['group']> = ['Getting started', 'Foundation', 'Components'];

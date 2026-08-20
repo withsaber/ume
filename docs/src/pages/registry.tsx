@@ -9,6 +9,7 @@ import CardNumberPage from './CardNumberPage';
 import ExpiryCVCPage from './ExpiryCVCPage';
 import LabelsPage from './LabelsPage';
 import FormPatternsPage from './FormPatternsPage';
+import FormPreviewsPage from './FormPreviewsPage';
 import ColorsPage from './ColorsPage';
 import ShadowsPage from './ShadowsPage';
 import TypographyPage from './TypographyPage';
@@ -28,6 +29,7 @@ export const PAGE_REGISTRY: Record<string, React.ComponentType> = {
   expiry: ExpiryCVCPage,
   labels: LabelsPage,
   'form-patterns': FormPatternsPage,
+  'form-previews': FormPreviewsPage,
 
   introduction: IntroductionPage,
   quickstart: QuickstartPage,

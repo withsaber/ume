@@ -461,6 +461,43 @@ body {
   border-radius: var(--ume-radius-sm);
 }
 
+/* ---------- Theme boards (side-by-side Light / Dark) ---------- */
+.docs-themeboards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.docs-themeboards__board {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--ume-border-subtle);
+  border-radius: var(--ume-radius-sm);
+  overflow: hidden;
+}
+.docs-themeboards__label {
+  padding: 8px 16px;
+  font-family: var(--ume-font-mono);
+  font-size: var(--ume-text-xs);
+  font-weight: 600;
+  color: var(--ume-text-tertiary);
+  background: var(--ume-bg-sunken);
+  border-bottom: 1px solid var(--ume-border-subtle);
+}
+/* Content forces its own theme via data-ume-theme; background comes from
+   the forced theme's canvas token. */
+.docs-themeboards__content {
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--ume-bg-canvas);
+  flex: 1;
+}
+@media (max-width: 900px) {
+  .docs-themeboards { grid-template-columns: 1fr; }
+}
+
 .docs-stack {
   display: flex;
   flex-direction: column;

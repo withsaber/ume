@@ -41,3 +41,53 @@
   font-size: var(--ume-text-md);
   color: var(--ume-text-secondary);
 }
+
+/* Radius demo boxes */
+.shadows-radius {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 120px;
+  padding: 16px;
+  background: var(--ume-bg-raised);
+  border: 1px solid var(--ume-border-subtle);
+  border-radius: var(--ume-radius-lg);
+  justify-content: flex-end;
+}
+.shadows-radius__box {
+  width: 48px;
+  height: 48px;
+  background: var(--ume-bg-field);
+  border: 1.5px solid var(--ume-border-strong);
+  margin-bottom: auto;
+}
+
+/* Surface ladder strips */
+.shadows-surfacelist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+.shadows-surface {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: var(--ume-radius-md);
+  border: 1px solid var(--ume-border-subtle);
+}
+.shadows-surface__name {
+  font-family: var(--ume-font-mono);
+  font-size: var(--ume-text-xs);
+  font-weight: 500;
+  color: var(--ume-text-primary);
+}
+.shadows-surface__token {
+  font-family: var(--ume-font-mono);
+  font-size: var(--ume-text-xs);
+  color: var(--ume-text-tertiary);
+}
+.shadows-surface--inverse .shadows-surface__name { color: var(--ume-text-inverse); }
+.shadows-surface--inverse .shadows-surface__token { color: var(--ume-text-inverse); opacity: 0.6; }
