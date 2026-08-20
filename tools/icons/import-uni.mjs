@@ -103,11 +103,14 @@ function kebab(s) {
   return s.toLowerCase().replace(/\s+/g, '-').replace(/_+/g, '-');
 }
 
-/* ---------- SVG normalisation ---------- */
+/* ---------- SVG normalisation ----------
+ *
+ * Stroke-width rule (per user): if a shape has a stroke, set that stroke to
+ * 1.25. If a shape is filled (no stroke), do NOT add a stroke — leave it as-is.
+ * Stroke colour is normalised to currentColor for the line variant.
+ */
 function normaliseSvg(svg) {
   // Extract the wrapper contents (UMEI ships icons inside <g class="nc-icon-wrapper">).
-  // After extraction we normalise: stroke -> currentColor, fill -> none (line variant),
-  // and remove any bookkeeping that doesn't help at runtime.
   const m = svg.match(/<g[^>]*class=["']nc-icon-wrapper["'][^>]*>([\s\S]*?)<\/g>(?:\s*<\/g>)*\s*<\/svg>/);
   if (!m) throw new Error('no nc-icon-wrapper');
   let inner = m[1];
@@ -115,48 +118,50 @@ function normaliseSvg(svg) {
   // Drop the <title> noise; the registry key carries the name.
   inner = inner.replace(/<title>[\s\S]*?<\/title>/g, '');
 
-  // Force every <g> wrapper's attributes to a known good state for the
-  // line variant. We trust <path stroke="..." fill="..."> and rewrite it.
+  // Normalise every <g> wrapper: strip class, keep fill/stroke if present,
+  // and only add the stroke-width / linecap attributes when a stroke is set.
   inner = inner.replace(
     /<g\s+([^>]*)>/g,
     (whole, attrs) => {
-      const cleaned = attrs
-        .replace(/\sfill="[^"]*"/g, '')
-        .replace(/\sstroke="[^"]*"/g, '')
-        .replace(/\sclass="[^"]*"/g, '');
-      return `<g${cleaned} fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">`;
-    },
-  );
-
-  // Normalise <path> fills/strokes to currentColor / none.
-  inner = inner.replace(/<path\b([^>]*)>/g, (whole, attrs) => {
-    let cleaned = attrs
-      .replace(/\sfill="(?!none")[^"]*"/g, ' fill="none"')
-      .replace(/\sfill="none"/g, ' fill="none"')
-      .replace(/\sstroke="(?!currentColor")[^"]*"/g, ' stroke="currentColor"');
-    if (!/\sfill=/.test(cleaned)) cleaned += ' fill="none"';
-    if (!/\sstroke=/.test(cleaned)) cleaned += ' stroke="currentColor"';
-    return `<path${cleaned}>`;
-  });
-
-  // Same normalisation for every other shape element (circle, rect, line,
-  // polyline, polygon, ellipse) — stroke -> currentColor, fill -> none,
-  // and force stroke-width 1.25 when a stroke is present.
-  inner = inner.replace(
-    /<(circle|rect|line|polyline|polygon|ellipse)\b([^>]*)>/g,
-    (whole, tag, attrs) => {
+      const hasFill = /\sfill="(?!none")/.test(attrs);
+      const hasStroke = /\sstroke="(?!none")/.test(attrs);
       let cleaned = attrs
-        .replace(/\sfill="(?!none")[^"]*"/g, ' fill="none"')
-        .replace(/\sstroke="(?!currentColor")[^"]*"/g, ' stroke="currentColor"')
+        .replace(/\sclass="[^"]*"/g, '')
+        .replace(/\sfill="[^"]*"/g, ' fill="currentColor"')
+        .replace(/\sstroke="(?!currentColor|none")[^"]*"/g, ' stroke="currentColor"')
+        .replace(/\sstroke-linecap="[^"]*"/g, '')
+        .replace(/\sstroke-linejoin="[^"]*"/g, '')
         .replace(/\sstroke-width="[^"]*"/g, '');
-      if (/\sstroke=/.test(cleaned)) cleaned += ' stroke-width="1.25"';
-      if (!/\sfill=/.test(cleaned)) cleaned += ' fill="none"';
-      return `<${tag}${cleaned}>`;
+      if (hasStroke) cleaned += ' stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"';
+      else if (!hasFill && !/\sfill=/.test(cleaned)) cleaned += ' fill="none"';
+      return `<g${cleaned}>`;
     },
   );
 
-  // Force every path stroke-width to 1.25 (the library rule).
-  inner = inner.replace(/\sstroke-width="[^"]*"/g, ' stroke-width="1.25"');
+  // Normalise every shape: stroke to currentColor (when present), stroke-width
+  // to 1.25 (only when stroke is present), fill to currentColor (when not "none").
+  // We do NOT inject a stroke into filled-only shapes.
+  const normaliseShape = (tag) => {
+    const re = new RegExp(`<${tag}\\b([^>]*)>`, 'g');
+    return inner.replace(re, (whole, attrs) => {
+      const hasStroke = /\sstroke="(?!none")/.test(attrs);
+      let cleaned = attrs
+        .replace(/\sfill="(?!none")[^"]*"/g, ' fill="currentColor"')
+        .replace(/\sstroke="(?!currentColor|none")[^"]*"/g, ' stroke="currentColor"')
+        .replace(/\sstroke-width="[^"]*"/g, '');
+      if (hasStroke) cleaned += ' stroke-width="1.25"';
+      return `<${tag}${cleaned}>`;
+    });
+  };
+
+  // Run for every shape type we may encounter.
+  inner = normaliseShape('path');
+  inner = normaliseShape('circle');
+  inner = normaliseShape('rect');
+  inner = normaliseShape('line');
+  inner = normaliseShape('polyline');
+  inner = normaliseShape('polygon');
+  inner = normaliseShape('ellipse');
 
   return inner.trim();
 }
