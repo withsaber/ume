@@ -1,2 +1,3 @@
 export declare const umeIcons: Record<string, string>;
-export type UmeIconName = keyof typeof umeIcons;
+export type UmeIconName = string;
+export type UmeIconVariant = 'line';
